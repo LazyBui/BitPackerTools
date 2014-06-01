@@ -2,17 +2,15 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: InternalsVisibleTo("Test")]
-
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BitPackerTools")]
-[assembly: AssemblyDescription("A .NET library designed to occupy minimum space and be relatively easy to work with for bitpacking.")]
+[assembly: AssemblyTitle("Test")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("BitPackerTools")]
-[assembly: AssemblyCopyright("Copyright © 2014")]
+[assembly: AssemblyProduct("Test")]
+[assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -22,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("7F75066B-D107-4D52-B276-41E9BF7DC50B")]
+[assembly: Guid("ed0fda83-7dd6-4139-97ec-35f53b94f388")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -31,5 +29,8 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
+// You can specify all the values or you can default the Build and Revision Numbers 
+// by using the '*' as shown below:
+// [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
