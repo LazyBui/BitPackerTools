@@ -19,6 +19,8 @@ namespace BitPackerTools {
 		/// Initializes a new instance of the BitPackerTools.PackedBitReader class with a bit buffer.
 		/// </summary>
 		public PackedBitReader(byte[] pByteStream) {
+			if (pByteStream == null) throw new ArgumentNullException("pByteStream");
+
 			InternalStream = new byte[pByteStream.Length];
 			// Copy the block in order to avoid modifications to the underlying array causing havoc
 			Buffer.BlockCopy(pByteStream, 0, InternalStream, 0, pByteStream.Length);
