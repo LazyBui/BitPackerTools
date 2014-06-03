@@ -295,6 +295,7 @@ namespace Test {
 				Assert.Same(o, o);
 			});
 			Assert.Throws<AssertionException>(() => Assert.Same(new object(), null));
+			Assert.Throws<AssertionException>(() => Assert.Same(new object(), new object()));
 		}
 
 		[TestMethod]
@@ -305,6 +306,7 @@ namespace Test {
 				Assert.NotSame(o, o);
 			});
 			Assert.DoesNotThrow(() => Assert.NotSame(new object(), null));
+			Assert.DoesNotThrow(() => Assert.NotSame(new object(), new object()));
 		}
 
 		[TestMethod]
