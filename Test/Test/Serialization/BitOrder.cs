@@ -107,7 +107,7 @@ namespace Test {
 				0xFF, 0xD7, 0xBF, 0xC0,
 				0xC9, 0xFD, 0xA3, 0x00,
 				0x00, 0x00, 0x00, 0x0D,
-		   };
+			};
 
 			var reader = new PackedBitReader(array);
 			var serializer = new PackedBitSerializer(typeof(BitPackingTest));

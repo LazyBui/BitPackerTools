@@ -158,41 +158,67 @@ namespace Test {
 		}
 
 		[TestMethod]
+		public void InRangeEqual() {
+			int minValue = 1;
+			int maxValue = 10;
+			Assert.Throws<ArgumentNullException>(() => Assert.InRangeEqual<string>(null, "z", "z"));
+			Assert.Throws<ArgumentNullException>(() => Assert.InRangeEqual<string>("a", null, "z"));
+			Assert.Throws<ArgumentNullException>(() => Assert.InRangeEqual<string>("a", "z", null));
+			Assert.DoesNotThrow(() => Assert.InRangeEqual(minValue, maxValue, 2));
+			Assert.DoesNotThrow(() => Assert.InRangeEqual(minValue, maxValue, minValue));
+			Assert.DoesNotThrow(() => Assert.InRangeEqual(minValue, maxValue, maxValue));
+			Assert.Throws<AssertionException>(() => Assert.InRangeEqual(minValue, maxValue, minValue - 5));
+			Assert.Throws<AssertionException>(() => Assert.InRangeEqual(minValue, maxValue, maxValue + 5));
+			Assert.Throws<AssertionException>(() => Assert.InRangeEqual(minValue, maxValue, minValue - 5));
+			Assert.Throws<AssertionException>(() => Assert.InRangeEqual(minValue, maxValue, maxValue + 5));
+		}
+
+		[TestMethod]
 		public void InRange() {
 			int minValue = 1;
 			int maxValue = 10;
 			Assert.Throws<ArgumentNullException>(() => Assert.InRange<string>(null, "z", "z"));
 			Assert.Throws<ArgumentNullException>(() => Assert.InRange<string>("a", null, "z"));
 			Assert.Throws<ArgumentNullException>(() => Assert.InRange<string>("a", "z", null));
-			Assert.DoesNotThrow(() => Assert.InRange(minValue, maxValue, 2, pInclusivePolicy: Inclusivity.Inclusive));
-			Assert.DoesNotThrow(() => Assert.InRange(minValue, maxValue, 2, pInclusivePolicy: Inclusivity.Exclusive));
-			Assert.DoesNotThrow(() => Assert.InRange(minValue, maxValue, minValue, pInclusivePolicy: Inclusivity.Inclusive));
-			Assert.Throws<AssertionException>(() => Assert.InRange(minValue, maxValue, minValue, pInclusivePolicy: Inclusivity.Exclusive));
-			Assert.DoesNotThrow(() => Assert.InRange(minValue, maxValue, maxValue, pInclusivePolicy: Inclusivity.Inclusive));
-			Assert.Throws<AssertionException>(() => Assert.InRange(minValue, maxValue, maxValue, pInclusivePolicy: Inclusivity.Exclusive));
-			Assert.Throws<AssertionException>(() => Assert.InRange(minValue, maxValue, minValue - 5, pInclusivePolicy: Inclusivity.Inclusive));
-			Assert.Throws<AssertionException>(() => Assert.InRange(minValue, maxValue, maxValue + 5, pInclusivePolicy: Inclusivity.Inclusive));
-			Assert.Throws<AssertionException>(() => Assert.InRange(minValue, maxValue, minValue - 5, pInclusivePolicy: Inclusivity.Exclusive));
-			Assert.Throws<AssertionException>(() => Assert.InRange(minValue, maxValue, maxValue + 5, pInclusivePolicy: Inclusivity.Exclusive));
+			Assert.DoesNotThrow(() => Assert.InRange(minValue, maxValue, 2));
+			Assert.Throws<AssertionException>(() => Assert.InRange(minValue, maxValue, minValue));
+			Assert.Throws<AssertionException>(() => Assert.InRange(minValue, maxValue, maxValue));
+			Assert.Throws<AssertionException>(() => Assert.InRange(minValue, maxValue, minValue - 5));
+			Assert.Throws<AssertionException>(() => Assert.InRange(minValue, maxValue, maxValue + 5));
+			Assert.Throws<AssertionException>(() => Assert.InRange(minValue, maxValue, minValue - 5));
+			Assert.Throws<AssertionException>(() => Assert.InRange(minValue, maxValue, maxValue + 5));
+		}
+
+		[TestMethod]
+		public void NotInRangeEqual() {
+			int minValue = 1;
+			int maxValue = 10;
+			Assert.Throws<ArgumentNullException>(() => Assert.NotInRangeEqual<string>(null, "z", "z"));
+			Assert.Throws<ArgumentNullException>(() => Assert.NotInRangeEqual<string>("a", null, "z"));
+			Assert.Throws<ArgumentNullException>(() => Assert.NotInRangeEqual<string>("a", "z", null));
+			Assert.Throws<AssertionException>(() => Assert.NotInRangeEqual(minValue, maxValue, 2));
+			Assert.DoesNotThrow(() => Assert.NotInRangeEqual(minValue, maxValue, minValue));
+			Assert.DoesNotThrow(() => Assert.NotInRangeEqual(minValue, maxValue, maxValue));
+			Assert.DoesNotThrow(() => Assert.NotInRangeEqual(minValue, maxValue, minValue - 5));
+			Assert.DoesNotThrow(() => Assert.NotInRangeEqual(minValue, maxValue, maxValue + 5));
+			Assert.DoesNotThrow(() => Assert.NotInRangeEqual(minValue, maxValue, minValue - 5));
+			Assert.DoesNotThrow(() => Assert.NotInRangeEqual(minValue, maxValue, maxValue + 5));
 		}
 
 		[TestMethod]
 		public void NotInRange() {
 			int minValue = 1;
 			int maxValue = 10;
-			Assert.Throws<ArgumentNullException>(() => Assert.InRange<string>(null, "z", "z"));
-			Assert.Throws<ArgumentNullException>(() => Assert.InRange<string>("a", null, "z"));
-			Assert.Throws<ArgumentNullException>(() => Assert.InRange<string>("a", "z", null));
-			Assert.Throws<AssertionException>(() => Assert.NotInRange(minValue, maxValue, 2, pInclusivePolicy: Inclusivity.Inclusive));
-			Assert.Throws<AssertionException>(() => Assert.NotInRange(minValue, maxValue, 2, pInclusivePolicy: Inclusivity.Exclusive));
-			Assert.Throws<AssertionException>(() => Assert.NotInRange(minValue, maxValue, minValue, pInclusivePolicy: Inclusivity.Inclusive));
-			Assert.DoesNotThrow(() => Assert.NotInRange(minValue, maxValue, minValue, pInclusivePolicy: Inclusivity.Exclusive));
-			Assert.Throws<AssertionException>(() => Assert.NotInRange(minValue, maxValue, maxValue, pInclusivePolicy: Inclusivity.Inclusive));
-			Assert.DoesNotThrow(() => Assert.NotInRange(minValue, maxValue, maxValue, pInclusivePolicy: Inclusivity.Exclusive));
-			Assert.DoesNotThrow(() => Assert.NotInRange(minValue, maxValue, minValue - 5, pInclusivePolicy: Inclusivity.Inclusive));
-			Assert.DoesNotThrow(() => Assert.NotInRange(minValue, maxValue, maxValue + 5, pInclusivePolicy: Inclusivity.Inclusive));
-			Assert.DoesNotThrow(() => Assert.NotInRange(minValue, maxValue, minValue - 5, pInclusivePolicy: Inclusivity.Exclusive));
-			Assert.DoesNotThrow(() => Assert.NotInRange(minValue, maxValue, maxValue + 5, pInclusivePolicy: Inclusivity.Exclusive));
+			Assert.Throws<ArgumentNullException>(() => Assert.NotInRange<string>(null, "z", "z"));
+			Assert.Throws<ArgumentNullException>(() => Assert.NotInRange<string>("a", null, "z"));
+			Assert.Throws<ArgumentNullException>(() => Assert.NotInRange<string>("a", "z", null));
+			Assert.Throws<AssertionException>(() => Assert.NotInRange(minValue, maxValue, 2));
+			Assert.Throws<AssertionException>(() => Assert.NotInRange(minValue, maxValue, minValue));
+			Assert.Throws<AssertionException>(() => Assert.NotInRange(minValue, maxValue, maxValue));
+			Assert.DoesNotThrow(() => Assert.NotInRange(minValue, maxValue, minValue - 5));
+			Assert.DoesNotThrow(() => Assert.NotInRange(minValue, maxValue, maxValue + 5));
+			Assert.DoesNotThrow(() => Assert.NotInRange(minValue, maxValue, minValue - 5));
+			Assert.DoesNotThrow(() => Assert.NotInRange(minValue, maxValue, maxValue + 5));
 		}
 
 		[TestMethod]
@@ -342,6 +368,18 @@ namespace Test {
 			Assert.DoesNotThrow(() => Assert.DoesNotContain(new int[] { }, 1));
 			Assert.DoesNotThrow(() => Assert.DoesNotContain(new int[] { 2 }, 1));
 			Assert.Throws<AssertionException>(() => Assert.DoesNotContain(new int[] { 2 }, 2));
+		}
+
+		[TestMethod]
+		public void ExceptionAttachments() {
+			var exception = new AssertionException("Testing {0}", 123);
+
+			try {
+				Assert.DoesNotThrow(() => { throw new ArgumentException(); }, exception);
+			}
+			catch (AssertionException e) {
+				Assert.Equal(e.Message, "Testing 123");
+			}
 		}
 	}
 }
