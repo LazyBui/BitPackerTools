@@ -89,7 +89,7 @@ namespace Test {
 		/// </summary>
 		public static void IsType<TType>(object pObj, AssertionException pException = null) {
 			if (pObj == null) throw new ArgumentNullException("pObj");
-			if (pObj.GetType() != typeof(TType)) throw pException ?? new AssertionException(string.Format("Given type: {0}\nExpected type: {1}", pObj.GetType(), typeof(TType)));
+			if (pObj.GetType() != typeof(TType)) throw pException ?? new AssertionException("Given type: {0}\nExpected type: {1}", pObj.GetType(), typeof(TType));
 		}
 
 		/// <summary>
@@ -106,7 +106,7 @@ namespace Test {
 		public static void GreaterThanEqual<TValue>(TValue pLowerBound, TValue pValue, AssertionException pException = null) where TValue : IComparable<TValue> {
 			if (pLowerBound == null) throw new ArgumentNullException("Lower bound must be populated to constrain a range");
 			if (pValue == null) throw new ArgumentNullException("Value must be populated to be in a range");
-			if (pLowerBound.CompareTo(pValue) > 0) throw pException ?? new AssertionException(string.Format("Value fell below expected range: {0}", pValue));
+			if (pLowerBound.CompareTo(pValue) > 0) throw pException ?? new AssertionException("Value fell below expected range: {0}", pValue);
 		}
 
 		/// <summary>
@@ -115,7 +115,7 @@ namespace Test {
 		public static void GreaterThan<TValue>(TValue pLowerBound, TValue pValue, AssertionException pException = null) where TValue : IComparable<TValue> {
 			if (pLowerBound == null) throw new ArgumentNullException("Lower bound must be populated to constrain a range");
 			if (pValue == null) throw new ArgumentNullException("Value must be populated to be in a range");
-			if (pLowerBound.CompareTo(pValue) >= 0) throw pException ?? new AssertionException(string.Format("Value fell below expected range: {0}", pValue));
+			if (pLowerBound.CompareTo(pValue) >= 0) throw pException ?? new AssertionException("Value fell below expected range: {0}", pValue);
 		}
 
 		/// <summary>
@@ -124,7 +124,7 @@ namespace Test {
 		public static void LessThanEqual<TValue>(TValue pUpperBound, TValue pValue, AssertionException pException = null) where TValue : IComparable<TValue> {
 			if (pUpperBound == null) throw new ArgumentNullException("Upper bound must be populated to constrain a range");
 			if (pValue == null) throw new ArgumentNullException("Value must be populated to be in a range");
-			if (pUpperBound.CompareTo(pValue) < 0) throw pException ?? new AssertionException(string.Format("Value fell above expected range: {0}", pValue));
+			if (pUpperBound.CompareTo(pValue) < 0) throw pException ?? new AssertionException("Value fell above expected range: {0}", pValue);
 		}
 
 		/// <summary>
@@ -133,7 +133,7 @@ namespace Test {
 		public static void LessThan<TValue>(TValue pUpperBound, TValue pValue, AssertionException pException = null) where TValue : IComparable<TValue> {
 			if (pUpperBound == null) throw new ArgumentNullException("Upper bound must be populated to constrain a range");
 			if (pValue == null) throw new ArgumentNullException("Value must be populated to be in a range");
-			if (pUpperBound.CompareTo(pValue) <= 0) throw pException ?? new AssertionException(string.Format("Value fell above expected range: {0}", pValue));
+			if (pUpperBound.CompareTo(pValue) <= 0) throw pException ?? new AssertionException("Value fell above expected range: {0}", pValue);
 		}
 
 		/// <summary>
@@ -142,8 +142,8 @@ namespace Test {
 		public static void InRangeEqual<TValue>(TValue pLowerBound, TValue pUpperBound, TValue pValue, AssertionException pException = null) where TValue : IComparable<TValue> {
 			if (pLowerBound == null || pUpperBound == null) throw new ArgumentNullException("Lower bound and upper bound must be populated to constrain a range");
 			if (pValue == null) throw new ArgumentNullException("Value must be populated to be in a range");
-			if (pLowerBound.CompareTo(pValue) > 0) throw pException ?? new AssertionException(string.Format("Value fell below expected range: {0}", pValue));
-			if (pUpperBound.CompareTo(pValue) < 0) throw pException ?? new AssertionException(string.Format("Value fell above expected range: {0}", pValue));
+			if (pLowerBound.CompareTo(pValue) > 0) throw pException ?? new AssertionException("Value fell below expected range: {0}", pValue);
+			if (pUpperBound.CompareTo(pValue) < 0) throw pException ?? new AssertionException("Value fell above expected range: {0}", pValue);
 		}
 
 		/// <summary>
@@ -152,8 +152,8 @@ namespace Test {
 		public static void InRange<TValue>(TValue pLowerBound, TValue pUpperBound, TValue pValue, AssertionException pException = null) where TValue : IComparable<TValue> {
 			if (pLowerBound == null || pUpperBound == null) throw new ArgumentNullException("Lower bound and upper bound must be populated to constrain a range");
 			if (pValue == null) throw new ArgumentNullException("Value must be populated to be in a range");
-			if (pLowerBound.CompareTo(pValue) >= 0) throw pException ?? new AssertionException(string.Format("Value fell below expected range: {0}", pValue));
-			if (pUpperBound.CompareTo(pValue) <= 0) throw pException ?? new AssertionException(string.Format("Value fell above expected range: {0}", pValue));
+			if (pLowerBound.CompareTo(pValue) >= 0) throw pException ?? new AssertionException("Value fell below expected range: {0}", pValue);
+			if (pUpperBound.CompareTo(pValue) <= 0) throw pException ?? new AssertionException("Value fell above expected range: {0}", pValue);
 		}
 
 		/// <summary>
