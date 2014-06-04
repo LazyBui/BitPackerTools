@@ -10,7 +10,6 @@ namespace BitPackerTools {
 		private List<byte> InternalStream { get; set; }
 		private int BitPos { get; set; }
 		private bool ForceAddByte { get; set; }
-		private const int cByteSizeInBits = sizeof(byte) * 8;
 
 		/// <summary>
 		/// Initializes a new instance of the BitPackerTools.PackedBitWriter class that has an empty bit buffer.
@@ -201,7 +200,7 @@ namespace BitPackerTools {
 		}
 
 		private static int ConvertBytesToBits(int pBytes) {
-			return pBytes * 8;
+			return pBytes * Constants.BitsInByte;
 		}
 
 		private int ParseBitCountAndExpandStreamAsNeeded(int pBitCount) {
@@ -210,10 +209,10 @@ namespace BitPackerTools {
 			int oldPos = InternalStream.Count - 1;
 			int bytesToAdd = 0;
 
-			if ((pBitCount + (BitPos - 1)) > cByteSizeInBits) {
-				int adjustedBitCount = pBitCount - (cByteSizeInBits - (BitPos - 1));
-				bytesToAdd = adjustedBitCount / cByteSizeInBits;
-				if (adjustedBitCount % cByteSizeInBits != 0) bytesToAdd++;
+			if ((pBitCount + (BitPos - 1)) > Constants.ByteSizeInBits) {
+				int adjustedBitCount = pBitCount - (Constants.ByteSizeInBits - (BitPos - 1));
+				bytesToAdd = adjustedBitCount / Constants.ByteSizeInBits;
+				if (adjustedBitCount % Constants.ByteSizeInBits != 0) bytesToAdd++;
 			}
 			if (ForceAddByte) {
 				bytesToAdd++;
@@ -251,9 +250,9 @@ namespace BitPackerTools {
 			int consumedBits = 0;
 
 			while (consumedBits < pBitCount) {
-				int bitsToConsume = Math.Min(pBitCount - consumedBits, cByteSizeInBits);
+				int bitsToConsume = Math.Min(pBitCount - consumedBits, Constants.ByteSizeInBits);
 				byte rawValue = (byte)(pData[srcBytePos] & PackedBitMasks.GetNarrowingMask(bitsToConsume));
-				int remainingBits = cByteSizeInBits - (BitPos - 1);
+				int remainingBits = Constants.ByteSizeInBits - (BitPos - 1);
 
 				// Extract only the bits we need for the current byte
 				// Assuming we have more bits than our current byte boundary, we have to apply some bits to the next byte
@@ -262,14 +261,14 @@ namespace BitPackerTools {
 					BitPos = 1;
 					remainingBits = bitsToConsume - remainingBits;
 
-					InternalStream[bytePos] |= (byte)(rawValue << (cByteSizeInBits - remainingBits));
+					InternalStream[bytePos] |= (byte)(rawValue << (Constants.ByteSizeInBits - remainingBits));
 					BitPos += remainingBits;
 					ForceAddByte = false;
 				}
 				else {
 					InternalStream[bytePos] |= (byte)(rawValue << (remainingBits - bitsToConsume));
 					BitPos += bitsToConsume;
-					if (BitPos > cByteSizeInBits) {
+					if (BitPos > Constants.ByteSizeInBits) {
 						BitPos = 1;
 						bytePos++;
 						// If the bits are directly on the border of a byte boundary (e.g. packed 32 bits)
@@ -282,7 +281,7 @@ namespace BitPackerTools {
 				}
 
 				srcBitPos += bitsToConsume;
-				if (srcBitPos > cByteSizeInBits) {
+				if (srcBitPos > Constants.ByteSizeInBits) {
 					srcBitPos = 1;
 					srcBytePos--;
 				}

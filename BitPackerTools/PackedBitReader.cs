@@ -13,8 +13,6 @@ namespace BitPackerTools {
 			get { return ConvertBytesToBits(InternalStream.Length) - ConvertBytesToBits(BytePos) - BitPos + 1; }
 		}
 
-		private const int cByteSizeInBits = sizeof(byte) * 8;
-
 		/// <summary>
 		/// Initializes a new instance of the BitPackerTools.PackedBitReader class with a bit buffer.
 		/// </summary>
@@ -503,7 +501,7 @@ namespace BitPackerTools {
 		/// <param name="pData">The array that will be intialized in the case where there are enough bits.</param>
 		/// <returns>true if reading all the bits was successful, false if there were not enough bits to read.</returns>
 		public bool TryRead(int pBitCount, out byte[] pData) {
-			return TryReadInternal(pBitCount, out pData, (int)Math.Ceiling((double)pBitCount / 8));
+			return TryReadInternal(pBitCount, out pData, (int)Math.Ceiling((double)pBitCount / Constants.BitsInByte));
 		}
 
 		private void CheckSize(bool pSigned, int pBitCount, int pTypeSize) {
@@ -517,7 +515,7 @@ namespace BitPackerTools {
 		}
 
 		private static int ConvertBytesToBits(int pBytes) {
-			return pBytes * 8;
+			return pBytes * Constants.BitsInByte;
 		}
 
 		private bool TryReadSignedInternal(int pBitCount, out byte[] pData, out bool pSigned, int pTypeBytes) {
@@ -553,13 +551,13 @@ namespace BitPackerTools {
 			int consumedBits = 0;
 
 			while (consumedBits < pBitCount) {
-				int bitsToConsume = Math.Min(pBitCount - consumedBits, cByteSizeInBits);
-				int remainingBits = cByteSizeInBits - (BitPos - 1);
+				int bitsToConsume = Math.Min(pBitCount - consumedBits, Constants.ByteSizeInBits);
+				int remainingBits = Constants.ByteSizeInBits - (BitPos - 1);
 				int attemptConsumeBits = Math.Min(bitsToConsume, remainingBits);
 				byte rawValue = (byte)(InternalStream[BytePos] & PackedBitMasks.GenerateWideningMask(attemptConsumeBits, BitPos - 1));
 
 				BitPos += attemptConsumeBits;
-				if (BitPos > cByteSizeInBits) {
+				if (BitPos > Constants.ByteSizeInBits) {
 					BitPos = 1;
 					BytePos++;
 				}
@@ -567,23 +565,23 @@ namespace BitPackerTools {
 				if (bitsToConsume > attemptConsumeBits) {
 					pData[destBytePos] |= (byte)(rawValue << (bitsToConsume - attemptConsumeBits));
 					destBitPos += attemptConsumeBits;
-					if (destBitPos > cByteSizeInBits) {
+					if (destBitPos > Constants.ByteSizeInBits) {
 						destBitPos = 1;
 						destBytePos--;
 					}
 
 					remainingBits = bitsToConsume - attemptConsumeBits;
 					rawValue = (byte)(InternalStream[BytePos] & PackedBitMasks.GenerateWideningMask(remainingBits, BitPos - 1));
-					pData[destBytePos] |= (byte)(rawValue >> (cByteSizeInBits - remainingBits));
+					pData[destBytePos] |= (byte)(rawValue >> (Constants.ByteSizeInBits - remainingBits));
 
 					destBitPos += remainingBits;
-					if (destBitPos > cByteSizeInBits) {
+					if (destBitPos > Constants.ByteSizeInBits) {
 						destBitPos = 1;
 						destBytePos--;
 					}
 
 					BitPos += remainingBits;
-					if (BitPos > cByteSizeInBits) {
+					if (BitPos > Constants.ByteSizeInBits) {
 						BitPos = 1;
 						BytePos++;
 					}
@@ -591,7 +589,7 @@ namespace BitPackerTools {
 				else {
 					pData[destBytePos] |= (byte)(rawValue >> (remainingBits - bitsToConsume));
 					destBitPos += bitsToConsume;
-					if (destBitPos > cByteSizeInBits) {
+					if (destBitPos > Constants.ByteSizeInBits) {
 						destBitPos = 1;
 						destBytePos--;
 					}

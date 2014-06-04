@@ -1,7 +1,7 @@
-﻿
+﻿using System;
+
 namespace BitPackerTools {
 	internal static class PackedBitMasks {
-		private const int ByteSizeInBits = sizeof(byte) * 8;
 		private static byte[] sBitNarrowingMasks;
 		private static byte[] sBitWideningMasks;
 
@@ -16,14 +16,14 @@ namespace BitPackerTools {
 				bitMask |= j;
 			}
 
-			bitMask <<= (8 - pBitsToGet);
+			bitMask <<= (Constants.BitsInByte - pBitsToGet);
 			bitMask >>= pStartOffset;
 			return bitMask;
 		}
 
 		static PackedBitMasks() {
 			// Bit 0 isn't used
-			int maskCount = ByteSizeInBits + 1;
+			int maskCount = Constants.ByteSizeInBits + 1;
 			sBitNarrowingMasks = new byte[maskCount];
 			sBitWideningMasks = new byte[maskCount];
 
