@@ -333,6 +333,7 @@ namespace Test {
 
 			Assert.Throws<AssertionException>(() => Assert.All(new int[] { 1, 2, 3, 4, 5 }, v => v <= 3));
 			Assert.DoesNotThrow(() => Assert.All(new int[] { 1, 2, 3, 4, 5 }, v => v < 10));
+			Assert.Throws<AssertionException>(() => Assert.All(new int[] { 1, 2, 3, 4, 5 }, v => v == 1));
 		}
 
 		[TestMethod]
@@ -343,6 +344,7 @@ namespace Test {
 
 			Assert.Throws<AssertionException>(() => Assert.None(new int[] { 1, 2, 3, 4, 5 }, v => v >= 3));
 			Assert.DoesNotThrow(() => Assert.None(new int[] { 1, 2, 3, 4, 5 }, v => v > 10));
+			Assert.Throws<AssertionException>(() => Assert.None(new int[] { 1, 2, 3, 4, 5 }, v => v == 1));
 		}
 
 		[TestMethod]
@@ -354,6 +356,33 @@ namespace Test {
 			Assert.DoesNotThrow(() => Assert.Any(new int[] { 1, 2, 3, 4, 5 }, v => v >= 3));
 			Assert.DoesNotThrow(() => Assert.Any(new int[] { 1, 2, 3, 4, 5 }, v => v < 10));
 			Assert.Throws<AssertionException>(() => Assert.Any(new int[] { 1, 2, 3, 4, 5 }, v => v > 10));
+			Assert.DoesNotThrow(() => Assert.Any(new int[] { 1, 2, 3, 4, 5 }, v => v == 1));
+		}
+
+		[TestMethod]
+		public void Only() {
+			Assert.Throws<ArgumentNullException>(() => Assert.Only(null as int[], v => v == 0));
+			Assert.Throws<ArgumentNullException>(() => Assert.Only(new int[] { }, null));
+			Assert.Throws<ArgumentException>(() => Assert.Only(new int[] { }, v => v == 0));
+
+			Assert.Throws<AssertionException>(() => Assert.Only(new int[] { 1, 2, 3, 4, 5 }, v => v >= 3));
+			Assert.Throws<AssertionException>(() => Assert.Only(new int[] { 1, 2, 3, 4, 5 }, v => v < 10));
+			Assert.Throws<AssertionException>(() => Assert.Only(new int[] { 1, 2, 3, 4, 5 }, v => v > 10));
+			Assert.DoesNotThrow(() => Assert.Only(new int[] { 1, 2, 3, 4, 5 }, v => v == 1));
+		}
+
+		[TestMethod]
+		public void Count() {
+			Assert.Throws<ArgumentNullException>(() => Assert.Count(null as int[], 1, v => v == 0));
+			Assert.Throws<ArgumentNullException>(() => Assert.Count(new int[] { }, 1, null));
+			Assert.Throws<ArgumentException>(() => Assert.Count(new int[] { }, 1, v => v == 0));
+
+			Assert.DoesNotThrow(() => Assert.Count(new int[] { 1, 2, 3, 4, 5 }, 3, v => v >= 3));
+			Assert.DoesNotThrow(() => Assert.Count(new int[] { 1, 2, 3, 4, 5 }, 5, v => v < 10));
+			Assert.Throws<AssertionException>(() => Assert.Count(new int[] { 1, 2, 3, 4, 5 }, 4, v => v < 10));
+			Assert.Throws<AssertionException>(() => Assert.Count(new int[] { 1, 2, 3, 4, 5 }, 6, v => v < 10));
+			Assert.Throws<AssertionException>(() => Assert.Count(new int[] { 1, 2, 3, 4, 5 }, 5, v => v > 10));
+			Assert.Throws<AssertionException>(() => Assert.Count(new int[] { 1, 2, 3, 4, 5 }, 5, v => v == 1));
 		}
 
 		[TestMethod]

@@ -225,6 +225,26 @@ namespace Test {
 		}
 
 		/// <summary>
+		/// Asserts that exactly one element of a sequence with one or more elements matches the predicate.
+		/// </summary>
+		public static void Only<TValue>(IEnumerable<TValue> pSequence, Func<TValue, bool> pPredicate, AssertionException pException = null) {
+			if (pSequence == null) throw new ArgumentNullException("pSequence");
+			if (pPredicate == null) throw new ArgumentNullException("pPredicate");
+			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");
+			if (pSequence.Count(pPredicate) != 1) throw pException ?? new AssertionException("Expected only 1 element to match predicate");
+		}
+
+		/// <summary>
+		/// Asserts that exactly a specified number of elements of a sequence with one or more elements matches the predicate.
+		/// </summary>
+		public static void Count<TValue>(IEnumerable<TValue> pSequence, int pCount, Func<TValue, bool> pPredicate, AssertionException pException = null) {
+			if (pSequence == null) throw new ArgumentNullException("pSequence");
+			if (pPredicate == null) throw new ArgumentNullException("pPredicate");
+			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");
+			if (pSequence.Count(pPredicate) != pCount) throw pException ?? new AssertionException("Expected {0} elements to match predicate", pCount);
+		}
+
+		/// <summary>
 		/// Asserts that an no elements of a sequence with one or more elements matches the predicate.
 		/// </summary>
 		public static void None<TValue>(IEnumerable<TValue> pSequence, Func<TValue, bool> pPredicate, AssertionException pException = null) {
