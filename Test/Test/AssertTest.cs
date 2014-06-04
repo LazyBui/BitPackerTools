@@ -45,7 +45,7 @@ namespace Test {
 		[TestMethod]
 		public void Throws() {
 			try {
-				Assert.Throws<AssertionException>(() => { throw new AssertionException("Testing"); });
+				Assert.Throws<ArgumentException>(() => { throw new ArgumentException("Testing"); });
 			}
 			catch (Exception) {
 				// This should not occur
@@ -53,10 +53,10 @@ namespace Test {
 			}
 
 			try {
-				Assert.Throws<ArgumentNullException>(() => { throw new AssertionException("Testing"); });
+				Assert.Throws<ArgumentNullException>(() => { throw new ArgumentException("Testing"); });
 			}
 			catch (AssertionException e) {
-				if (e.InnerException.GetType() != typeof(AssertionException)) {
+				if (e.InnerException.GetType() != typeof(ArgumentException)) {
 					// This should not occur
 					throw;
 				}
@@ -68,7 +68,7 @@ namespace Test {
 
 			bool thrown = false;
 			try {
-				Assert.Throws<AssertionException>(() => { });
+				Assert.Throws<ArgumentException>(() => { });
 			}
 			catch (AssertionException) {
 				thrown = true;
@@ -84,7 +84,7 @@ namespace Test {
 		public void DoesNotThrow() {
 			bool thrown = false;
 			try {
-				Assert.DoesNotThrow(() => { throw new AssertionException("Testing"); });
+				Assert.DoesNotThrow(() => { throw new ArgumentException("Testing"); });
 			}
 			catch (Exception) {
 				thrown = true;
