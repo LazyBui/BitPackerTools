@@ -239,6 +239,7 @@ namespace Test {
 		/// </summary>
 		public static void Contains<TValue>(IEnumerable<TValue> pSequence, TValue pValue, AssertionException pException = null) {
 			if (pSequence == null) throw new ArgumentNullException("pSequence");
+			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");
 			if (!pSequence.Contains(pValue)) throw pException ?? new AssertionException("Expected value is missing");
 		}
 
@@ -247,6 +248,7 @@ namespace Test {
 		/// </summary>
 		public static void DoesNotContain<TValue>(IEnumerable<TValue> pSequence, TValue pValue, AssertionException pException = null) {
 			if (pSequence == null) throw new ArgumentNullException("pSequence");
+			if (!pSequence.Any()) throw new ArgumentException("Expected elements", "pSequence");
 			if (pSequence.Contains(pValue)) throw pException ?? new AssertionException("Expected value is present");
 		}
 

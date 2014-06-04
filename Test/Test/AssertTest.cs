@@ -359,7 +359,7 @@ namespace Test {
 		[TestMethod]
 		public void Contains() {
 			Assert.Throws<ArgumentNullException>(() => Assert.Contains<int>(null, 1));
-			Assert.Throws<AssertionException>(() => Assert.Contains(new int[] { }, 1));
+			Assert.Throws<ArgumentException>(() => Assert.Contains<int>(new int[] { }, 1));
 			Assert.Throws<AssertionException>(() => Assert.Contains(new int[] { 2 }, 1));
 			Assert.DoesNotThrow(() => Assert.Contains(new int[] { 2 }, 2));
 		}
@@ -367,7 +367,7 @@ namespace Test {
 		[TestMethod]
 		public void DoesNotContain() {
 			Assert.Throws<ArgumentNullException>(() => Assert.DoesNotContain<int>(null, 1));
-			Assert.DoesNotThrow(() => Assert.DoesNotContain(new int[] { }, 1));
+			Assert.Throws<ArgumentException>(() => Assert.Contains<int>(new int[] { }, 1));
 			Assert.DoesNotThrow(() => Assert.DoesNotContain(new int[] { 2 }, 1));
 			Assert.Throws<AssertionException>(() => Assert.DoesNotContain(new int[] { 2 }, 2));
 		}
