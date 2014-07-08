@@ -12,7 +12,7 @@ namespace Test {
 			PackedBitReader reader = null;
 			// This is the same as the output of the PackedBitWriter test, so should have the same outputs as the inputs
 			byte[] raw = { 0x9E, 0x4D, 0x0D, 0x39, 0x76, 0x08, 0x48, 0x9E, 0x67, 0x36, 0xBC, 0x87, };
-			Assert.Throws<ArgumentNullException>(() => reader = new PackedBitReader(null));
+			Assert.ThrowsExact<ArgumentNullException>(() => reader = new PackedBitReader(null));
 			bool boolValue = false;
 			sbyte signedByte = 0;
 			byte unsignedByte = 0;

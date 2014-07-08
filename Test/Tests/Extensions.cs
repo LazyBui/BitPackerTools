@@ -15,7 +15,7 @@ namespace Test {
 		[TestMethod]
 		public void Implements() {
 			Type t = null;
-			Assert.Throws<ArgumentNullException>(() => t.Implements<ITestImplement>());
+			Assert.ThrowsExact<ArgumentNullException>(() => t.Implements<ITestImplement>());
 
 			t = typeof(TestNoInterface);
 			Assert.DoesNotThrow(() => t.Implements<ITestImplement>());
@@ -39,7 +39,7 @@ namespace Test {
 			PropertyInfo prop = null;
 			bool result = false;
 
-			Assert.Throws<ArgumentNullException>(() => prop.HasAttribute<TestingAttribute>());
+			Assert.ThrowsExact<ArgumentNullException>(() => prop.HasAttribute<TestingAttribute>());
 
 			prop = getProperty(typeof(NoAttributeProperty));
 			Assert.DoesNotThrow(() => result = prop.HasAttribute<TestingAttribute>());

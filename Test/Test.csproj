@@ -51,16 +51,38 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="AssertionException.cs" />
-    <Compile Include="Assert.cs" />
+    <Compile Include="Framework\BasicAssertions.cs" />
+    <Compile Include="Framework\CollectionAssertions.cs" />
+    <Compile Include="Framework\FileAndDirectoryAssertions.cs" />
+    <Compile Include="Framework\FloatingPointAssertions.cs" />
+    <Compile Include="Framework\LogicalComparisonAssertions.cs" />
+    <Compile Include="Framework\EqualityComparerStateful.cs" />
+    <Compile Include="Framework\EqualityComparerStateless.cs" />
+    <Compile Include="Framework\AssertionException.cs" />
+    <Compile Include="Framework\Assert.cs" />
+    <Compile Include="Framework\StringAssertions.cs" />
+    <Compile Include="Framework\TypeAndInstanceAssertions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Test\PackedBitReader.cs" />
-    <Compile Include="Test\PackedBitWriter.cs" />
-    <Compile Include="Test\Extensions.cs" />
-    <Compile Include="Test\AssertTest.cs" />
-    <Compile Include="Test\Serialization\BitRange.cs" />
-    <Compile Include="Test\Serialization\BitSize.cs" />
-    <Compile Include="Test\Serialization\BitOrder.cs" />
+    <Compile Include="Tests\Extensions.cs" />
+    <Compile Include="Tests\PackedBitReader.cs" />
+    <Compile Include="Tests\PackedBitWriter.cs" />
+    <Compile Include="Tests\Serialization\BitOrder.cs" />
+    <Compile Include="Tests\Serialization\BitRange.cs" />
+    <Compile Include="Tests\Serialization\BitSize.cs" />
+    <Compile Include="Tests\Test Framework\AssertTest.cs" />
+    <Compile Include="Tests\Test Framework\FileAndDirectoryAssertionsTest.cs" />
+    <Compile Include="Tests\Test Framework\FloatingPointAssertionsTest.cs" />
+    <Compile Include="Tests\Test Framework\TypeAndInstanceAssertionsTest.cs" />
+    <Compile Include="Tests\Test Framework\LogicalComparisonAssertionsTest.cs" />
+    <Compile Include="Tests\Test Framework\StringAssertionsTest.cs" />
+    <Compile Include="Tests\Test Framework\CollectionAssertionsTest.cs" />
+    <Compile Include="Tests\Test Framework\BasicAssertionsTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Tests\Test Framework\diffcontent.bin" />
+    <None Include="Tests\Test Framework\difflength.bin" />
+    <None Include="Tests\Test Framework\eq1.bin" />
+    <None Include="Tests\Test Framework\eq2.bin" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BitPackerTools\BitPackerTools.csproj">
