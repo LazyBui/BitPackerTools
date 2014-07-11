@@ -8,10 +8,10 @@ namespace BitPackerTools {
 			return sBitMasks[pBitCount];
 		}
 
-		public static byte GenerateWideningMask(int pBitsToGet, int pStartOffset) {
-			byte bitMask = sBitMasks[pBitsToGet];
-			bitMask <<= (Constants.BitsInByte - pBitsToGet);
-			bitMask >>= pStartOffset;
+		public static byte GetWideningMask(int pBitCount, int pStartBit) {
+			byte bitMask = sBitMasks[pBitCount];
+			bitMask <<= (Constants.BitsInByte - pBitCount);
+			bitMask >>= pStartBit;
 			return bitMask;
 		}
 

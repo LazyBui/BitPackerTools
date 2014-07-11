@@ -554,7 +554,7 @@ namespace BitPackerTools {
 				int bitsToConsume = Math.Min(pBitCount - consumedBits, Constants.ByteSizeInBits);
 				int remainingBits = Constants.ByteSizeInBits - (BitPos - 1);
 				int attemptConsumeBits = Math.Min(bitsToConsume, remainingBits);
-				byte rawValue = (byte)(InternalStream[BytePos] & PackedBitMasks.GenerateWideningMask(attemptConsumeBits, BitPos - 1));
+				byte rawValue = (byte)(InternalStream[BytePos] & PackedBitMasks.GetWideningMask(attemptConsumeBits, BitPos - 1));
 
 				BitPos += attemptConsumeBits;
 				if (BitPos > Constants.ByteSizeInBits) {
@@ -571,7 +571,7 @@ namespace BitPackerTools {
 					}
 
 					remainingBits = bitsToConsume - attemptConsumeBits;
-					rawValue = (byte)(InternalStream[BytePos] & PackedBitMasks.GenerateWideningMask(remainingBits, BitPos - 1));
+					rawValue = (byte)(InternalStream[BytePos] & PackedBitMasks.GetWideningMask(remainingBits, BitPos - 1));
 					pData[destBytePos] |= (byte)(rawValue >> (Constants.ByteSizeInBits - remainingBits));
 
 					destBitPos += remainingBits;
