@@ -279,10 +279,6 @@ namespace BitPackerTools.Serialization {
 
 		private void ReadImperativeBits(PackedBitReader pReader, object pObj, IEnumerable<PropertyInfo> pProperties, Func<PropertyInfo, BitPair> pGetBitPair) {
 			foreach (PropertyInfo prop in pProperties) {
-				if (prop.Name == "ShouldBeTrue43") {
-					var i = 5;
-					i++;
-				}
 				if (prop.PropertyType == typeof(bool)) prop.SetValue(pObj, pReader.ReadBool());
 				else {
 					BitPair read = pGetBitPair(prop);
