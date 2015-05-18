@@ -18,6 +18,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void Empty() {
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.Empty<int>(null));
 			Assert.DoesNotThrow(() => Assert.Empty(new int[] { }));
@@ -26,6 +27,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void NotEmpty() {
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.NotEmpty<int>(null));
 			Assert.ThrowsExact<AssertionException>(() => Assert.NotEmpty(new int[] { }));
@@ -34,6 +36,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void All() {
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.All(null as int[], v => v == 0));
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.All(new int[] { }, null));
@@ -45,6 +48,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void None() {
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.None(null as int[], v => v == 0));
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.None(new int[] { }, null));
@@ -56,6 +60,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void Any() {
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.Any(null as int[], v => v == 0));
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.Any(new int[] { }, null));
@@ -68,6 +73,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void Only() {
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.Only(null as int[], v => v == 0));
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.Only(new int[] { }, null));
@@ -80,6 +86,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void Exactly() {
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.Exactly(null as int[], 1, v => v == 0));
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.Exactly(new int[] { }, 1, null));
@@ -95,6 +102,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void CountSequence() {
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.Count(null as int[], 1));
 			Assert.ThrowsExact<ArgumentException>(() => Assert.Count(new int[] { }, 1));
@@ -106,6 +114,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void CountElement() {
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.Count(null as int[], 1, 1));
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.Count("ABC", 1, 'c', null as IEqualityComparer<char>));
@@ -121,6 +130,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void Contains() {
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.Contains<int>(null, 1));
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.Contains("ABC", 'c', null as IEqualityComparer<char>));
@@ -132,6 +142,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void DoesNotContain() {
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.DoesNotContain<int>(null, 1));
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.DoesNotContain("ABC", 'c', null as IEqualityComparer<char>));
@@ -143,6 +154,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void Unique() {
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.Unique(null as int[]));
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.Unique(new int[] { 2, 3 }, null as Func<int, int>));
@@ -181,6 +193,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void NotUnique() {
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.NotUnique(null as int[]));
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.NotUnique(new int[] { 2, 3 }, null as Func<int, int>));
@@ -219,6 +232,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void StartsWith() {
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.StartsWith(null, new int[0]));
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.StartsWith(new int[0], null));
@@ -236,6 +250,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void EndsWith() {
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.EndsWith(null, new int[0]));
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.EndsWith(new int[0], null));
@@ -253,6 +268,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void IsSubsetOf() {
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.IsSubsetOf(null, new int[0]));
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.IsSubsetOf(new int[0], null));
@@ -274,6 +290,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void IsNotSubsetOf() {
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.IsNotSubsetOf(null, new int[0]));
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.IsNotSubsetOf(new int[0], null));
@@ -295,6 +312,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void IsStrictSubsetOf() {
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.IsStrictSubsetOf(null, new int[0]));
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.IsStrictSubsetOf(new int[0], null));
@@ -314,6 +332,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void IsNotStrictSubsetOf() {
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.IsNotStrictSubsetOf(null, new int[0]));
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.IsNotStrictSubsetOf(new int[0], null));

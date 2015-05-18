@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Test {
 	public partial class AssertTest {
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void IsNaN() {
 			Assert.DoesNotThrow(() => Assert.IsNaN(float.NaN));
 			Assert.DoesNotThrow(() => Assert.IsNaN(double.NaN));
@@ -16,6 +17,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void IsNotNaN() {
 			Assert.ThrowsExact<AssertionException>(() => Assert.IsNotNaN(float.NaN));
 			Assert.ThrowsExact<AssertionException>(() => Assert.IsNotNaN(double.NaN));
@@ -28,6 +30,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void IsInfinity() {
 			Assert.ThrowsExact<AssertionException>(() => Assert.IsInfinity(float.NaN));
 			Assert.ThrowsExact<AssertionException>(() => Assert.IsInfinity(double.NaN));
@@ -40,6 +43,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void IsNotInfinity() {
 			Assert.DoesNotThrow(() => Assert.IsNotInfinity(float.NaN));
 			Assert.DoesNotThrow(() => Assert.IsNotInfinity(double.NaN));
@@ -52,6 +56,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void IsPositiveInfinity() {
 			Assert.ThrowsExact<AssertionException>(() => Assert.IsPositiveInfinity(float.NaN));
 			Assert.ThrowsExact<AssertionException>(() => Assert.IsPositiveInfinity(double.NaN));
@@ -64,6 +69,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void IsNotPositiveInfinity() {
 			Assert.DoesNotThrow(() => Assert.IsNotPositiveInfinity(float.NaN));
 			Assert.DoesNotThrow(() => Assert.IsNotPositiveInfinity(double.NaN));
@@ -76,6 +82,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void IsNegativeInfinity() {
 			Assert.ThrowsExact<AssertionException>(() => Assert.IsNegativeInfinity(float.NaN));
 			Assert.ThrowsExact<AssertionException>(() => Assert.IsNegativeInfinity(double.NaN));
@@ -88,6 +95,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void IsNotNegativeInfinity() {
 			Assert.DoesNotThrow(() => Assert.IsNotNegativeInfinity(float.NaN));
 			Assert.DoesNotThrow(() => Assert.IsNotNegativeInfinity(double.NaN));
@@ -100,6 +108,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void IsFloatValue() {
 			Assert.ThrowsExact<AssertionException>(() => Assert.IsFloatValue(float.NaN));
 			Assert.ThrowsExact<AssertionException>(() => Assert.IsFloatValue(double.NaN));
@@ -112,6 +121,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void IsNotFloatValue() {
 			Assert.DoesNotThrow(() => Assert.IsNotFloatValue(float.NaN));
 			Assert.DoesNotThrow(() => Assert.IsNotFloatValue(double.NaN));
@@ -124,6 +134,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void IsWithinDelta() {
 			Assert.DoesNotThrow(() => Assert.IsWithinDelta(0.0001f, 0.0002f, 0.0001f));
 			Assert.DoesNotThrow(() => Assert.IsWithinDelta(0.0001d, 0.0002d, 0.0001d));

@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Test {
 	public partial class AssertTest {
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void IsMatch() {
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.IsMatch(null as Regex, string.Empty));
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.IsMatch(new Regex(string.Empty), null));
@@ -16,6 +17,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void IsNotMatch() {
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.IsNotMatch(null as Regex, string.Empty));
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.IsNotMatch(new Regex(string.Empty), null));
@@ -27,6 +29,7 @@ namespace Test {
 		}
 
 		[TestMethod]
+		[TestCategory("Framework")]
 		public void MatchCount() {
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.MatchCount(null as Regex, string.Empty, 1));
 			Assert.ThrowsExact<ArgumentNullException>(() => Assert.MatchCount(new Regex(string.Empty), null, 1));
