@@ -7,17 +7,14 @@ namespace BitPackerTools {
 	/// Represents a compact array that is written based on specific bit-level inputs.
 	/// </summary>
 	public sealed class PackedBitWriter {
-		private List<byte> InternalStream { get; set; }
-		private int BitPos { get; set; }
+		private List<byte> InternalStream { get; set; } = new List<byte>();
+		private int BitPos { get; set; } = 1;
 		private bool ForceAddByte { get; set; }
 
 		/// <summary>
 		/// Initializes a new instance of the BitPackerTools.PackedBitWriter class that has an empty bit buffer.
 		/// </summary>
-		public PackedBitWriter() {
-			BitPos = 1;
-			InternalStream = new List<byte>();
-		}
+		public PackedBitWriter() { }
 
 		/// <summary>
 		/// Writes an sbyte to the current buffer (sign bit is included).

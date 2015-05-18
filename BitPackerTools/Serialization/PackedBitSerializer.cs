@@ -175,7 +175,7 @@ namespace BitPackerTools.Serialization {
 			var bitsUsed = new HashSet<int>();
 			int maxBit = 0;
 			int minBit = int.MaxValue;
-			
+
 			foreach (PropertyInfo prop in pProperties) {
 				PackedBitOrderAttribute bitOrderAttr = prop.GetCustomAttribute<PackedBitOrderAttribute>();
 				if (prop.PropertyType == typeof(string) || prop.PropertyType == typeof(double)) {
@@ -210,7 +210,7 @@ namespace BitPackerTools.Serialization {
 				// Validation
 				if (bitRangeAttr.HasHighBit) {
 					if (bitRangeAttr.LowBit <= 0 || bitRangeAttr.HighBit <= 0) throw new ArgumentException(string.Format("Bits must be expressed as 1 or above ({0})", prop.Name));
-					if (bitRangeAttr.HighBit < bitRangeAttr.LowBit) throw new ArgumentException(string.Format("HighBit must be higher than LowBit ({0})", prop.Name)); 
+					if (bitRangeAttr.HighBit < bitRangeAttr.LowBit) throw new ArgumentException(string.Format("HighBit must be higher than LowBit ({0})", prop.Name));
 
 					for (int i = bitRangeAttr.LowBit; i <= bitRangeAttr.HighBit; i++) {
 						if (bitsUsed.Contains(i)) throw new ArgumentException(string.Format("Overlapping bit value in range ({0}): {1}", prop.Name, i));
