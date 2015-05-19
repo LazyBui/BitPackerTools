@@ -18,6 +18,7 @@ namespace BitPackerTools {
 		/// </summary>
 		public PackedBitReader(byte[] pByteStream) {
 			if (pByteStream == null) throw new ArgumentNullException(nameof(pByteStream));
+			if (pByteStream.Length == 0) throw new ArgumentException("Must have at least 1 byte", nameof(pByteStream));
 
 			InternalStream = new byte[pByteStream.Length];
 			// Copy the block in order to avoid modifications to the underlying array causing havoc

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BitPackerTools;
 
@@ -8,11 +6,17 @@ namespace Test {
 	[TestClass]
 	public class PackedBitReaderTest {
 		[TestMethod]
+		public void Constructor() {
+			Assert.ThrowsExact<ArgumentNullException>(() => new PackedBitReader(null));
+			Assert.ThrowsExact<ArgumentException>(() => new PackedBitReader(new byte[] { }));
+			Assert.DoesNotThrow(() => new PackedBitReader(new byte[] { 0x22 }));
+		}
+
+		[TestMethod]
 		public void Basics() {
 			PackedBitReader reader = null;
 			// This is the same as the output of the PackedBitWriter test, so should have the same outputs as the inputs
 			byte[] raw = { 0x9E, 0x4D, 0x0D, 0x39, 0x76, 0x08, 0x48, 0x9E, 0x67, 0x36, 0xBC, 0x87, };
-			Assert.ThrowsExact<ArgumentNullException>(() => reader = new PackedBitReader(null));
 			bool boolValue = false;
 			sbyte signedByte = 0;
 			byte unsignedByte = 0;

@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BitCountException.cs" />
+    <Compile Include="CodePath.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="InsufficientBitsException.cs" />
@@ -68,7 +69,6 @@
     <Compile Include="Serialization\IPackedBitSerializable.cs" />
     <Compile Include="Serialization\PackedBitOrderAttribute.cs" />
     <Compile Include="Serialization\PackedBitRangeAttribute.cs" />
-    <Compile Include="Serialization\PackedBitSerializationException.cs" />
     <Compile Include="Serialization\PackedBitSerializer.cs" />
     <Compile Include="Serialization\PackedBitSizeAttribute.cs" />
   </ItemGroup>
