@@ -91,10 +91,10 @@
     <Compile Include="Tests\Framework\BasicAssertionsTest.cs" />
     <Compile Include="Tests\PackedBitReader.cs" />
     <Compile Include="Tests\PackedBitWriter.cs" />
-    <Compile Include="Tests\Serialization\PackedBitSerializer.cs" />
     <Compile Include="Tests\Serialization\BitOrder.cs" />
     <Compile Include="Tests\Serialization\BitRange.cs" />
     <Compile Include="Tests\Serialization\BitSize.cs" />
+    <Compile Include="Tests\Serialization\PackedBitSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Tests\Framework\_diffcontent.bin" />

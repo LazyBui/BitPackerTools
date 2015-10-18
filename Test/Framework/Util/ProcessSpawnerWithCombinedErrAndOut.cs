@@ -92,6 +92,7 @@ namespace Test {
 				RedirectStandardError = true,
 				RedirectStandardInput = true,
 				UseShellExecute = false,
+				CreateNoWindow = true,
 			};
 
 			string arguments = string.Empty;

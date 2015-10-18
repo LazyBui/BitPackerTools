@@ -90,6 +90,7 @@ namespace Test {
 				RedirectStandardError = true,
 				RedirectStandardInput = true,
 				UseShellExecute = false,
+				CreateNoWindow = true,
 			};
 
 			if (pArguments != null && pArguments.Any()) {
