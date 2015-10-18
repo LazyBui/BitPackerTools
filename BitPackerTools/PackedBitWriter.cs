@@ -68,90 +68,70 @@ namespace BitPackerTools {
 		/// Writes a bool to the current buffer (no sign bit included).
 		/// </summary>
 		/// <param name="pData">The value to write a bit from.</param>
-		public void Write(bool pData) {
-			Write(1, pData ? 1 : 0);
-		}
+		public void Write(bool pData) => Write(1, pData ? 1 : 0);
 
 		/// <summary>
 		/// Writes an sbyte to the current buffer (no sign bit included).
 		/// </summary>
 		/// <param name="pBitCount">The number of bits from the value to write.</param>
 		/// <param name="pData">The value to write bits from.</param>
-		public void Write(int pBitCount, sbyte pData) {
-			Write(pBitCount, BitConverter.GetBytes(pData));
-		}
+		public void Write(int pBitCount, sbyte pData) => Write(pBitCount, BitConverter.GetBytes(pData));
 
 		/// <summary>
 		/// Writes a short to the current buffer (no sign bit included).
 		/// </summary>
 		/// <param name="pBitCount">The number of bits from the value to write.</param>
 		/// <param name="pData">The value to write bits from.</param>
-		public void Write(int pBitCount, short pData) {
-			Write(pBitCount, BitConverter.GetBytes(pData));
-		}
+		public void Write(int pBitCount, short pData) => Write(pBitCount, BitConverter.GetBytes(pData));
 
 		/// <summary>
 		/// Writes an int to the current buffer (no sign bit included).
 		/// </summary>
 		/// <param name="pBitCount">The number of bits from the value to write.</param>
 		/// <param name="pData">The value to write bits from.</param>
-		public void Write(int pBitCount, int pData) {
-			Write(pBitCount, BitConverter.GetBytes(pData));
-		}
+		public void Write(int pBitCount, int pData) => Write(pBitCount, BitConverter.GetBytes(pData));
 
 		/// <summary>
 		/// Writes a long to the current buffer (no sign bit included).
 		/// </summary>
 		/// <param name="pBitCount">The number of bits from the value to write.</param>
 		/// <param name="pData">The value to write bits from.</param>
-		public void Write(int pBitCount, long pData) {
-			Write(pBitCount, BitConverter.GetBytes(pData));
-		}
+		public void Write(int pBitCount, long pData) => Write(pBitCount, BitConverter.GetBytes(pData));
 
 		/// <summary>
 		/// Writes a byte to the current buffer (no sign bit included).
 		/// </summary>
 		/// <param name="pBitCount">The number of bits from the value to write.</param>
 		/// <param name="pData">The value to write bits from.</param>
-		public void Write(int pBitCount, byte pData) {
-			Write(pBitCount, BitConverter.GetBytes(pData));
-		}
+		public void Write(int pBitCount, byte pData) => Write(pBitCount, BitConverter.GetBytes(pData));
 
 		/// <summary>
 		/// Writes a ushort to the current buffer (no sign bit included).
 		/// </summary>
 		/// <param name="pBitCount">The number of bits from the value to write.</param>
 		/// <param name="pData">The value to write bits from.</param>
-		public void Write(int pBitCount, ushort pData) {
-			Write(pBitCount, BitConverter.GetBytes(pData));
-		}
+		public void Write(int pBitCount, ushort pData) => Write(pBitCount, BitConverter.GetBytes(pData));
 
 		/// <summary>
 		/// Writes a uint to the current buffer (no sign bit included).
 		/// </summary>
 		/// <param name="pBitCount">The number of bits from the value to write.</param>
 		/// <param name="pData">The value to write bits from.</param>
-		public void Write(int pBitCount, uint pData) {
-			Write(pBitCount, BitConverter.GetBytes(pData));
-		}
+		public void Write(int pBitCount, uint pData) => Write(pBitCount, BitConverter.GetBytes(pData));
 
 		/// <summary>
 		/// Writes a ulong to the current buffer (no sign bit included).
 		/// </summary>
 		/// <param name="pBitCount">The number of bits from the value to write.</param>
 		/// <param name="pData">The value to write bits from.</param>
-		public void Write(int pBitCount, ulong pData) {
-			Write(pBitCount, BitConverter.GetBytes(pData));
-		}
+		public void Write(int pBitCount, ulong pData) => Write(pBitCount, BitConverter.GetBytes(pData));
 
 		/// <summary>
 		/// Writes a double to the current buffer (no sign bit included).
 		/// This is provided as a convenience, it saves no space in a bitpacked context.
 		/// </summary>
 		/// <param name="pData">The double to write to the current buffer.</param>
-		public void Write(double pData) {
-			Write(ConvertBytesToBits(sizeof(double)), BitConverter.GetBytes(pData));
-		}
+		public void Write(double pData) => Write(ConvertBytesToBits(sizeof(double)), BitConverter.GetBytes(pData));
 
 		/// <summary>
 		/// Writes a string to the current buffer (no sign bit included).
@@ -159,9 +139,7 @@ namespace BitPackerTools {
 		/// The default encoding is UTF8.
 		/// </summary>
 		/// <param name="pData">The string to write to the current buffer.</param>
-		public void Write(string pData) {
-			Write(pData, Encoding.UTF8);
-		}
+		public void Write(string pData) => Write(pData, Encoding.UTF8);
 
 		/// <summary>
 		/// Writes a string to the current buffer (no sign bit included).
@@ -192,13 +170,9 @@ namespace BitPackerTools {
 		/// Copies the internal buffer of bytes to a new array.
 		/// </summary>
 		/// <returns>An array of bytes built up from the internal buffer.</returns>
-		public byte[] ToArray() {
-			return InternalStream.ToArray();
-		}
+		public byte[] ToArray() => InternalStream.ToArray();
 
-		private static int ConvertBytesToBits(int pBytes) {
-			return pBytes * Constants.BitsInByte;
-		}
+		private static int ConvertBytesToBits(int pBytes) => pBytes * Constants.BitsInByte;
 
 		private int ParseBitCountAndExpandStreamAsNeeded(int pBitCount) {
 			if (InternalStream.Count == 0) InternalStream.Add(0x00);

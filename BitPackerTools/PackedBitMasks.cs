@@ -4,9 +4,7 @@ namespace BitPackerTools {
 	internal static class PackedBitMasks {
 		private static byte[] sBitMasks;
 
-		public static byte GetNarrowingMask(int pBitCount) {
-			return sBitMasks[pBitCount];
-		}
+		public static byte GetNarrowingMask(int pBitCount) => sBitMasks[pBitCount];
 
 		public static byte GetWideningMask(int pBitCount, int pStartBit) {
 			byte bitMask = sBitMasks[pBitCount];

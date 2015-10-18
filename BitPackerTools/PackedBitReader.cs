@@ -468,9 +468,7 @@ namespace BitPackerTools {
 		/// </summary>
 		/// <param name="pData">The string that will be initialized in the case where the read is successful.</param>
 		/// <returns>true if reading the string was successful, false if a string could not be read.</returns>
-		public bool TryRead(out string pData) {
-			return TryRead(out pData, Encoding.UTF8);
-		}
+		public bool TryRead(out string pData) => TryRead(out pData, Encoding.UTF8);
 
 		/// <summary>
 		/// Attempt to read a string out of the current buffer.
@@ -499,9 +497,8 @@ namespace BitPackerTools {
 		/// <param name="pBitCount">The number of bits to try reading.</param>
 		/// <param name="pData">The array that will be intialized in the case where there are enough bits.</param>
 		/// <returns>true if reading all the bits was successful, false if there were not enough bits to read.</returns>
-		public bool TryRead(int pBitCount, out byte[] pData) {
-			return TryReadInternal(pBitCount, out pData, (int)Math.Ceiling((double)pBitCount / Constants.BitsInByte));
-		}
+		public bool TryRead(int pBitCount, out byte[] pData) =>
+			TryReadInternal(pBitCount, out pData, (int)Math.Ceiling((double)pBitCount / Constants.BitsInByte));
 
 		private void CheckSize(bool pSigned, int pBitCount, int pTypeSize) {
 			if (pBitCount < 1) throw new BitCountException();
@@ -513,9 +510,7 @@ namespace BitPackerTools {
 			}
 		}
 
-		private static int ConvertBytesToBits(int pBytes) {
-			return pBytes * Constants.BitsInByte;
-		}
+		private static int ConvertBytesToBits(int pBytes) => pBytes * Constants.BitsInByte;
 
 		private bool TryReadSignedInternal(int pBitCount, out byte[] pData, out bool pSigned, int pTypeBytes) {
 			if (pBitCount > RemainingBits) {

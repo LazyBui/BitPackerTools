@@ -105,7 +105,7 @@ namespace BitPackerTools.Serialization {
 				pHasOrder = false;
 				pHasSize = false;
 				pHasRange = false;
-            }
+			}
 		}
 
 		private static void ValidateProperty(Type pSerializeType, PropertyInfo pProperty) {
