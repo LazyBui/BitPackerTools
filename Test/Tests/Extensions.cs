@@ -1,7 +1,7 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BitPackerTools;
 using System.Reflection;
+using BitPackerTools;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Test {
 	[TestClass]
