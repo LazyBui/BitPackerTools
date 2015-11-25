@@ -13,16 +13,16 @@ namespace Test {
 		/// <summary>
 		/// Escapes a collection of objects to a usable Windows command line argument string.
 		/// </summary>
-		/// <param name="pRawArguments">A collection of objects to be used to compose a Windows command line argument string.</param>
+		/// <param name="rawArguments">A collection of objects to be used to compose a Windows command line argument string.</param>
 		/// <returns>A usable Windows command line argument string.</returns>
-		public string Escape(IEnumerable<object> pRawArguments) {
+		public string Escape(IEnumerable<object> rawArguments) {
 			return string.Join(" ",
-				pRawArguments.Select(a => EscapeArgument(a.ToString())));
+				rawArguments.Select(a => EscapeArgument(a.ToString())));
 		}
 
-		private string EscapeArgument(string pRawArgument) {
+		private string EscapeArgument(string rawArgument) {
 			string output;
-			output = Regex.Replace(pRawArgument, @"(\\*)" + "\"", @"$1$1\" + "\"");
+			output = Regex.Replace(rawArgument, @"(\\*)" + "\"", @"$1$1\" + "\"");
 			output = Regex.Replace(output, @"(\\+)$", @"$1$1");
 			return Quote + output + Quote;
 		}

@@ -37,55 +37,55 @@ namespace Test {
 		/// <summary>z
 		/// Initializes a new instance of the <see cref="Test.ProcessSpawnerWithSplitErrAndOut" /> class with a specified file.
 		/// </summary>
-		/// <param name="pFileName">The name of the file to execute.</param>
-		public ProcessSpawnerWithSplitErrAndOut(string pFileName) { Initialize(pFileName, null, null); }
+		/// <param name="file">The name of the file to execute.</param>
+		public ProcessSpawnerWithSplitErrAndOut(string file) { Initialize(file, null, null); }
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Test.ProcessSpawnerWithSplitErrAndOut" /> class with a specified file and command line arguments.
 		/// </summary>
-		/// <param name="pFileName">The name of the file to execute.</param>
-		/// <param name="pArguments">The command line arguments to pass to the execution of the file.</param>
-		public ProcessSpawnerWithSplitErrAndOut(string pFileName, params object[] pArguments) { Initialize(pFileName, new WindowsCommandLineArgumentEscaper(), pArguments); }
+		/// <param name="file">The name of the file to execute.</param>
+		/// <param name="args">The command line arguments to pass to the execution of the file.</param>
+		public ProcessSpawnerWithSplitErrAndOut(string file, params object[] args) { Initialize(file, new WindowsCommandLineArgumentEscaper(), args); }
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Test.ProcessSpawnerWithSplitErrAndOut" /> class with a specified file, command line escaper, and command line arguments.
 		/// </summary>
-		/// <param name="pFileName">The name of the file to execute.</param>
-		/// <param name="pEscaper">The command line escaper to produce a command line argument string from the command line arguments.</param>
-		/// <param name="pArguments">The command line arguments to pass to the execution of the file.</param>
-		public ProcessSpawnerWithSplitErrAndOut(string pFileName, ICommandLineArgumentEscaper pEscaper, params object[] pArguments) { Initialize(pFileName, pEscaper, pArguments); }
+		/// <param name="file">The name of the file to execute.</param>
+		/// <param name="escaper">The command line escaper to produce a command line argument string from the command line arguments.</param>
+		/// <param name="args">The command line arguments to pass to the execution of the file.</param>
+		public ProcessSpawnerWithSplitErrAndOut(string file, ICommandLineArgumentEscaper escaper, params object[] args) { Initialize(file, escaper, args); }
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Test.ProcessSpawnerWithSplitErrAndOut" /> class with a specified file.
 		/// </summary>
-		/// <param name="pFile">The <see cref="FileInfo" /> carrying information about the file to execute.</param>
-		public ProcessSpawnerWithSplitErrAndOut(FileInfo pFile) { Initialize(pFile, null, null); }
+		/// <param name="file">The <see cref="FileInfo" /> carrying information about the file to execute.</param>
+		public ProcessSpawnerWithSplitErrAndOut(FileInfo file) { Initialize(file, null, null); }
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Test.ProcessSpawnerWithSplitErrAndOut" /> class with a specified file and command line arguments.
 		/// </summary>
-		/// <param name="pFile">The <see cref="FileInfo" /> carrying information about the file to execute.</param>
-		/// <param name="pArguments">The command line arguments to pass to the execution of the file.</param>
-		public ProcessSpawnerWithSplitErrAndOut(FileInfo pFile, params object[] pArguments) { Initialize(pFile, new WindowsCommandLineArgumentEscaper(), pArguments); }
+		/// <param name="file">The <see cref="FileInfo" /> carrying information about the file to execute.</param>
+		/// <param name="args">The command line arguments to pass to the execution of the file.</param>
+		public ProcessSpawnerWithSplitErrAndOut(FileInfo file, params object[] args) { Initialize(file, new WindowsCommandLineArgumentEscaper(), args); }
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Test.ProcessSpawnerWithSplitErrAndOut" /> class with a specified file, command line escaper, and command line arguments.
 		/// </summary>
-		/// <param name="pFile">The <see cref="FileInfo" /> carrying information about the file to execute.</param>
-		/// <param name="pEscaper">The command line escaper to produce a command line argument string from the command line arguments.</param>
-		/// <param name="pArguments">The command line arguments to pass to the execution of the file.</param>
-		public ProcessSpawnerWithSplitErrAndOut(FileInfo pFile, ICommandLineArgumentEscaper pEscaper, params object[] pArguments) { Initialize(pFile, pEscaper, pArguments); }
+		/// <param name="file">The <see cref="FileInfo" /> carrying information about the file to execute.</param>
+		/// <param name="escaper">The command line escaper to produce a command line argument string from the command line arguments.</param>
+		/// <param name="args">The command line arguments to pass to the execution of the file.</param>
+		public ProcessSpawnerWithSplitErrAndOut(FileInfo file, ICommandLineArgumentEscaper escaper, params object[] args) { Initialize(file, escaper, args); }
 
-		private void Initialize(string pFileName, ICommandLineArgumentEscaper pEscaper, params object[] pArguments) {
-			if (pFileName == null) throw new ArgumentNullException(nameof(pFileName));
-			if (pFileName.Length == 0) throw new ArgumentException("String is blank", nameof(pFileName));
-			Initialize(new FileInfo(pFileName), pEscaper, pArguments);
+		private void Initialize(string file, ICommandLineArgumentEscaper escaper, params object[] args) {
+			if (file == null) throw new ArgumentNullException(nameof(file));
+			if (file.Length == 0) throw new ArgumentException("String is blank", nameof(file));
+			Initialize(new FileInfo(file), escaper, args);
 		}
 
-		private void Initialize(FileInfo pFile, ICommandLineArgumentEscaper pEscaper, params object[] pArguments) {
-			if (pFile == null) throw new ArgumentNullException(nameof(pFile));
-			if (!pFile.Exists) throw new FileNotFoundException("File not found", pFile.FullName);
-			if (pArguments != null && pArguments.Any()) {
-				if (pEscaper == null) throw new ArgumentNullException(nameof(pEscaper));
+		private void Initialize(FileInfo file, ICommandLineArgumentEscaper escaper, params object[] args) {
+			if (file == null) throw new ArgumentNullException(nameof(file));
+			if (!file.Exists) throw new FileNotFoundException("File not found", file.FullName);
+			if (args != null && args.Any()) {
+				if (escaper == null) throw new ArgumentNullException(nameof(escaper));
 			}
 
 			var startInfo = new ProcessStartInfo() {
-				FileName = pFile.FullName,
+				FileName = file.FullName,
 				RedirectStandardOutput = true,
 				RedirectStandardError = true,
 				RedirectStandardInput = true,
@@ -93,8 +93,8 @@ namespace Test {
 				CreateNoWindow = true,
 			};
 
-			if (pArguments != null && pArguments.Any()) {
-				startInfo.Arguments = pEscaper.Escape(pArguments);
+			if (args != null && args.Any()) {
+				startInfo.Arguments = escaper.Escape(args);
 			}
 
 			m_process = new Process() {
@@ -102,37 +102,37 @@ namespace Test {
 				EnableRaisingEvents = true,
 			};
 
-			m_process.OutputDataReceived += (sender, args) => {
-				if (args.Data == null) return;
+			m_process.OutputDataReceived += (sender, e) => {
+				if (e.Data == null) return;
 				if (m_outputSinceLastInput != null) {
 					if (m_outputSinceLastInput.Length != 0) m_outputSinceLastInput.AppendLine();
-					m_outputSinceLastInput.Append(args.Data);
+					m_outputSinceLastInput.Append(e.Data);
 				}
 				if (m_output.Length != 0) m_output.AppendLine();
-				m_output.Append(args.Data);
+				m_output.Append(e.Data);
 			};
 
-			m_process.ErrorDataReceived += (sender, args) => {
-				if (args.Data == null) return;
+			m_process.ErrorDataReceived += (sender, e) => {
+				if (e.Data == null) return;
 				if (m_error.Length != 0) m_error.AppendLine();
-				m_error.Append(args.Data);
+				m_error.Append(e.Data);
 			};
 		}
 
 		private ProcessResult ProduceResult() {
 			return new ProcessResult(
-				pFullOutput: m_output.ToString(),
-				pFullError: m_error.ToString(),
-				pFullBuffer: null,
-				pExitCode: m_process.ExitCode,
-				pStartTime: m_process.StartTime,
-				pExitTime: m_process.ExitTime,
-				pPrivilegedProcessorTime: m_process.PrivilegedProcessorTime,
-				pUserProcessorTime: m_process.UserProcessorTime,
-				pTotalProcessorTime: m_process.TotalProcessorTime,
-				pPeakPagedMemorySize: m_procPeakPagedMemorySize,
-				pPeakVirtualMemorySize: m_procPeakVirtualMemorySize,
-				pPeakWorkingSet: m_procPeakWorkingSet
+				stdOutput: m_output.ToString(),
+				errorOutput: m_error.ToString(),
+				fullOutput: null,
+				exitCode: m_process.ExitCode,
+				startTime: m_process.StartTime,
+				exitTime: m_process.ExitTime,
+				privilegedProcessorTime: m_process.PrivilegedProcessorTime,
+				userProcessorTime: m_process.UserProcessorTime,
+				totalProcessorTime: m_process.TotalProcessorTime,
+				peakPagedMemorySize: m_procPeakPagedMemorySize,
+				peakVirtualMemorySize: m_procPeakVirtualMemorySize,
+				peakWorkingSet: m_procPeakWorkingSet
 			);
 		}
 

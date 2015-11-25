@@ -14,14 +14,14 @@ namespace Test {
 		/// Initializes a new instance of the <see cref="Test.EqualityComparerStateful&lt;TValue&gt;" /> class with a specified comparer delegate and optional hasher delegate.
 		/// If the hasher is not specified, the hash of all objects is assumed to be 0.
 		/// </summary>
-		/// <param name="pComparer">The comparer that determines whether two objects are equal.</param>
-		/// <param name="pHasher">The hash function for a particular object.</param>
-		public EqualityComparerStateful(Func<TValue, TValue, bool> pComparer, Func<TValue, int> pHasher = null) {
-			if (pComparer == null) throw new ArgumentNullException(nameof(pComparer));
-			if (pHasher == null) pHasher = v => 0;
+		/// <param name="comparer">The comparer that determines whether two objects are equal.</param>
+		/// <param name="hasher">The hash function for a particular object.</param>
+		public EqualityComparerStateful(Func<TValue, TValue, bool> comparer, Func<TValue, int> hasher = null) {
+			if (comparer == null) throw new ArgumentNullException(nameof(comparer));
+			if (hasher == null) hasher = v => 0;
 
-			mComparer = pComparer;
-			mHasher = pHasher;
+			mComparer = comparer;
+			mHasher = hasher;
 		}
 
 		/// <summary>

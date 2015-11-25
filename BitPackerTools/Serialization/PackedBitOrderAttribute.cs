@@ -13,14 +13,14 @@ namespace BitPackerTools.Serialization {
 		public int BitCount { get; private set; }
 		public bool Signed { get; set; }
 
-		public PackedBitOrderAttribute(int pBitIndex) {
-			LowBit = pBitIndex;
+		public PackedBitOrderAttribute(int bitIndex) {
+			LowBit = bitIndex;
 			BitCount = 1;
 		}
 
-		public PackedBitOrderAttribute(int pBitIndex, int pBitCount) {
-			LowBit = pBitIndex;
-			BitCount = pBitCount;
+		public PackedBitOrderAttribute(int bitIndex, int bitCount) {
+			LowBit = bitIndex;
+			BitCount = bitCount;
 		}
 	}
 }

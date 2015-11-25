@@ -11,8 +11,8 @@ namespace BitPackerTools.Serialization {
 		public int BitCount { get; private set; }
 		public bool Signed { get; set; }
 
-		public PackedBitSizeAttribute(int pBitCount = 1) {
-			BitCount = pBitCount;
+		public PackedBitSizeAttribute(int bitCount = 1) {
+			BitCount = bitCount;
 		}
 	}
 }

@@ -6,57 +6,57 @@ namespace Test {
 		/// <summary>
 		/// Asserts that a string matches the regex pattern.
 		/// </summary>
-		public static void IsMatch(Regex pRegex, string pInput, AssertionException pException = null) {
-			if (pRegex == null) throw new ArgumentNullException(nameof(pRegex));
-			if (pInput == null) throw new ArgumentNullException(nameof(pInput));
-			if (!pRegex.IsMatch(pInput)) throw pException ?? new AssertionException("Regex pattern was not matched");
+		public static void IsMatch(Regex regex, string input, AssertionException exception = null) {
+			if (regex == null) throw new ArgumentNullException(nameof(regex));
+			if (input == null) throw new ArgumentNullException(nameof(input));
+			if (!regex.IsMatch(input)) throw exception ?? new AssertionException("Regex pattern was not matched");
 		}
 
 		/// <summary>
 		/// Asserts that a string matches the regex pattern.
 		/// </summary>
-		public static void IsMatch(string pRegexPattern, string pInput, AssertionException pException = null) {
-			if (pRegexPattern == null) throw new ArgumentNullException(nameof(pRegexPattern));
-			if (pInput == null) throw new ArgumentNullException(nameof(pInput));
-			if (!Regex.IsMatch(pInput, pRegexPattern)) throw pException ?? new AssertionException("Regex pattern was not matched");
+		public static void IsMatch(string regexPattern, string input, AssertionException exception = null) {
+			if (regexPattern == null) throw new ArgumentNullException(nameof(regexPattern));
+			if (input == null) throw new ArgumentNullException(nameof(input));
+			if (!Regex.IsMatch(input, regexPattern)) throw exception ?? new AssertionException("Regex pattern was not matched");
 		}
 
 		/// <summary>
 		/// Asserts that a string produces the specified count of matches to the regex pattern.
 		/// </summary>
-		public static void MatchCount(Regex pRegex, string pInput, int pCount, AssertionException pException = null) {
-			if (pRegex == null) throw new ArgumentNullException(nameof(pRegex));
-			if (pInput == null) throw new ArgumentNullException(nameof(pInput));
-			if (pCount < 0) throw new ArgumentException("Must be non-negative", nameof(pCount));
-			if (pRegex.Matches(pInput).Count != pCount) throw pException ?? new AssertionException("Regex pattern was not matched the specified number of times: {0}", pCount);
+		public static void MatchCount(Regex regex, string input, int count, AssertionException exception = null) {
+			if (regex == null) throw new ArgumentNullException(nameof(regex));
+			if (input == null) throw new ArgumentNullException(nameof(input));
+			if (count < 0) throw new ArgumentException("Must be non-negative", nameof(count));
+			if (regex.Matches(input).Count != count) throw exception ?? new AssertionException("Regex pattern was not matched the specified number of times: {0}", count);
 		}
 
 		/// <summary>
 		/// Asserts that a string produces the specified count of matches to the regex pattern.
 		/// </summary>
-		public static void MatchCount(string pRegexPattern, string pInput, int pCount, AssertionException pException = null) {
-			if (pRegexPattern == null) throw new ArgumentNullException(nameof(pRegexPattern));
-			if (pInput == null) throw new ArgumentNullException(nameof(pInput));
-			if (pCount < 0) throw new ArgumentException("Must be non-negative", nameof(pCount));
-			if (Regex.Matches(pInput, pRegexPattern).Count != pCount) throw pException ?? new AssertionException("Regex pattern was not matched the specified number of times: {0}", pCount);
+		public static void MatchCount(string regexPattern, string input, int count, AssertionException exception = null) {
+			if (regexPattern == null) throw new ArgumentNullException(nameof(regexPattern));
+			if (input == null) throw new ArgumentNullException(nameof(input));
+			if (count < 0) throw new ArgumentException("Must be non-negative", nameof(count));
+			if (Regex.Matches(input, regexPattern).Count != count) throw exception ?? new AssertionException("Regex pattern was not matched the specified number of times: {0}", count);
 		}
 
 		/// <summary>
 		/// Asserts that a string does not match the regex pattern.
 		/// </summary>
-		public static void IsNotMatch(Regex pRegex, string pInput, AssertionException pException = null) {
-			if (pRegex == null) throw new ArgumentNullException(nameof(pRegex));
-			if (pInput == null) throw new ArgumentNullException(nameof(pInput));
-			if (pRegex.IsMatch(pInput)) throw pException ?? new AssertionException("Regex pattern matched");
+		public static void IsNotMatch(Regex regex, string input, AssertionException exception = null) {
+			if (regex == null) throw new ArgumentNullException(nameof(regex));
+			if (input == null) throw new ArgumentNullException(nameof(input));
+			if (regex.IsMatch(input)) throw exception ?? new AssertionException("Regex pattern matched");
 		}
 
 		/// <summary>
 		/// Asserts that a string does not match the regex pattern.
 		/// </summary>
-		public static void IsNotMatch(string pRegexPattern, string pInput, AssertionException pException = null) {
-			if (pRegexPattern == null) throw new ArgumentNullException(nameof(pRegexPattern));
-			if (pInput == null) throw new ArgumentNullException(nameof(pInput));
-			if (Regex.IsMatch(pInput, pRegexPattern)) throw pException ?? new AssertionException("Regex pattern matched");
+		public static void IsNotMatch(string regexPattern, string input, AssertionException exception = null) {
+			if (regexPattern == null) throw new ArgumentNullException(nameof(regexPattern));
+			if (input == null) throw new ArgumentNullException(nameof(input));
+			if (Regex.IsMatch(input, regexPattern)) throw exception ?? new AssertionException("Regex pattern matched");
 		}
 	}
 }

@@ -24,10 +24,10 @@ namespace BitPackerTools.Serialization {
 		/// <summary>
 		/// Initializes a new instance of the BitPackerTools.Serialization.PackedBitSerializer class with a specified type.
 		/// </summary>
-		/// <param name="pSerializeType">The type to serialize from/deserialize to.</param>
-		public PackedBitSerializer(Type pSerializeType) {
-			if (pSerializeType == null) throw new ArgumentNullException(nameof(pSerializeType));
-			SerializeType = pSerializeType;
+		/// <param name="serializeType">The type to serialize from/deserialize to.</param>
+		public PackedBitSerializer(Type serializeType) {
+			if (serializeType == null) throw new ArgumentNullException(nameof(serializeType));
+			SerializeType = serializeType;
 			bool hasRange;
 			bool hasOrder;
 			bool hasSize;
@@ -40,10 +40,10 @@ namespace BitPackerTools.Serialization {
 			ImplementsInterface = implementsInterface;
 		}
 
-		private static IEnumerable<PropertyInfo> GetProperties(Type pSerializeType) {
-			if (pSerializeType == null) throw CodePath.Unreachable;
+		private static IEnumerable<PropertyInfo> GetProperties(Type serializeType) {
+			if (serializeType == null) throw CodePath.Unreachable;
 
-			return pSerializeType.
+			return serializeType.
 				GetProperties(BindingFlags.Public | BindingFlags.Instance).
 				Where(p => {
 					return
@@ -53,23 +53,23 @@ namespace BitPackerTools.Serialization {
 				});
 		}
 
-		private static void ValidateType(Type pSerializeType, out bool pImplementsInterface, out bool pHasSize, out bool pHasRange, out bool pHasOrder) {
-			if (pSerializeType == null) throw CodePath.Unreachable;
+		private static void ValidateType(Type serializeType, out bool implementsInterface, out bool hasSize, out bool hasRange, out bool hasOrder) {
+			if (serializeType == null) throw CodePath.Unreachable;
 
-			if (!pSerializeType.Implements<IPackedBitSerializable>()) {
+			if (!serializeType.Implements<IPackedBitSerializable>()) {
 				// We'll have to test the type to see if it fits our rubric
-				var properties = GetProperties(pSerializeType);
+				var properties = GetProperties(serializeType);
 				if (properties == null || !properties.Any()) {
-					throw new ArgumentException("Type must have at least one property with PackedBitSizeAttribute, PackedBitRangeAttribute, or PackedBitOrderAttribute", nameof(pSerializeType));
+					throw new ArgumentException("Type must have at least one property with PackedBitSizeAttribute, PackedBitRangeAttribute, or PackedBitOrderAttribute", nameof(serializeType));
 				}
 
-				bool hasSize = properties.Any(p => p.HasAttribute<PackedBitSizeAttribute>());
-				bool hasRange = properties.Any(p => p.HasAttribute<PackedBitRangeAttribute>());
-				bool hasOrder = properties.Any(p => p.HasAttribute<PackedBitOrderAttribute>());
+				bool hasSizeAttribute = properties.Any(p => p.HasAttribute<PackedBitSizeAttribute>());
+				bool hasRangeAttribute = properties.Any(p => p.HasAttribute<PackedBitRangeAttribute>());
+				bool hasOrderAttribute = properties.Any(p => p.HasAttribute<PackedBitOrderAttribute>());
 				int setCount = new[] {
-					hasSize,
-					hasRange,
-					hasOrder
+					hasSizeAttribute,
+					hasRangeAttribute,
+					hasOrderAttribute
 				}.Count(c => c);
 
 				if (setCount == 0) {
@@ -79,60 +79,60 @@ namespace BitPackerTools.Serialization {
 				}
 
 				if (setCount > 1) {
-					throw new ArgumentException("PackedBitSizeAttribute, PackedBitRangeAttribute, and PackedBitOrderAttribute are all mutually incompatible; please choose a single one for the entire class", nameof(pSerializeType));
+					throw new ArgumentException("PackedBitSizeAttribute, PackedBitRangeAttribute, and PackedBitOrderAttribute are all mutually incompatible; please choose a single one for the entire class", nameof(serializeType));
 				}
 
-				if (hasOrder) {
+				if (hasOrderAttribute) {
 					properties = properties.OrderBy(p => p.GetCustomAttribute<PackedBitOrderAttribute>().LowBit);
-					ValidateOrder(pSerializeType, properties);
+					ValidateOrder(serializeType, properties);
 				}
-				else if (hasRange) {
+				else if (hasRangeAttribute) {
 					properties = properties.OrderBy(p => p.GetCustomAttribute<PackedBitRangeAttribute>().LowBit);
-					ValidateRange(pSerializeType, properties);
+					ValidateRange(serializeType, properties);
 				}
-				else if (hasSize) {
-					ValidatePropertyTypes(pSerializeType, properties);
+				else if (hasSizeAttribute) {
+					ValidatePropertyTypes(serializeType, properties);
 				}
 				else throw CodePath.Unreachable;
 
-				pImplementsInterface = false;
-				pHasOrder = hasOrder;
-				pHasSize = hasSize;
-				pHasRange = hasRange;
+				implementsInterface = false;
+				hasOrder = hasOrderAttribute;
+				hasSize = hasSizeAttribute;
+				hasRange = hasRangeAttribute;
 			}
 			else {
-				pImplementsInterface = true;
-				pHasOrder = false;
-				pHasSize = false;
-				pHasRange = false;
+				implementsInterface = true;
+				hasOrder = false;
+				hasSize = false;
+				hasRange = false;
 			}
 		}
 
-		private static void ValidateProperty(Type pSerializeType, PropertyInfo pProperty) {
-			if (!sValidTypes.Contains(pProperty.PropertyType)) {
-				throw new ArgumentException($"Property type for property {pProperty.Name} must be one of the following: {string.Join(", ", sValidTypes.Select(t => t.Name))}", nameof(pSerializeType));
+		private static void ValidateProperty(Type serializeType, PropertyInfo property) {
+			if (!sValidTypes.Contains(property.PropertyType)) {
+				throw new ArgumentException($"Property type for property {property.Name} must be one of the following: {string.Join(", ", sValidTypes.Select(t => t.Name))}", nameof(serializeType));
 			}
 		}
 
-		private static void ValidatePropertyTypes(Type pSerializeType, IEnumerable<PropertyInfo> pProperties) {
-			foreach (PropertyInfo prop in pProperties) {
-				ValidateProperty(pSerializeType, prop);
+		private static void ValidatePropertyTypes(Type serializeType, IEnumerable<PropertyInfo> properties) {
+			foreach (PropertyInfo prop in properties) {
+				ValidateProperty(serializeType, prop);
 			}
 		}
 
-		private static void ValidateOrder(Type pSerializeType, IEnumerable<PropertyInfo> pProperties) {
+		private static void ValidateOrder(Type serializeType, IEnumerable<PropertyInfo> properties) {
 			var bitsUsed = new HashSet<int>();
 			int maxBit = 0;
 			int minBit = int.MaxValue;
 
-			foreach (PropertyInfo prop in pProperties) {
-				ValidateProperty(pSerializeType, prop);
+			foreach (PropertyInfo prop in properties) {
+				ValidateProperty(serializeType, prop);
 				PackedBitOrderAttribute bitOrderAttr = prop.GetCustomAttribute<PackedBitOrderAttribute>();
 
 				// Validation
-				if (bitOrderAttr.LowBit <= 0) throw new ArgumentException($"Bits must be expressed as 1 or above ({prop.Name})", nameof(pSerializeType));
+				if (bitOrderAttr.LowBit <= 0) throw new ArgumentException($"Bits must be expressed as 1 or above ({prop.Name})", nameof(serializeType));
 				for (int i = 0; i < bitOrderAttr.BitCount; i++) {
-					if (bitsUsed.Contains(bitOrderAttr.LowBit + i)) throw new ArgumentException($"Overlapping bit value in range ({prop.Name}): {bitOrderAttr.LowBit + i}", nameof(pSerializeType));
+					if (bitsUsed.Contains(bitOrderAttr.LowBit + i)) throw new ArgumentException($"Overlapping bit value in range ({prop.Name}): {bitOrderAttr.LowBit + i}", nameof(serializeType));
 					bitsUsed.Add(bitOrderAttr.LowBit + i);
 				}
 
@@ -140,25 +140,25 @@ namespace BitPackerTools.Serialization {
 				minBit = Math.Min(minBit, bitOrderAttr.LowBit);
 			}
 
-			ValidateFullRange(pSerializeType, bitsUsed, minBit, maxBit);
+			ValidateFullRange(serializeType, bitsUsed, minBit, maxBit);
 		}
 
-		private static void ValidateRange(Type pSerializeType, IEnumerable<PropertyInfo> pProperties) {
+		private static void ValidateRange(Type serializeType, IEnumerable<PropertyInfo> properties) {
 			var bitsUsed = new HashSet<int>();
 			int maxBit = 0;
 			int minBit = int.MaxValue;
 
-			foreach (PropertyInfo prop in pProperties) {
-				ValidateProperty(pSerializeType, prop);
+			foreach (PropertyInfo prop in properties) {
+				ValidateProperty(serializeType, prop);
 				PackedBitRangeAttribute bitRangeAttr = prop.GetCustomAttribute<PackedBitRangeAttribute>();
 
 				// Validation
 				if (bitRangeAttr.HasHighBit) {
-					if (bitRangeAttr.LowBit <= 0 || bitRangeAttr.HighBit <= 0) throw new ArgumentException($"Bits must be expressed as 1 or above ({prop.Name})", nameof(pSerializeType));
-					if (bitRangeAttr.HighBit < bitRangeAttr.LowBit) throw new ArgumentException($"HighBit must be higher than LowBit ({prop.Name})", nameof(pSerializeType));
+					if (bitRangeAttr.LowBit <= 0 || bitRangeAttr.HighBit <= 0) throw new ArgumentException($"Bits must be expressed as 1 or above ({prop.Name})", nameof(serializeType));
+					if (bitRangeAttr.HighBit < bitRangeAttr.LowBit) throw new ArgumentException($"HighBit must be higher than LowBit ({prop.Name})", nameof(serializeType));
 
 					for (int i = bitRangeAttr.LowBit; i <= bitRangeAttr.HighBit; i++) {
-						if (bitsUsed.Contains(i)) throw new ArgumentException($"Overlapping bit value in range ({prop.Name}): {i}", nameof(pSerializeType));
+						if (bitsUsed.Contains(i)) throw new ArgumentException($"Overlapping bit value in range ({prop.Name}): {i}", nameof(serializeType));
 						bitsUsed.Add(i);
 					}
 
@@ -167,8 +167,8 @@ namespace BitPackerTools.Serialization {
 				}
 				else {
 					int bitValue = bitRangeAttr.LowBit;
-					if (bitValue <= 0) throw new ArgumentException($"Bits must be expressed as 1 or above ({prop.Name})", nameof(pSerializeType));
-					if (bitsUsed.Contains(bitValue)) throw new ArgumentException($"Overlapping bit value in range ({prop.Name}): {bitValue}", nameof(pSerializeType));
+					if (bitValue <= 0) throw new ArgumentException($"Bits must be expressed as 1 or above ({prop.Name})", nameof(serializeType));
+					if (bitsUsed.Contains(bitValue)) throw new ArgumentException($"Overlapping bit value in range ({prop.Name}): {bitValue}", nameof(serializeType));
 					bitsUsed.Add(bitValue);
 
 					maxBit = Math.Max(maxBit, bitValue);
@@ -176,35 +176,35 @@ namespace BitPackerTools.Serialization {
 				}
 			}
 
-			ValidateFullRange(pSerializeType, bitsUsed, minBit, maxBit);
+			ValidateFullRange(serializeType, bitsUsed, minBit, maxBit);
 		}
 
-		private static void ValidateFullRange(Type pSerializeType, HashSet<int> pValues, int pMinimum, int pMaximum) {
-			if (pValues.Count != (pMaximum - (pMinimum - 1))) {
+		private static void ValidateFullRange(Type serializeType, HashSet<int> values, int min, int max) {
+			if (values.Count != (max - (min - 1))) {
 				throw new ArgumentException(string.Format(
 					"Missing bit value(s) from range: {0}",
-					string.Join(", ", Enumerable.Range(pMinimum, pMaximum - (pMinimum - 1)).
-					Where(v => !pValues.Contains(v)).
-					Select(v => v.ToString()))), nameof(pSerializeType));
+					string.Join(", ", Enumerable.Range(min, max - (min - 1)).
+					Where(v => !values.Contains(v)).
+					Select(v => v.ToString()))), nameof(serializeType));
 			}
 		}
 
 		/// <summary>
 		/// Deserializes a PackedBitReader stream to an object.
 		/// </summary>
-		/// <param name="pReader">The stream to deserialize.</param>
+		/// <param name="reader">The stream to deserialize.</param>
 		/// <returns>An object populated by the stream.</returns>
-		public object Deserialize(PackedBitReader pReader) {
+		public object Deserialize(PackedBitReader reader) {
 			object ret = Activator.CreateInstance(SerializeType);
 			if (ImplementsInterface) {
-				((IPackedBitSerializable)ret).Deserialize(pReader);
+				((IPackedBitSerializable)ret).Deserialize(reader);
 			}
 			else {
 				var properties = GetProperties(SerializeType);
 
 				if (HasOrder) {
 					properties = properties.OrderBy(p => p.GetCustomAttribute<PackedBitOrderAttribute>().LowBit);
-					ReadImperativeBits(pReader, ret, properties, (prop) => {
+					ReadImperativeBits(reader, ret, properties, (prop) => {
 						PackedBitOrderAttribute bitOrderAttr = prop.GetCustomAttribute<PackedBitOrderAttribute>();
 						return new BitPair() {
 							Count = bitOrderAttr.BitCount,
@@ -214,7 +214,7 @@ namespace BitPackerTools.Serialization {
 				}
 				else if (HasRange) {
 					properties = properties.OrderBy(p => p.GetCustomAttribute<PackedBitRangeAttribute>().LowBit);
-					ReadImperativeBits(pReader, ret, properties, (prop) => {
+					ReadImperativeBits(reader, ret, properties, (prop) => {
 						PackedBitRangeAttribute bitRangeAttr = prop.GetCustomAttribute<PackedBitRangeAttribute>();
 						return new BitPair() {
 							Count = bitRangeAttr.HasHighBit ?
@@ -225,7 +225,7 @@ namespace BitPackerTools.Serialization {
 					});
 				}
 				else if (HasSize) {
-					ReadImperativeBits(pReader, ret, properties, (prop) => {
+					ReadImperativeBits(reader, ret, properties, (prop) => {
 						PackedBitSizeAttribute bitSizeAttr = prop.GetCustomAttribute<PackedBitSizeAttribute>();
 						return new BitPair() {
 							Count = bitSizeAttr.BitCount,
@@ -241,18 +241,18 @@ namespace BitPackerTools.Serialization {
 		/// <summary>
 		/// Serializes an object into a PackedBitWriter stream.
 		/// </summary>
-		/// <param name="pWriter">The stream to serialize to.</param>
-		/// <param name="pObj">The object to serialize.</param>
-		public void Serialize(PackedBitWriter pWriter, object pObj) {
+		/// <param name="writer">The stream to serialize to.</param>
+		/// <param name="value">The object to serialize.</param>
+		public void Serialize(PackedBitWriter writer, object value) {
 			if (ImplementsInterface) {
-				((IPackedBitSerializable)pObj).Serialize(pWriter);
+				((IPackedBitSerializable)value).Serialize(writer);
 			}
 			else {
 				var properties = GetProperties(SerializeType);
 
 				if (HasOrder) {
 					properties = properties.OrderBy(p => (p.GetCustomAttribute<PackedBitOrderAttribute>() ?? new PackedBitOrderAttribute(0)).LowBit);
-					WriteImperativeBits(pWriter, pObj, properties, (prop) => {
+					WriteImperativeBits(writer, value, properties, (prop) => {
 						PackedBitOrderAttribute bitOrderAttr = prop.GetCustomAttribute<PackedBitOrderAttribute>();
 						return new BitPair() {
 							Count = bitOrderAttr.BitCount,
@@ -262,7 +262,7 @@ namespace BitPackerTools.Serialization {
 				}
 				else if (HasRange) {
 					properties = properties.OrderBy(p => (p.GetCustomAttribute<PackedBitRangeAttribute>() ?? new PackedBitRangeAttribute(0)).LowBit);
-					WriteImperativeBits(pWriter, pObj, properties, (prop) => {
+					WriteImperativeBits(writer, value, properties, (prop) => {
 						PackedBitRangeAttribute bitRangeAttr = prop.GetCustomAttribute<PackedBitRangeAttribute>();
 						return new BitPair() {
 							Count = bitRangeAttr.HasHighBit ?
@@ -273,7 +273,7 @@ namespace BitPackerTools.Serialization {
 					});
 				}
 				else if (HasSize) {
-					WriteImperativeBits(pWriter, pObj, properties, (prop) => {
+					WriteImperativeBits(writer, value, properties, (prop) => {
 						PackedBitSizeAttribute bitSizeAttr = prop.GetCustomAttribute<PackedBitSizeAttribute>();
 						return new BitPair() {
 							Count = bitSizeAttr.BitCount,
@@ -290,56 +290,56 @@ namespace BitPackerTools.Serialization {
 			public bool Signed { get; set; }
 		}
 
-		private void WriteImperativeBits(PackedBitWriter pWriter, object pObj, IEnumerable<PropertyInfo> pProperties, Func<PropertyInfo, BitPair> pGetBitPair) {
-			foreach (PropertyInfo prop in pProperties) {
-				if (prop.PropertyType == typeof(bool)) pWriter.Write((bool)prop.GetValue(pObj));
+		private void WriteImperativeBits(PackedBitWriter writer, object value, IEnumerable<PropertyInfo> properties, Func<PropertyInfo, BitPair> getBitPair) {
+			foreach (PropertyInfo prop in properties) {
+				if (prop.PropertyType == typeof(bool)) writer.Write((bool)prop.GetValue(value));
 				else {
-					BitPair write = pGetBitPair(prop);
+					BitPair write = getBitPair(prop);
 					int bitRange = write.Count;
 					if (write.Signed) {
-						if (prop.PropertyType == typeof(sbyte)) pWriter.WriteSigned(bitRange, (sbyte)prop.GetValue(pObj));
-						else if (prop.PropertyType == typeof(short)) pWriter.WriteSigned(bitRange, (short)prop.GetValue(pObj));
-						else if (prop.PropertyType == typeof(int)) pWriter.WriteSigned(bitRange, (int)prop.GetValue(pObj));
-						else if (prop.PropertyType == typeof(long)) pWriter.WriteSigned(bitRange, (long)prop.GetValue(pObj));
+						if (prop.PropertyType == typeof(sbyte)) writer.WriteSigned(bitRange, (sbyte)prop.GetValue(value));
+						else if (prop.PropertyType == typeof(short)) writer.WriteSigned(bitRange, (short)prop.GetValue(value));
+						else if (prop.PropertyType == typeof(int)) writer.WriteSigned(bitRange, (int)prop.GetValue(value));
+						else if (prop.PropertyType == typeof(long)) writer.WriteSigned(bitRange, (long)prop.GetValue(value));
 						else throw CodePath.Unreachable;
 					}
 					else {
-						if (prop.PropertyType == typeof(sbyte)) pWriter.Write(bitRange, (sbyte)prop.GetValue(pObj));
-						else if (prop.PropertyType == typeof(short)) pWriter.Write(bitRange, (short)prop.GetValue(pObj));
-						else if (prop.PropertyType == typeof(int)) pWriter.Write(bitRange, (int)prop.GetValue(pObj));
-						else if (prop.PropertyType == typeof(long)) pWriter.Write(bitRange, (long)prop.GetValue(pObj));
-						else if (prop.PropertyType == typeof(byte)) pWriter.Write(bitRange, (byte)prop.GetValue(pObj));
-						else if (prop.PropertyType == typeof(ushort)) pWriter.Write(bitRange, (ushort)prop.GetValue(pObj));
-						else if (prop.PropertyType == typeof(uint)) pWriter.Write(bitRange, (uint)prop.GetValue(pObj));
-						else if (prop.PropertyType == typeof(ulong)) pWriter.Write(bitRange, (ulong)prop.GetValue(pObj));
+						if (prop.PropertyType == typeof(sbyte)) writer.Write(bitRange, (sbyte)prop.GetValue(value));
+						else if (prop.PropertyType == typeof(short)) writer.Write(bitRange, (short)prop.GetValue(value));
+						else if (prop.PropertyType == typeof(int)) writer.Write(bitRange, (int)prop.GetValue(value));
+						else if (prop.PropertyType == typeof(long)) writer.Write(bitRange, (long)prop.GetValue(value));
+						else if (prop.PropertyType == typeof(byte)) writer.Write(bitRange, (byte)prop.GetValue(value));
+						else if (prop.PropertyType == typeof(ushort)) writer.Write(bitRange, (ushort)prop.GetValue(value));
+						else if (prop.PropertyType == typeof(uint)) writer.Write(bitRange, (uint)prop.GetValue(value));
+						else if (prop.PropertyType == typeof(ulong)) writer.Write(bitRange, (ulong)prop.GetValue(value));
 						else throw CodePath.Unreachable;
 					}
 				}
 			}
 		}
 
-		private void ReadImperativeBits(PackedBitReader pReader, object pObj, IEnumerable<PropertyInfo> pProperties, Func<PropertyInfo, BitPair> pGetBitPair) {
-			foreach (PropertyInfo prop in pProperties) {
-				if (prop.PropertyType == typeof(bool)) prop.SetValue(pObj, pReader.ReadBool());
+		private void ReadImperativeBits(PackedBitReader reader, object value, IEnumerable<PropertyInfo> properties, Func<PropertyInfo, BitPair> getBitPair) {
+			foreach (PropertyInfo prop in properties) {
+				if (prop.PropertyType == typeof(bool)) prop.SetValue(value, reader.ReadBool());
 				else {
-					BitPair read = pGetBitPair(prop);
+					BitPair read = getBitPair(prop);
 					int bitRange = read.Count;
 					if (read.Signed) {
-						if (prop.PropertyType == typeof(sbyte)) prop.SetValue(pObj, pReader.ReadSignedInt8(bitRange));
-						else if (prop.PropertyType == typeof(short)) prop.SetValue(pObj, pReader.ReadSignedInt16(bitRange));
-						else if (prop.PropertyType == typeof(int)) prop.SetValue(pObj, pReader.ReadSignedInt32(bitRange));
-						else if (prop.PropertyType == typeof(long)) prop.SetValue(pObj, pReader.ReadSignedInt64(bitRange));
+						if (prop.PropertyType == typeof(sbyte)) prop.SetValue(value, reader.ReadSignedInt8(bitRange));
+						else if (prop.PropertyType == typeof(short)) prop.SetValue(value, reader.ReadSignedInt16(bitRange));
+						else if (prop.PropertyType == typeof(int)) prop.SetValue(value, reader.ReadSignedInt32(bitRange));
+						else if (prop.PropertyType == typeof(long)) prop.SetValue(value, reader.ReadSignedInt64(bitRange));
 						else throw CodePath.Unreachable;
 					}
 					else {
-						if (prop.PropertyType == typeof(sbyte)) prop.SetValue(pObj, pReader.ReadInt8(bitRange));
-						else if (prop.PropertyType == typeof(short)) prop.SetValue(pObj, pReader.ReadInt16(bitRange));
-						else if (prop.PropertyType == typeof(int)) prop.SetValue(pObj, pReader.ReadInt32(bitRange));
-						else if (prop.PropertyType == typeof(long)) prop.SetValue(pObj, pReader.ReadInt64(bitRange));
-						else if (prop.PropertyType == typeof(byte)) prop.SetValue(pObj, pReader.ReadUInt8(bitRange));
-						else if (prop.PropertyType == typeof(ushort)) prop.SetValue(pObj, pReader.ReadUInt16(bitRange));
-						else if (prop.PropertyType == typeof(uint)) prop.SetValue(pObj, pReader.ReadUInt32(bitRange));
-						else if (prop.PropertyType == typeof(ulong)) prop.SetValue(pObj, pReader.ReadUInt64(bitRange));
+						if (prop.PropertyType == typeof(sbyte)) prop.SetValue(value, reader.ReadInt8(bitRange));
+						else if (prop.PropertyType == typeof(short)) prop.SetValue(value, reader.ReadInt16(bitRange));
+						else if (prop.PropertyType == typeof(int)) prop.SetValue(value, reader.ReadInt32(bitRange));
+						else if (prop.PropertyType == typeof(long)) prop.SetValue(value, reader.ReadInt64(bitRange));
+						else if (prop.PropertyType == typeof(byte)) prop.SetValue(value, reader.ReadUInt8(bitRange));
+						else if (prop.PropertyType == typeof(ushort)) prop.SetValue(value, reader.ReadUInt16(bitRange));
+						else if (prop.PropertyType == typeof(uint)) prop.SetValue(value, reader.ReadUInt32(bitRange));
+						else if (prop.PropertyType == typeof(ulong)) prop.SetValue(value, reader.ReadUInt64(bitRange));
 						else throw CodePath.Unreachable;
 					}
 				}

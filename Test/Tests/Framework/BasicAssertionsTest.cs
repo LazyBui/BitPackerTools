@@ -5,11 +5,11 @@ namespace Test {
 	public partial class AssertTest {
 		private class ExceptionTest : Exception {
 			public ExceptionTest() : base() { }
-			public ExceptionTest(Exception pInnerException) : base(string.Empty, pInnerException) { }
+			public ExceptionTest(Exception innerException) : base(string.Empty, innerException) { }
 		}
 		private class DerivedExceptionTest : ExceptionTest {
 			public DerivedExceptionTest() : base() { }
-			public DerivedExceptionTest(Exception pInnerException) : base(pInnerException) { }
+			public DerivedExceptionTest(Exception innerException) : base(innerException) { }
 		}
 
 		[TestMethod]

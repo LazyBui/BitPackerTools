@@ -81,10 +81,10 @@ namespace Test {
 			Assert.NotEqual(result.StartTime, DateTime.MinValue);
 			Assert.NotEqual(result.ExitTime, DateTime.MinValue);
 			Assert.GreaterThan(result.ExitTime - result.StartTime, TimeSpan.Zero);
-			Assert.NotNull(result.FullBuffer);
-			Assert.Null(result.FullOutput);
+			Assert.NotNull(result.FullOutput);
+			Assert.Null(result.FullStd);
 			Assert.Null(result.FullError);
-			Assert.Equal(result.FullBuffer, @"abc
+			Assert.Equal(result.FullOutput, @"abc
 def
 abc
 def
@@ -112,10 +112,10 @@ aabbccddeeff");
 			Assert.NotEqual(result.StartTime, DateTime.MinValue);
 			Assert.NotEqual(result.ExitTime, DateTime.MinValue);
 			Assert.GreaterThan(result.ExitTime - result.StartTime, TimeSpan.Zero);
-			Assert.NotNull(result.FullBuffer);
-			Assert.Null(result.FullOutput);
+			Assert.NotNull(result.FullOutput);
+			Assert.Null(result.FullStd);
 			Assert.Null(result.FullError);
-			Assert.Equal(result.FullBuffer, @"abc
+			Assert.Equal(result.FullOutput, @"abc
 
 def
 
@@ -146,10 +146,10 @@ abc");
 			Assert.NotEqual(result.StartTime, DateTime.MinValue);
 			Assert.NotEqual(result.ExitTime, DateTime.MinValue);
 			Assert.GreaterThan(result.ExitTime - result.StartTime, TimeSpan.Zero);
-			Assert.NotNull(result.FullBuffer);
-			Assert.Null(result.FullOutput);
+			Assert.NotNull(result.FullOutput);
+			Assert.Null(result.FullStd);
 			Assert.Null(result.FullError);
-			Assert.Equal(result.FullBuffer, @"");
+			Assert.Equal(result.FullOutput, @"");
 		}
 
 		[TestMethod]
@@ -170,10 +170,10 @@ abc");
 				}
 			});
 			Assert.NotNull(result);
-			Assert.NotNull(result.FullBuffer);
-			Assert.Null(result.FullOutput);
+			Assert.NotNull(result.FullOutput);
+			Assert.Null(result.FullStd);
 			Assert.Null(result.FullError);
-			Assert.Equal(result.FullBuffer, @"acb876");
+			Assert.Equal(result.FullOutput, @"acb876");
 		}
 
 		[TestMethod]
@@ -201,8 +201,8 @@ abc");
 				}
 			});
 			Assert.NotNull(result);
-			Assert.NotNull(result.FullBuffer);
-			Assert.Equal(result.FullBuffer, @"Please enter a number...
+			Assert.NotNull(result.FullOutput);
+			Assert.Equal(result.FullOutput, @"Please enter a number...
 878");
 
 			Assert.DoesNotThrow(() => {
@@ -226,8 +226,8 @@ abc");
 				}
 			});
 			Assert.NotNull(result);
-			Assert.NotNull(result.FullBuffer);
-			Assert.Equal(result.FullBuffer, @"Please enter a number...
+			Assert.NotNull(result.FullOutput);
+			Assert.Equal(result.FullOutput, @"Please enter a number...
 Bad number");
 		}
 	}

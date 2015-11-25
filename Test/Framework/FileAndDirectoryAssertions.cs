@@ -7,33 +7,33 @@ namespace Test {
 		/// <summary>
 		/// Asserts that a file exists.
 		/// </summary>
-		public static void FileExists(string pFile, AssertionException pException = null) {
-			if (pFile == null) throw new ArgumentNullException(nameof(pFile));
-			if (!File.Exists(pFile)) throw pException ?? new AssertionException("File did not exist");
+		public static void FileExists(string file, AssertionException exception = null) {
+			if (file == null) throw new ArgumentNullException(nameof(file));
+			if (!File.Exists(file)) throw exception ?? new AssertionException("File did not exist");
 		}
 
 		/// <summary>
 		/// Asserts that a file exists.
 		/// </summary>
-		public static void FileExists(FileInfo pFile, AssertionException pException = null) {
-			if (pFile == null) throw new ArgumentNullException(nameof(pFile));
-			if (!pFile.Exists) throw pException ?? new AssertionException("File did not exist");
+		public static void FileExists(FileInfo file, AssertionException exception = null) {
+			if (file == null) throw new ArgumentNullException(nameof(file));
+			if (!file.Exists) throw exception ?? new AssertionException("File did not exist");
 		}
 
 		/// <summary>
 		/// Asserts that a file does not exist.
 		/// </summary>
-		public static void FileNotExists(string pFile, AssertionException pException = null) {
-			if (pFile == null) throw new ArgumentNullException(nameof(pFile));
-			if (File.Exists(pFile)) throw pException ?? new AssertionException("File exists");
+		public static void FileNotExists(string file, AssertionException exception = null) {
+			if (file == null) throw new ArgumentNullException(nameof(file));
+			if (File.Exists(file)) throw exception ?? new AssertionException("File exists");
 		}
 
 		/// <summary>
 		/// Asserts that a file does not exist.
 		/// </summary>
-		public static void FileNotExists(FileInfo pFile, AssertionException pException = null) {
-			if (pFile == null) throw new ArgumentNullException(nameof(pFile));
-			if (pFile.Exists) throw pException ?? new AssertionException("File exists");
+		public static void FileNotExists(FileInfo file, AssertionException exception = null) {
+			if (file == null) throw new ArgumentNullException(nameof(file));
+			if (file.Exists) throw exception ?? new AssertionException("File exists");
 		}
 
 		/// <summary>
@@ -41,16 +41,16 @@ namespace Test {
 		/// This has a very high threshold for equality: byte-by-byte binary equality.
 		/// If you need a looser definition of equality, this is unsupported at this time.
 		/// </summary>
-		public static void FilesEqual(string pFile1, string pFile2, AssertionException pException = null) {
-			if (pFile1 == null) throw new ArgumentNullException(nameof(pFile1));
-			if (pFile1.Length == 0) throw new ArgumentException("Must be a valid file", nameof(pFile1));
-			if (pFile2 == null) throw new ArgumentNullException(nameof(pFile2));
-			if (pFile2.Length == 0) throw new ArgumentException("Must be a valid file", nameof(pFile2));
+		public static void FilesEqual(string file1, string file2, AssertionException exception = null) {
+			if (file1 == null) throw new ArgumentNullException(nameof(file1));
+			if (file1.Length == 0) throw new ArgumentException("Must be a valid file", nameof(file1));
+			if (file2 == null) throw new ArgumentNullException(nameof(file2));
+			if (file2.Length == 0) throw new ArgumentException("Must be a valid file", nameof(file2));
 
-			FileInfo file1 = new FileInfo(pFile1);
-			FileInfo file2 = new FileInfo(pFile2);
+			FileInfo info1 = new FileInfo(file1);
+			FileInfo info2 = new FileInfo(file2);
 
-			FilesEqual(file1, file2);
+			FilesEqual(info1, info2, exception: exception);
 		}
 
 		/// <summary>
@@ -58,14 +58,14 @@ namespace Test {
 		/// This has a very high threshold for equality: byte-by-byte binary equality.
 		/// If you need a looser definition of equality, this is unsupported at this time.
 		/// </summary>
-		public static void FilesEqual(FileInfo pFile1, string pFile2, AssertionException pException = null) {
-			if (pFile1 == null) throw new ArgumentNullException(nameof(pFile1));
-			if (pFile2 == null) throw new ArgumentNullException(nameof(pFile2));
-			if (pFile2.Length == 0) throw new ArgumentException("Must be a valid file", nameof(pFile2));
+		public static void FilesEqual(FileInfo file1, string file2, AssertionException exception = null) {
+			if (file1 == null) throw new ArgumentNullException(nameof(file1));
+			if (file2 == null) throw new ArgumentNullException(nameof(file2));
+			if (file2.Length == 0) throw new ArgumentException("Must be a valid file", nameof(file2));
 
-			FileInfo file2 = new FileInfo(pFile2);
+			FileInfo info2 = new FileInfo(file2);
 
-			FilesEqual(pFile1, file2);
+			FilesEqual(file1, info2, exception: exception);
 		}
 
 		/// <summary>
@@ -73,14 +73,14 @@ namespace Test {
 		/// This has a very high threshold for equality: byte-by-byte binary equality.
 		/// If you need a looser definition of equality, this is unsupported at this time.
 		/// </summary>
-		public static void FilesEqual(string pFile1, FileInfo pFile2, AssertionException pException = null) {
-			if (pFile1 == null) throw new ArgumentNullException(nameof(pFile1));
-			if (pFile1.Length == 0) throw new ArgumentException("Must be a valid file", nameof(pFile1));
-			if (pFile2 == null) throw new ArgumentNullException(nameof(pFile2));
+		public static void FilesEqual(string file1, FileInfo file2, AssertionException exception = null) {
+			if (file1 == null) throw new ArgumentNullException(nameof(file1));
+			if (file1.Length == 0) throw new ArgumentException("Must be a valid file", nameof(file1));
+			if (file2 == null) throw new ArgumentNullException(nameof(file2));
 
-			FileInfo file1 = new FileInfo(pFile1);
+			FileInfo info1 = new FileInfo(file1);
 
-			FilesEqual(file1, pFile2);
+			FilesEqual(info1, file2, exception: exception);
 		}
 
 		/// <summary>
@@ -88,23 +88,23 @@ namespace Test {
 		/// This has a very high threshold for equality: byte-by-byte binary equality.
 		/// If you need a looser definition of equality, this is unsupported at this time.
 		/// </summary>
-		public static void FilesEqual(FileInfo pFile1, FileInfo pFile2, AssertionException pException = null) {
-			if (pFile1 == null) throw new ArgumentNullException(nameof(pFile1));
-			if (pFile2 == null) throw new ArgumentNullException(nameof(pFile2));
+		public static void FilesEqual(FileInfo file1, FileInfo file2, AssertionException exception = null) {
+			if (file1 == null) throw new ArgumentNullException(nameof(file1));
+			if (file2 == null) throw new ArgumentNullException(nameof(file2));
 
-			if (!pFile1.Exists) throw new ArgumentException("File must exist", nameof(pFile1));
-			if (!pFile2.Exists) throw new ArgumentException("File must exist", nameof(pFile2));
+			if (!file1.Exists) throw new ArgumentException("File must exist", nameof(file1));
+			if (!file2.Exists) throw new ArgumentException("File must exist", nameof(file2));
 
-			if (pFile1.Length != pFile2.Length) {
-				throw pException ?? new AssertionException("Specified files are not equal");
+			if (file1.Length != file2.Length) {
+				throw exception ?? new AssertionException("Specified files are not equal");
 			}
 
-			if (string.Compare(pFile1.FullName, pFile2.FullName, StringComparison.InvariantCultureIgnoreCase) == 0) {
+			if (string.Compare(file1.FullName, file2.FullName, StringComparison.InvariantCultureIgnoreCase) == 0) {
 				// If they're the same file, we can safely not do anything else
 				return;
 			}
 
-			using (FileStream fs1 = pFile1.OpenRead(), fs2 = pFile2.OpenRead()) {
+			using (FileStream fs1 = file1.OpenRead(), fs2 = file2.OpenRead()) {
 				const int readSize = 65536;
 				byte[] buffer1 = new byte[readSize];
 				byte[] buffer2 = new byte[readSize];
@@ -116,7 +116,7 @@ namespace Test {
 						throw new InvalidOperationException("Something strange happened here");
 					}
 					if (!Enumerable.SequenceEqual(buffer1, buffer2)) {
-						throw pException ?? new AssertionException("Specified files are not equal");
+						throw exception ?? new AssertionException("Specified files are not equal");
 					}
 					if (read1 < readSize) {
 						break;
@@ -130,16 +130,16 @@ namespace Test {
 		/// This has a very high threshold for equality: byte-by-byte binary equality.
 		/// If you need a looser definition of equality, this is unsupported at this time.
 		/// </summary>
-		public static void FilesNotEqual(string pFile1, string pFile2, AssertionException pException = null) {
-			if (pFile1 == null) throw new ArgumentNullException(nameof(pFile1));
-			if (pFile1.Length == 0) throw new ArgumentException("Must be a valid file", nameof(pFile1));
-			if (pFile2 == null) throw new ArgumentNullException(nameof(pFile2));
-			if (pFile2.Length == 0) throw new ArgumentException("Must be a valid file", nameof(pFile2));
+		public static void FilesNotEqual(string file1, string file2, AssertionException exception = null) {
+			if (file1 == null) throw new ArgumentNullException(nameof(file1));
+			if (file1.Length == 0) throw new ArgumentException("Must be a valid file", nameof(file1));
+			if (file2 == null) throw new ArgumentNullException(nameof(file2));
+			if (file2.Length == 0) throw new ArgumentException("Must be a valid file", nameof(file2));
 
-			FileInfo file1 = new FileInfo(pFile1);
-			FileInfo file2 = new FileInfo(pFile2);
+			FileInfo info1 = new FileInfo(file1);
+			FileInfo info2 = new FileInfo(file2);
 
-			FilesNotEqual(file1, file2);
+			FilesNotEqual(info1, info2, exception: exception);
 		}
 
 		/// <summary>
@@ -147,14 +147,14 @@ namespace Test {
 		/// This has a very high threshold for equality: byte-by-byte binary equality.
 		/// If you need a looser definition of equality, this is unsupported at this time.
 		/// </summary>
-		public static void FilesNotEqual(FileInfo pFile1, string pFile2, AssertionException pException = null) {
-			if (pFile1 == null) throw new ArgumentNullException(nameof(pFile1));
-			if (pFile2 == null) throw new ArgumentNullException(nameof(pFile2));
-			if (pFile2.Length == 0) throw new ArgumentException("Must be a valid file", nameof(pFile2));
+		public static void FilesNotEqual(FileInfo file1, string file2, AssertionException exception = null) {
+			if (file1 == null) throw new ArgumentNullException(nameof(file1));
+			if (file2 == null) throw new ArgumentNullException(nameof(file2));
+			if (file2.Length == 0) throw new ArgumentException("Must be a valid file", nameof(file2));
 
-			FileInfo file2 = new FileInfo(pFile2);
+			FileInfo info2 = new FileInfo(file2);
 
-			FilesNotEqual(pFile1, file2);
+			FilesNotEqual(file1, info2, exception: exception);
 		}
 
 		/// <summary>
@@ -162,14 +162,14 @@ namespace Test {
 		/// This has a very high threshold for equality: byte-by-byte binary equality.
 		/// If you need a looser definition of equality, this is unsupported at this time.
 		/// </summary>
-		public static void FilesNotEqual(string pFile1, FileInfo pFile2, AssertionException pException = null) {
-			if (pFile1 == null) throw new ArgumentNullException(nameof(pFile1));
-			if (pFile1.Length == 0) throw new ArgumentException("Must be a valid file", nameof(pFile1));
-			if (pFile2 == null) throw new ArgumentNullException(nameof(pFile2));
+		public static void FilesNotEqual(string file1, FileInfo file2, AssertionException exception = null) {
+			if (file1 == null) throw new ArgumentNullException(nameof(file1));
+			if (file1.Length == 0) throw new ArgumentException("Must be a valid file", nameof(file1));
+			if (file2 == null) throw new ArgumentNullException(nameof(file2));
 
-			FileInfo file1 = new FileInfo(pFile1);
+			FileInfo info1 = new FileInfo(file1);
 
-			FilesNotEqual(file1, pFile2);
+			FilesNotEqual(info1, file2, exception: exception);
 		}
 
 		/// <summary>
@@ -177,23 +177,23 @@ namespace Test {
 		/// This has a very high threshold for equality: byte-by-byte binary equality.
 		/// If you need a looser definition of equality, this is unsupported at this time.
 		/// </summary>
-		public static void FilesNotEqual(FileInfo pFile1, FileInfo pFile2, AssertionException pException = null) {
-			if (pFile1 == null) throw new ArgumentNullException(nameof(pFile1));
-			if (pFile2 == null) throw new ArgumentNullException(nameof(pFile2));
+		public static void FilesNotEqual(FileInfo file1, FileInfo file2, AssertionException exception = null) {
+			if (file1 == null) throw new ArgumentNullException(nameof(file1));
+			if (file2 == null) throw new ArgumentNullException(nameof(file2));
 
-			if (!pFile1.Exists) throw new ArgumentException("File must exist", nameof(pFile1));
-			if (!pFile2.Exists) throw new ArgumentException("File must exist", nameof(pFile2));
+			if (!file1.Exists) throw new ArgumentException("File must exist", nameof(file1));
+			if (!file2.Exists) throw new ArgumentException("File must exist", nameof(file2));
 
-			if (pFile1.Length != pFile2.Length) {
+			if (file1.Length != file2.Length) {
 				return;
 			}
 
-			if (string.Compare(pFile1.FullName, pFile2.FullName, StringComparison.InvariantCultureIgnoreCase) == 0) {
+			if (string.Compare(file1.FullName, file2.FullName, StringComparison.InvariantCultureIgnoreCase) == 0) {
 				// If they're the same file, we can safely not do anything else
-				throw pException ?? new AssertionException("Specified files are equal");
+				throw exception ?? new AssertionException("Specified files are equal");
 			}
 
-			using (FileStream fs1 = pFile1.OpenRead(), fs2 = pFile2.OpenRead()) {
+			using (FileStream fs1 = file1.OpenRead(), fs2 = file2.OpenRead()) {
 				const int readSize = 65536;
 				byte[] buffer1 = new byte[readSize];
 				byte[] buffer2 = new byte[readSize];
@@ -213,39 +213,39 @@ namespace Test {
 				} while (true);
 			}
 
-			throw pException ?? new AssertionException("Specified files are equal");
+			throw exception ?? new AssertionException("Specified files are equal");
 		}
 
 		/// <summary>
 		/// Asserts that a directory exists.
 		/// </summary>
-		public static void DirectoryExists(string pDirectory, AssertionException pException = null) {
-			if (pDirectory == null) throw new ArgumentNullException(nameof(pDirectory));
-			if (!Directory.Exists(pDirectory)) throw pException ?? new AssertionException("Directory did not exist");
+		public static void DirectoryExists(string dir, AssertionException exception = null) {
+			if (dir == null) throw new ArgumentNullException(nameof(dir));
+			if (!Directory.Exists(dir)) throw exception ?? new AssertionException("Directory did not exist");
 		}
 
 		/// <summary>
 		/// Asserts that a directory exists.
 		/// </summary>
-		public static void DirectoryExists(DirectoryInfo pDirectory, AssertionException pException = null) {
-			if (pDirectory == null) throw new ArgumentNullException(nameof(pDirectory));
-			if (!pDirectory.Exists) throw pException ?? new AssertionException("Directory did not exist");
+		public static void DirectoryExists(DirectoryInfo dir, AssertionException exception = null) {
+			if (dir == null) throw new ArgumentNullException(nameof(dir));
+			if (!dir.Exists) throw exception ?? new AssertionException("Directory did not exist");
 		}
 
 		/// <summary>
 		/// Asserts that a directory does not exist.
 		/// </summary>
-		public static void DirectoryNotExists(string pDirectory, AssertionException pException = null) {
-			if (pDirectory == null) throw new ArgumentNullException(nameof(pDirectory));
-			if (Directory.Exists(pDirectory)) throw pException ?? new AssertionException("Directory exists");
+		public static void DirectoryNotExists(string dir, AssertionException exception = null) {
+			if (dir == null) throw new ArgumentNullException(nameof(dir));
+			if (Directory.Exists(dir)) throw exception ?? new AssertionException("Directory exists");
 		}
 
 		/// <summary>
 		/// Asserts that a directory does not exist.
 		/// </summary>
-		public static void DirectoryNotExists(DirectoryInfo pDirectory, AssertionException pException = null) {
-			if (pDirectory == null) throw new ArgumentNullException(nameof(pDirectory));
-			if (pDirectory.Exists) throw pException ?? new AssertionException("Directory exists");
+		public static void DirectoryNotExists(DirectoryInfo dir, AssertionException exception = null) {
+			if (dir == null) throw new ArgumentNullException(nameof(dir));
+			if (dir.Exists) throw exception ?? new AssertionException("Directory exists");
 		}
 	}
 }

@@ -14,13 +14,13 @@ namespace BitPackerTools.Serialization {
 		public bool HasHighBit { get; private set; }
 		public bool Signed { get; set; }
 
-		public PackedBitRangeAttribute(int pBitIndex) {
-			LowBit = pBitIndex;
+		public PackedBitRangeAttribute(int bitIndex) {
+			LowBit = bitIndex;
 		}
 
-		public PackedBitRangeAttribute(int pLowBit, int pHighBit) {
-			LowBit = pLowBit;
-			HighBit = pHighBit;
+		public PackedBitRangeAttribute(int lowBit, int highBit) {
+			LowBit = lowBit;
+			HighBit = highBit;
 			HasHighBit = true;
 		}
 	}

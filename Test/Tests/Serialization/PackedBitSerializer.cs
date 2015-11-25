@@ -12,30 +12,30 @@ namespace Test {
 		internal class NonImplementingTypeWithProperty { public int A { get; set; } }
 
 		internal class ImplementingType : IPackedBitSerializable {
-			public void Deserialize(PackedBitReader pReader) {
+			public void Deserialize(PackedBitReader reader) {
 				throw new NotImplementedException();
 			}
-			public void Serialize(PackedBitWriter pReader) {
+			public void Serialize(PackedBitWriter reader) {
 				throw new NotImplementedException();
 			}
 		}
 
 		internal class ImplementingTypeWithProperty : IPackedBitSerializable {
 			public int A { get; set; }
-			public void Deserialize(PackedBitReader pReader) {
+			public void Deserialize(PackedBitReader reader) {
 				throw new NotImplementedException();
 			}
-			public void Serialize(PackedBitWriter pReader) {
+			public void Serialize(PackedBitWriter reader) {
 				throw new NotImplementedException();
 			}
 		}
 
 		internal class ImplementingTypeWithStringProperty : IPackedBitSerializable {
 			public string A { get; set; }
-			public void Deserialize(PackedBitReader pReader) {
+			public void Deserialize(PackedBitReader reader) {
 				throw new NotImplementedException();
 			}
-			public void Serialize(PackedBitWriter pReader) {
+			public void Serialize(PackedBitWriter reader) {
 				throw new NotImplementedException();
 			}
 		}

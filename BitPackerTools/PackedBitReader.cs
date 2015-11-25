@@ -16,13 +16,13 @@ namespace BitPackerTools {
 		/// <summary>
 		/// Initializes a new instance of the BitPackerTools.PackedBitReader class with a bit buffer.
 		/// </summary>
-		public PackedBitReader(byte[] pByteStream) {
-			if (pByteStream == null) throw new ArgumentNullException(nameof(pByteStream));
-			if (pByteStream.Length == 0) throw new ArgumentException("Must have at least 1 byte", nameof(pByteStream));
+		public PackedBitReader(byte[] byteStream) {
+			if (byteStream == null) throw new ArgumentNullException(nameof(byteStream));
+			if (byteStream.Length == 0) throw new ArgumentException("Must have at least 1 byte", nameof(byteStream));
 
-			InternalStream = new byte[pByteStream.Length];
+			InternalStream = new byte[byteStream.Length];
 			// Copy the block in order to avoid modifications to the underlying array causing havoc
-			Buffer.BlockCopy(pByteStream, 0, InternalStream, 0, pByteStream.Length);
+			Buffer.BlockCopy(byteStream, 0, InternalStream, 0, byteStream.Length);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace BitPackerTools {
 		/// <summary>
 		/// Read a string value from current buffer.
 		/// </summary>
-		/// <param name="pEncoding">The encoding to interpret the string's bytes.</param>
+		/// <param name="encoding">The encoding to interpret the string's bytes.</param>
 		/// <returns>A string containing the contents of the operation.</returns>
-		public string ReadString(Encoding pEncoding) {
+		public string ReadString(Encoding encoding) {
 			string ret;
-			if (!TryRead(out ret, pEncoding)) throw new InsufficientBitsException();
+			if (!TryRead(out ret, encoding)) throw new InsufficientBitsException();
 			return ret;
 		}
 
@@ -69,483 +69,483 @@ namespace BitPackerTools {
 		/// <summary>
 		/// Read a specified number of bits from the current buffer into an sbyte. The sign bit is read.
 		/// </summary>
-		/// <param name="pBitCount">The number of bits to read, not including the sign bit.</param>
+		/// <param name="bitCount">The number of bits to read, not including the sign bit.</param>
 		/// <returns>An sbyte containing the contents of the operation.</returns>
-		public sbyte ReadSignedInt8(int pBitCount) {
+		public sbyte ReadSignedInt8(int bitCount) {
 			sbyte ret;
-			if (!TryReadSigned(pBitCount, out ret)) throw new InsufficientBitsException();
+			if (!TryReadSigned(bitCount, out ret)) throw new InsufficientBitsException();
 			return ret;
 		}
 
 		/// <summary>
 		/// Read a specified number of bits from the current buffer into a short. The sign bit is read.
 		/// </summary>
-		/// <param name="pBitCount">The number of bits to read, not including the sign bit.</param>
+		/// <param name="bitCount">The number of bits to read, not including the sign bit.</param>
 		/// <returns>A short containing the contents of the operation.</returns>
-		public short ReadSignedInt16(int pBitCount) {
+		public short ReadSignedInt16(int bitCount) {
 			short ret;
-			if (!TryReadSigned(pBitCount, out ret)) throw new InsufficientBitsException();
+			if (!TryReadSigned(bitCount, out ret)) throw new InsufficientBitsException();
 			return ret;
 		}
 
 		/// <summary>
 		/// Read a specified number of bits from the current buffer into an int. The sign bit is read.
 		/// </summary>
-		/// <param name="pBitCount">The number of bits to read, not including the sign bit.</param>
+		/// <param name="bitCount">The number of bits to read, not including the sign bit.</param>
 		/// <returns>An int containing the contents of the operation.</returns>
-		public int ReadSignedInt32(int pBitCount) {
+		public int ReadSignedInt32(int bitCount) {
 			int ret;
-			if (!TryReadSigned(pBitCount, out ret)) throw new InsufficientBitsException();
+			if (!TryReadSigned(bitCount, out ret)) throw new InsufficientBitsException();
 			return ret;
 		}
 
 		/// <summary>
 		/// Read a specified number of bits from the current buffer into a long. The sign bit is read.
 		/// </summary>
-		/// <param name="pBitCount">The number of bits to read, not including the sign bit.</param>
+		/// <param name="bitCount">The number of bits to read, not including the sign bit.</param>
 		/// <returns>A long containing the contents of the operation.</returns>
-		public long ReadSignedInt64(int pBitCount) {
+		public long ReadSignedInt64(int bitCount) {
 			long ret;
-			if (!TryReadSigned(pBitCount, out ret)) throw new InsufficientBitsException();
+			if (!TryReadSigned(bitCount, out ret)) throw new InsufficientBitsException();
 			return ret;
 		}
 
 		/// <summary>
 		/// Read a specified number of bits from the current buffer into an sbyte. No sign bit is read.
 		/// </summary>
-		/// <param name="pBitCount">The number of bits to read.</param>
+		/// <param name="bitCount">The number of bits to read.</param>
 		/// <returns>An sbyte containing the contents of the operation.</returns>
-		public sbyte ReadInt8(int pBitCount) {
+		public sbyte ReadInt8(int bitCount) {
 			sbyte ret;
-			if (!TryRead(pBitCount, out ret)) throw new InsufficientBitsException();
+			if (!TryRead(bitCount, out ret)) throw new InsufficientBitsException();
 			return ret;
 		}
 
 		/// <summary>
 		/// Read a specified number of bits from the current buffer into a short. No sign bit is read.
 		/// </summary>
-		/// <param name="pBitCount">The number of bits to read.</param>
+		/// <param name="bitCount">The number of bits to read.</param>
 		/// <returns>A short containing the contents of the operation.</returns>
-		public short ReadInt16(int pBitCount) {
+		public short ReadInt16(int bitCount) {
 			short ret;
-			if (!TryRead(pBitCount, out ret)) throw new InsufficientBitsException();
+			if (!TryRead(bitCount, out ret)) throw new InsufficientBitsException();
 			return ret;
 		}
 
 		/// <summary>
 		/// Read a specified number of bits from the current buffer into an int. No sign bit is read.
 		/// </summary>
-		/// <param name="pBitCount">The number of bits to read.</param>
+		/// <param name="bitCount">The number of bits to read.</param>
 		/// <returns>An int containing the contents of the operation.</returns>
-		public int ReadInt32(int pBitCount) {
+		public int ReadInt32(int bitCount) {
 			int ret;
-			if (!TryRead(pBitCount, out ret)) throw new InsufficientBitsException();
+			if (!TryRead(bitCount, out ret)) throw new InsufficientBitsException();
 			return ret;
 		}
 
 		/// <summary>
 		/// Read a specified number of bits from the current buffer into a long. No sign bit is read.
 		/// </summary>
-		/// <param name="pBitCount">The number of bits to read.</param>
+		/// <param name="bitCount">The number of bits to read.</param>
 		/// <returns>A long containing the contents of the operation.</returns>
-		public long ReadInt64(int pBitCount) {
+		public long ReadInt64(int bitCount) {
 			long ret;
-			if (!TryRead(pBitCount, out ret)) throw new InsufficientBitsException();
+			if (!TryRead(bitCount, out ret)) throw new InsufficientBitsException();
 			return ret;
 		}
 
 		/// <summary>
 		/// Read a specified number of bits from the current buffer into a byte. No sign bit is read.
 		/// </summary>
-		/// <param name="pBitCount">The number of bits to read.</param>
+		/// <param name="bitCount">The number of bits to read.</param>
 		/// <returns>A byte containing the contents of the operation.</returns>
-		public byte ReadUInt8(int pBitCount) {
+		public byte ReadUInt8(int bitCount) {
 			byte ret;
-			if (!TryRead(pBitCount, out ret)) throw new InsufficientBitsException();
+			if (!TryRead(bitCount, out ret)) throw new InsufficientBitsException();
 			return ret;
 		}
 
 		/// <summary>
 		/// Read a specified number of bits from the current buffer into a ushort. No sign bit is read.
 		/// </summary>
-		/// <param name="pBitCount">The number of bits to read.</param>
+		/// <param name="bitCount">The number of bits to read.</param>
 		/// <returns>A ushort containing the contents of the operation.</returns>
-		public ushort ReadUInt16(int pBitCount) {
+		public ushort ReadUInt16(int bitCount) {
 			ushort ret;
-			if (!TryRead(pBitCount, out ret)) throw new InsufficientBitsException();
+			if (!TryRead(bitCount, out ret)) throw new InsufficientBitsException();
 			return ret;
 		}
 
 		/// <summary>
 		/// Read a specified number of bits from the current buffer into a uint. No sign bit is read.
 		/// </summary>
-		/// <param name="pBitCount">The number of bits to read.</param>
+		/// <param name="bitCount">The number of bits to read.</param>
 		/// <returns>A uint containing the contents of the operation.</returns>
-		public uint ReadUInt32(int pBitCount) {
+		public uint ReadUInt32(int bitCount) {
 			uint ret;
-			if (!TryRead(pBitCount, out ret)) throw new InsufficientBitsException();
+			if (!TryRead(bitCount, out ret)) throw new InsufficientBitsException();
 			return ret;
 		}
 
 		/// <summary>
 		/// Read a specified number of bits from the current buffer into a ulong. No sign bit is read.
 		/// </summary>
-		/// <param name="pBitCount">The number of bits to read.</param>
+		/// <param name="bitCount">The number of bits to read.</param>
 		/// <returns>A ulong containing the contents of the operation.</returns>
-		public ulong ReadUInt64(int pBitCount) {
+		public ulong ReadUInt64(int bitCount) {
 			ulong ret;
-			if (!TryRead(pBitCount, out ret)) throw new InsufficientBitsException();
+			if (!TryRead(bitCount, out ret)) throw new InsufficientBitsException();
 			return ret;
 		}
 
 		/// <summary>
 		/// Read a specified number of bits from the current buffer into an array. No sign bit is read.
 		/// </summary>
-		/// <param name="pBitCount">The number of bits to read.</param>
+		/// <param name="bitCount">The number of bits to read.</param>
 		/// <returns>A byte array containing the contents of the operation.</returns>
-		public byte[] ReadBytes(int pBitCount) {
+		public byte[] ReadBytes(int bitCount) {
 			byte[] ret;
-			if (!TryRead(pBitCount, out ret)) throw new InsufficientBitsException();
+			if (!TryRead(bitCount, out ret)) throw new InsufficientBitsException();
 			return ret;
 		}
 
 		/// <summary>
 		/// Attempt to read a specified number of bits from the current buffer into an sbyte. The sign bit is read.
 		/// </summary>
-		/// <param name="pBitCount">The number of bits to try reading, not including the sign bit.</param>
-		/// <param name="pData">The value that will be intialized in the case where there are enough bits.</param>
+		/// <param name="bitCount">The number of bits to try reading, not including the sign bit.</param>
+		/// <param name="data">The value that will be intialized in the case where there are enough bits.</param>
 		/// <returns>true if reading all the bits was successful, false if there were not enough bits to read.</returns>
-		public bool TryReadSigned(int pBitCount, out sbyte pData) {
-			CheckSize(true, pBitCount, sizeof(sbyte));
+		public bool TryReadSigned(int bitCount, out sbyte data) {
+			CheckSize(true, bitCount, sizeof(sbyte));
 
-			byte[] data;
+			byte[] raw;
 			bool signed;
-			if (TryReadSignedInternal(pBitCount, out data, out signed, sizeof(sbyte))) {
-				pData = (sbyte)data[0];
-				if (signed) pData *= -1;
+			if (TryReadSignedInternal(bitCount, out raw, out signed, sizeof(sbyte))) {
+				data = (sbyte)raw[0];
+				if (signed) data *= -1;
 				return true;
 			}
-			pData = 0;
+			data = 0;
 			return false;
 		}
 
 		/// <summary>
 		/// Attempt to read a specified number of bits from the current buffer into a short. The sign bit is read.
 		/// </summary>
-		/// <param name="pBitCount">The number of bits to try reading, not including the sign bit.</param>
-		/// <param name="pData">The value that will be intialized in the case where there are enough bits.</param>
+		/// <param name="bitCount">The number of bits to try reading, not including the sign bit.</param>
+		/// <param name="data">The value that will be intialized in the case where there are enough bits.</param>
 		/// <returns>true if reading all the bits was successful, false if there were not enough bits to read.</returns>
-		public bool TryReadSigned(int pBitCount, out short pData) {
-			CheckSize(true, pBitCount, sizeof(short));
+		public bool TryReadSigned(int bitCount, out short data) {
+			CheckSize(true, bitCount, sizeof(short));
 
-			byte[] data;
+			byte[] raw;
 			bool signed;
-			if (TryReadSignedInternal(pBitCount, out data, out signed, sizeof(short))) {
-				pData = BitConverter.ToInt16(data, 0);
-				if (signed) pData *= -1;
+			if (TryReadSignedInternal(bitCount, out raw, out signed, sizeof(short))) {
+				data = BitConverter.ToInt16(raw, 0);
+				if (signed) data *= -1;
 				return true;
 			}
-			pData = 0;
+			data = 0;
 			return false;
 		}
 
 		/// <summary>
 		/// Attempt to read a specified number of bits from the current buffer into an int. The sign bit is read.
 		/// </summary>
-		/// <param name="pBitCount">The number of bits to try reading, not including the sign bit.</param>
-		/// <param name="pData">The value that will be intialized in the case where there are enough bits.</param>
+		/// <param name="bitCount">The number of bits to try reading, not including the sign bit.</param>
+		/// <param name="data">The value that will be intialized in the case where there are enough bits.</param>
 		/// <returns>true if reading all the bits was successful, false if there were not enough bits to read.</returns>
-		public bool TryReadSigned(int pBitCount, out int pData) {
-			CheckSize(true, pBitCount, sizeof(int));
+		public bool TryReadSigned(int bitCount, out int data) {
+			CheckSize(true, bitCount, sizeof(int));
 
-			byte[] data;
+			byte[] raw;
 			bool signed;
-			if (TryReadSignedInternal(pBitCount, out data, out signed, sizeof(int))) {
-				pData = BitConverter.ToInt32(data, 0);
-				if (signed) pData *= -1;
+			if (TryReadSignedInternal(bitCount, out raw, out signed, sizeof(int))) {
+				data = BitConverter.ToInt32(raw, 0);
+				if (signed) data *= -1;
 				return true;
 			}
-			pData = 0;
+			data = 0;
 			return false;
 		}
 
 		/// <summary>
 		/// Attempt to read a specified number of bits from the current buffer into a long. The sign bit is read.
 		/// </summary>
-		/// <param name="pBitCount">The number of bits to try reading, not including the sign bit.</param>
-		/// <param name="pData">The value that will be intialized in the case where there are enough bits.</param>
+		/// <param name="bitCount">The number of bits to try reading, not including the sign bit.</param>
+		/// <param name="data">The value that will be intialized in the case where there are enough bits.</param>
 		/// <returns>true if reading all the bits was successful, false if there were not enough bits to read.</returns>
-		public bool TryReadSigned(int pBitCount, out long pData) {
-			CheckSize(true, pBitCount, sizeof(long));
+		public bool TryReadSigned(int bitCount, out long data) {
+			CheckSize(true, bitCount, sizeof(long));
 
-			byte[] data;
+			byte[] raw;
 			bool signed;
-			if (TryReadSignedInternal(pBitCount, out data, out signed, sizeof(long))) {
-				pData = BitConverter.ToInt64(data, 0);
-				if (signed) pData *= -1;
+			if (TryReadSignedInternal(bitCount, out raw, out signed, sizeof(long))) {
+				data = BitConverter.ToInt64(raw, 0);
+				if (signed) data *= -1;
 				return true;
 			}
-			pData = 0;
+			data = 0;
 			return false;
 		}
 
 		/// <summary>
 		/// Attempt to read a bool value from the current buffer.
 		/// </summary>
-		/// <param name="pData">The value that will be intialized in the case where there are enough bits.</param>
+		/// <param name="data">The value that will be intialized in the case where there are enough bits.</param>
 		/// <returns>true if reading the bits was successful, false if there were not enough bits to read.</returns>
-		public bool TryRead(out bool pData) {
-			byte[] data;
-			if (TryRead(1, out data)) {
-				pData = data[0] == 1;
+		public bool TryRead(out bool data) {
+			byte[] raw;
+			if (TryRead(1, out raw)) {
+				data = raw[0] == 1;
 				return true;
 			}
-			pData = false;
+			data = false;
 			return false;
 		}
 
 		/// <summary>
 		/// Attempt to read a double value from the current buffer.
 		/// </summary>
-		/// <param name="pData">The value that will be intialized in the case where there are enough bits.</param>
+		/// <param name="data">The value that will be intialized in the case where there are enough bits.</param>
 		/// <returns>true if reading the bits was successful, false if there were not enough bits to read.</returns>
-		public bool TryRead(out double pData) {
-			byte[] data;
-			if (TryRead(ConvertBytesToBits(sizeof(double)), out data)) {
-				pData = BitConverter.ToDouble(data, 0);
+		public bool TryRead(out double data) {
+			byte[] raw;
+			if (TryRead(ConvertBytesToBits(sizeof(double)), out raw)) {
+				data = BitConverter.ToDouble(raw, 0);
 				return true;
 			}
-			pData = 0d;
+			data = 0d;
 			return false;
 		}
 
 		/// <summary>
 		/// Attempt to read a specified number of bits from the current buffer into an sbyte. No sign bit is read.
 		/// </summary>
-		/// <param name="pBitCount">The number of bits to try reading.</param>
-		/// <param name="pData">The value that will be intialized in the case where there are enough bits.</param>
+		/// <param name="bitCount">The number of bits to try reading.</param>
+		/// <param name="data">The value that will be intialized in the case where there are enough bits.</param>
 		/// <returns>true if reading all the bits was successful, false if there were not enough bits to read.</returns>
-		public bool TryRead(int pBitCount, out sbyte pData) {
-			CheckSize(false, pBitCount, sizeof(sbyte));
+		public bool TryRead(int bitCount, out sbyte data) {
+			CheckSize(false, bitCount, sizeof(sbyte));
 
-			byte[] data;
-			if (TryReadInternal(pBitCount, out data, sizeof(sbyte))) {
-				pData = (sbyte)data[0];
+			byte[] raw;
+			if (TryReadInternal(bitCount, out raw, sizeof(sbyte))) {
+				data = (sbyte)raw[0];
 				return true;
 			}
-			pData = 0;
+			data = 0;
 			return false;
 		}
 
 		/// <summary>
 		/// Attempt to read a specified number of bits from the current buffer into a short. No sign bit is read.
 		/// </summary>
-		/// <param name="pBitCount">The number of bits to try reading.</param>
-		/// <param name="pData">The value that will be intialized in the case where there are enough bits.</param>
+		/// <param name="bitCount">The number of bits to try reading.</param>
+		/// <param name="data">The value that will be intialized in the case where there are enough bits.</param>
 		/// <returns>true if reading all the bits was successful, false if there were not enough bits to read.</returns>
-		public bool TryRead(int pBitCount, out short pData) {
-			CheckSize(false, pBitCount, sizeof(short));
+		public bool TryRead(int bitCount, out short data) {
+			CheckSize(false, bitCount, sizeof(short));
 
-			byte[] data;
-			if (TryReadInternal(pBitCount, out data, sizeof(short))) {
-				pData = BitConverter.ToInt16(data, 0);
+			byte[] raw;
+			if (TryReadInternal(bitCount, out raw, sizeof(short))) {
+				data = BitConverter.ToInt16(raw, 0);
 				return true;
 			}
-			pData = 0;
+			data = 0;
 			return false;
 		}
 
 		/// <summary>
 		/// Attempt to read a specified number of bits from the current buffer into an int. No sign bit is read.
 		/// </summary>
-		/// <param name="pBitCount">The number of bits to try reading.</param>
-		/// <param name="pData">The value that will be intialized in the case where there are enough bits.</param>
+		/// <param name="bitCount">The number of bits to try reading.</param>
+		/// <param name="data">The value that will be intialized in the case where there are enough bits.</param>
 		/// <returns>true if reading all the bits was successful, false if there were not enough bits to read.</returns>
-		public bool TryRead(int pBitCount, out int pData) {
-			CheckSize(false, pBitCount, sizeof(int));
+		public bool TryRead(int bitCount, out int data) {
+			CheckSize(false, bitCount, sizeof(int));
 
-			byte[] data;
-			if (TryReadInternal(pBitCount, out data, sizeof(int))) {
-				pData = BitConverter.ToInt32(data, 0);
+			byte[] raw;
+			if (TryReadInternal(bitCount, out raw, sizeof(int))) {
+				data = BitConverter.ToInt32(raw, 0);
 				return true;
 			}
-			pData = 0;
+			data = 0;
 			return false;
 		}
 
 		/// <summary>
 		/// Attempt to read a specified number of bits from the current buffer into a long. No sign bit is read.
 		/// </summary>
-		/// <param name="pBitCount">The number of bits to try reading.</param>
-		/// <param name="pData">The value that will be intialized in the case where there are enough bits.</param>
+		/// <param name="bitCount">The number of bits to try reading.</param>
+		/// <param name="data">The value that will be intialized in the case where there are enough bits.</param>
 		/// <returns>true if reading all the bits was successful, false if there were not enough bits to read.</returns>
-		public bool TryRead(int pBitCount, out long pData) {
-			CheckSize(false, pBitCount, sizeof(long));
+		public bool TryRead(int bitCount, out long data) {
+			CheckSize(false, bitCount, sizeof(long));
 
-			byte[] data;
-			if (TryReadInternal(pBitCount, out data, sizeof(long))) {
-				pData = BitConverter.ToInt64(data, 0);
+			byte[] raw;
+			if (TryReadInternal(bitCount, out raw, sizeof(long))) {
+				data = BitConverter.ToInt64(raw, 0);
 				return true;
 			}
-			pData = 0;
+			data = 0;
 			return false;
 		}
 
 		/// <summary>
 		/// Attempt to read a specified number of bits from the current buffer into a byte. No sign bit is read.
 		/// </summary>
-		/// <param name="pBitCount">The number of bits to try reading.</param>
-		/// <param name="pData">The value that will be intialized in the case where there are enough bits.</param>
+		/// <param name="bitCount">The number of bits to try reading.</param>
+		/// <param name="data">The value that will be intialized in the case where there are enough bits.</param>
 		/// <returns>true if reading all the bits was successful, false if there were not enough bits to read.</returns>
-		public bool TryRead(int pBitCount, out byte pData) {
-			CheckSize(false, pBitCount, sizeof(byte));
+		public bool TryRead(int bitCount, out byte data) {
+			CheckSize(false, bitCount, sizeof(byte));
 
-			byte[] data;
-			if (TryReadInternal(pBitCount, out data, sizeof(byte))) {
-				pData = data[0];
+			byte[] raw;
+			if (TryReadInternal(bitCount, out raw, sizeof(byte))) {
+				data = raw[0];
 				return true;
 			}
-			pData = 0;
+			data = 0;
 			return false;
 		}
 
 		/// <summary>
 		/// Attempt to read a specified number of bits from the current buffer into a ushort. No sign bit is read.
 		/// </summary>
-		/// <param name="pBitCount">The number of bits to try reading.</param>
-		/// <param name="pData">The value that will be intialized in the case where there are enough bits.</param>
+		/// <param name="bitCount">The number of bits to try reading.</param>
+		/// <param name="data">The value that will be intialized in the case where there are enough bits.</param>
 		/// <returns>true if reading all the bits was successful, false if there were not enough bits to read.</returns>
-		public bool TryRead(int pBitCount, out ushort pData) {
-			CheckSize(false, pBitCount, sizeof(ushort));
+		public bool TryRead(int bitCount, out ushort data) {
+			CheckSize(false, bitCount, sizeof(ushort));
 
-			byte[] data;
-			if (TryReadInternal(pBitCount, out data, sizeof(ushort))) {
-				pData = BitConverter.ToUInt16(data, 0);
+			byte[] raw;
+			if (TryReadInternal(bitCount, out raw, sizeof(ushort))) {
+				data = BitConverter.ToUInt16(raw, 0);
 				return true;
 			}
-			pData = 0;
+			data = 0;
 			return false;
 		}
 
 		/// <summary>
 		/// Attempt to read a specified number of bits from the current buffer into a uint. No sign bit is read.
 		/// </summary>
-		/// <param name="pBitCount">The number of bits to try reading.</param>
-		/// <param name="pData">The value that will be intialized in the case where there are enough bits.</param>
+		/// <param name="bitCount">The number of bits to try reading.</param>
+		/// <param name="data">The value that will be intialized in the case where there are enough bits.</param>
 		/// <returns>true if reading all the bits was successful, false if there were not enough bits to read.</returns>
-		public bool TryRead(int pBitCount, out uint pData) {
-			CheckSize(false, pBitCount, sizeof(uint));
+		public bool TryRead(int bitCount, out uint data) {
+			CheckSize(false, bitCount, sizeof(uint));
 
-			byte[] data;
-			if (TryReadInternal(pBitCount, out data, sizeof(uint))) {
-				pData = BitConverter.ToUInt32(data, 0);
+			byte[] raw;
+			if (TryReadInternal(bitCount, out raw, sizeof(uint))) {
+				data = BitConverter.ToUInt32(raw, 0);
 				return true;
 			}
-			pData = 0;
+			data = 0;
 			return false;
 		}
 
 		/// <summary>
 		/// Attempt to read a specified number of bits from the current buffer into a ulong. No sign bit is read.
 		/// </summary>
-		/// <param name="pBitCount">The number of bits to try reading.</param>
-		/// <param name="pData">The value that will be intialized in the case where there are enough bits.</param>
+		/// <param name="bitCount">The number of bits to try reading.</param>
+		/// <param name="data">The value that will be intialized in the case where there are enough bits.</param>
 		/// <returns>true if reading all the bits was successful, false if there were not enough bits to read.</returns>
-		public bool TryRead(int pBitCount, out ulong pData) {
-			CheckSize(false, pBitCount, sizeof(ulong));
+		public bool TryRead(int bitCount, out ulong data) {
+			CheckSize(false, bitCount, sizeof(ulong));
 
-			byte[] data;
-			if (TryReadInternal(pBitCount, out data, sizeof(ulong))) {
-				pData = BitConverter.ToUInt64(data, 0);
+			byte[] raw;
+			if (TryReadInternal(bitCount, out raw, sizeof(ulong))) {
+				data = BitConverter.ToUInt64(raw, 0);
 				return true;
 			}
-			pData = 0;
+			data = 0;
 			return false;
 		}
 
 		/// <summary>
 		/// Attempt to read a string out of the current buffer. The default encoding is UTF8.
 		/// </summary>
-		/// <param name="pData">The string that will be initialized in the case where the read is successful.</param>
+		/// <param name="data">The string that will be initialized in the case where the read is successful.</param>
 		/// <returns>true if reading the string was successful, false if a string could not be read.</returns>
-		public bool TryRead(out string pData) => TryRead(out pData, Encoding.UTF8);
+		public bool TryRead(out string data) => TryRead(out data, Encoding.UTF8);
 
 		/// <summary>
 		/// Attempt to read a string out of the current buffer.
 		/// </summary>
-		/// <param name="pData">The string that will be initialized in the case where the read is successful.</param>
-		/// <param name="pEncoding">The encoding to interpret the string's bytes.</param>
+		/// <param name="data">The string that will be initialized in the case where the read is successful.</param>
+		/// <param name="encoding">The encoding to interpret the string's bytes.</param>
 		/// <returns>true if reading the string was successful, false if a string could not be read.</returns>
-		public bool TryRead(out string pData, Encoding pEncoding) {
+		public bool TryRead(out string data, Encoding encoding) {
 			int length;
 			if (!TryRead(sizeof(int) - 1, out length)) {
-				pData = null;
+				data = null;
 				return false;
 			}
-			byte[] data;
-			if (!TryRead(ConvertBytesToBits(length), out data)) {
-				pData = null;
+			byte[] raw;
+			if (!TryRead(ConvertBytesToBits(length), out raw)) {
+				data = null;
 				return false;
 			}
-			pData = pEncoding.GetString(data);
+			data = encoding.GetString(raw);
 			return true;
 		}
 
 		/// <summary>
 		/// Attempt to read a specified number of bits from the current buffer into an array.
 		/// </summary>
-		/// <param name="pBitCount">The number of bits to try reading.</param>
-		/// <param name="pData">The array that will be intialized in the case where there are enough bits.</param>
+		/// <param name="bitCount">The number of bits to try reading.</param>
+		/// <param name="data">The array that will be intialized in the case where there are enough bits.</param>
 		/// <returns>true if reading all the bits was successful, false if there were not enough bits to read.</returns>
-		public bool TryRead(int pBitCount, out byte[] pData) =>
-			TryReadInternal(pBitCount, out pData, (int)Math.Ceiling((double)pBitCount / Constants.BitsInByte));
+		public bool TryRead(int bitCount, out byte[] data) =>
+			TryReadInternal(bitCount, out data, (int)Math.Ceiling((double)bitCount / Constants.BitsInByte));
 
-		private void CheckSize(bool pSigned, int pBitCount, int pTypeSize) {
-			if (pBitCount < 1) throw new BitCountException();
-			if (pSigned) {
-				if (pBitCount >= ConvertBytesToBits(pTypeSize)) throw new BitCountException();
+		private void CheckSize(bool isSigned, int bitCount, int typeSize) {
+			if (bitCount < 1) throw new BitCountException();
+			if (isSigned) {
+				if (bitCount >= ConvertBytesToBits(typeSize)) throw new BitCountException();
 			}
 			else {
-				if (pBitCount > ConvertBytesToBits(pTypeSize)) throw new BitCountException();
+				if (bitCount > ConvertBytesToBits(typeSize)) throw new BitCountException();
 			}
 		}
 
-		private static int ConvertBytesToBits(int pBytes) => pBytes * Constants.BitsInByte;
+		private static int ConvertBytesToBits(int bytes) => bytes * Constants.BitsInByte;
 
-		private bool TryReadSignedInternal(int pBitCount, out byte[] pData, out bool pSigned, int pTypeBytes) {
-			if (pBitCount > RemainingBits) {
-				pData = null;
-				pSigned = false;
+		private bool TryReadSignedInternal(int bitCount, out byte[] data, out bool isSigned, int typeBytes) {
+			if (bitCount > RemainingBits) {
+				data = null;
+				isSigned = false;
 				return false;
 			}
 
-			if (!TryRead(out pSigned)) {
-				pData = null;
+			if (!TryRead(out isSigned)) {
+				data = null;
 				return false;
 			}
 
-			if (!TryReadInternal(pBitCount, out pData, pTypeBytes)) {
-				pData = null;
+			if (!TryReadInternal(bitCount, out data, typeBytes)) {
+				data = null;
 				return false;
 			}
 
 			return true;
 		}
 
-		private bool TryReadInternal(int pBitCount, out byte[] pData, int pTypeBytes) {
-			if (pBitCount > RemainingBits) {
-				pData = null;
+		private bool TryReadInternal(int bitCount, out byte[] data, int typeBytes) {
+			if (bitCount > RemainingBits) {
+				data = null;
 				return false;
 			}
 
-			pData = new byte[pTypeBytes];
+			data = new byte[typeBytes];
 
-			int destBytePos = pData.Length - 1;
+			int destBytePos = data.Length - 1;
 			int destBitPos = 1;
 			int consumedBits = 0;
 
-			while (consumedBits < pBitCount) {
-				int bitsToConsume = Math.Min(pBitCount - consumedBits, Constants.ByteSizeInBits);
+			while (consumedBits < bitCount) {
+				int bitsToConsume = Math.Min(bitCount - consumedBits, Constants.ByteSizeInBits);
 				int remainingBits = Constants.ByteSizeInBits - (BitPos - 1);
 				int attemptConsumeBits = Math.Min(bitsToConsume, remainingBits);
 				byte rawValue = (byte)(InternalStream[BytePos] & PackedBitMasks.GetWideningMask(attemptConsumeBits, BitPos - 1));
@@ -557,7 +557,7 @@ namespace BitPackerTools {
 				}
 
 				if (bitsToConsume > attemptConsumeBits) {
-					pData[destBytePos] |= (byte)(rawValue << (bitsToConsume - attemptConsumeBits));
+					data[destBytePos] |= (byte)(rawValue << (bitsToConsume - attemptConsumeBits));
 					destBitPos += attemptConsumeBits;
 					if (destBitPos > Constants.ByteSizeInBits) {
 						destBitPos = 1;
@@ -566,7 +566,7 @@ namespace BitPackerTools {
 
 					remainingBits = bitsToConsume - attemptConsumeBits;
 					rawValue = (byte)(InternalStream[BytePos] & PackedBitMasks.GetWideningMask(remainingBits, BitPos - 1));
-					pData[destBytePos] |= (byte)(rawValue >> (Constants.ByteSizeInBits - remainingBits));
+					data[destBytePos] |= (byte)(rawValue >> (Constants.ByteSizeInBits - remainingBits));
 
 					destBitPos += remainingBits;
 					if (destBitPos > Constants.ByteSizeInBits) {
@@ -581,7 +581,7 @@ namespace BitPackerTools {
 					}
 				}
 				else {
-					pData[destBytePos] |= (byte)(rawValue >> (remainingBits - bitsToConsume));
+					data[destBytePos] |= (byte)(rawValue >> (remainingBits - bitsToConsume));
 					destBitPos += bitsToConsume;
 					if (destBitPos > Constants.ByteSizeInBits) {
 						destBitPos = 1;
@@ -592,7 +592,7 @@ namespace BitPackerTools {
 				consumedBits += bitsToConsume;
 			}
 
-			if (BitConverter.IsLittleEndian) Array.Reverse(pData);
+			if (BitConverter.IsLittleEndian) Array.Reverse(data);
 			return true;
 		}
 	}
