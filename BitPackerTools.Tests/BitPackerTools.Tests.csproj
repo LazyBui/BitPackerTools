@@ -6,8 +6,8 @@
     <ProjectGuid>{695D0B04-1A71-430E-979F-CE69A8E6F1C5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Test</RootNamespace>
-    <AssemblyName>Test</AssemblyName>
+    <RootNamespace>BitPackerTools.Tests</RootNamespace>
+    <AssemblyName>BitPackerTools.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -39,6 +39,9 @@
     <Reference Include="System" />
     <Reference Include="System.Management" />
     <Reference Include="System.XML" />
+    <Reference Include="TestLib">
+      <HintPath>..\TestLib.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -53,61 +56,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Framework\BasicAssertions.cs" />
-    <Compile Include="Framework\CollectionAssertions.cs" />
-    <Compile Include="Framework\FileAndDirectoryAssertions.cs" />
-    <Compile Include="Framework\FloatingPointAssertions.cs" />
-    <Compile Include="Framework\LogicalComparisonAssertions.cs" />
-    <Compile Include="Framework\Util\EqualityComparerStateful.cs" />
-    <Compile Include="Framework\Util\ProcessInputHandleResult.cs" />
-    <Compile Include="Framework\Util\ProcessInputRequestDelegate.cs" />
-    <Compile Include="Framework\Util\IProcessSpawner.cs" />
-    <Compile Include="Framework\Util\ProcessSpawnerWithCombinedAndSplitErrAndOut.cs" />
-    <Compile Include="Framework\Util\ProcessSpawnerWithCombinedErrAndOut.cs" />
-    <Compile Include="Framework\Util\WindowsCommandLineArgumentEscaper.cs" />
-    <Compile Include="Framework\Util\ProcessResult.cs" />
-    <Compile Include="Framework\Util\ICommandLineArgumentEscaper.cs" />
-    <Compile Include="Framework\Util\ProcessSpawnerWithSplitErrAndOut.cs" />
-    <Compile Include="Framework\Util\EqualityComparerStateless.cs" />
-    <Compile Include="Framework\Util\AssertionException.cs" />
-    <Compile Include="Framework\Assert.cs" />
-    <Compile Include="Framework\ReflectionAssertions.cs" />
-    <Compile Include="Framework\StringAssertions.cs" />
-    <Compile Include="Framework\ObjectAssertions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\Extensions.cs" />
-    <Compile Include="Tests\Framework\AssertTest.cs" />
-    <Compile Include="Tests\Framework\FileAndDirectoryAssertionsTest.cs" />
-    <Compile Include="Tests\Framework\FloatingPointAssertionsTest.cs" />
-    <Compile Include="Tests\Framework\ReflectionAssertions.cs" />
-    <Compile Include="Tests\Framework\ObjectAssertionsTest.cs" />
-    <Compile Include="Tests\Framework\LogicalComparisonAssertionsTest.cs" />
-    <Compile Include="Tests\Framework\Util\ProcessSpawnerWithCombinedAndSplitErrAndOutTest.cs" />
-    <Compile Include="Tests\Framework\Util\ProcessSpawnerWithCombinedErrAndOutTest.cs" />
-    <Compile Include="Tests\Framework\Util\TestApplications.cs" />
-    <Compile Include="Tests\Framework\Util\ProcessSpawnerWithSplitErrAndOutTest.cs" />
-    <Compile Include="Tests\Framework\StringAssertionsTest.cs" />
-    <Compile Include="Tests\Framework\CollectionAssertionsTest.cs" />
-    <Compile Include="Tests\Framework\BasicAssertionsTest.cs" />
-    <Compile Include="Tests\PackedBitReader.cs" />
-    <Compile Include="Tests\PackedBitWriter.cs" />
-    <Compile Include="Tests\Serialization\BitOrder.cs" />
-    <Compile Include="Tests\Serialization\BitRange.cs" />
-    <Compile Include="Tests\Serialization\BitSize.cs" />
-    <Compile Include="Tests\Serialization\PackedBitSerializer.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Tests\Framework\_diffcontent.bin" />
-    <None Include="Tests\Framework\_difflength.bin" />
-    <None Include="Tests\Framework\_eq1.bin" />
-    <None Include="Tests\Framework\_eq2.bin" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Tests\Framework\Util\_PlusTwoNumber.exe" />
-    <Content Include="Tests\Framework\Util\_NakedInput.exe" />
-    <Content Include="Tests\Framework\Util\_BlankLinesInterspersed.exe" />
-    <Content Include="Tests\Framework\Util\_NoOutput.exe" />
-    <Content Include="Tests\Framework\Util\_SimpleInterspersed.exe" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="PackedBitReader.cs" />
+    <Compile Include="PackedBitWriter.cs" />
+    <Compile Include="Serialization\BitOrder.cs" />
+    <Compile Include="Serialization\BitRange.cs" />
+    <Compile Include="Serialization\BitSize.cs" />
+    <Compile Include="Serialization\PackedBitSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BitPackerTools\BitPackerTools.csproj">

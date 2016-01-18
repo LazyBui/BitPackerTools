@@ -4,8 +4,9 @@ using System.Reflection;
 using BitPackerTools;
 using BitPackerTools.Serialization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Assert = TestLib.Framework.Assert;
 
-namespace Test {
+namespace BitPackerTools.Tests.Serialization {
 	[TestClass]
 	public class BitSizeTest {
 		internal class BitPackingTest {

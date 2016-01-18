@@ -1,8 +1,9 @@
 ﻿using System;
 using BitPackerTools;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Assert = TestLib.Framework.Assert;
 
-namespace Test {
+namespace BitPackerTools.Tests {
 	[TestClass]
 	public class PackedBitWriterTest {
 		[TestMethod]

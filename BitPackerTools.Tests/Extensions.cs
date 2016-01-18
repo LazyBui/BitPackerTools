@@ -2,8 +2,9 @@
 using System.Reflection;
 using BitPackerTools;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Assert = TestLib.Framework.Assert;
 
-namespace Test {
+namespace BitPackerTools.Tests {
 	[TestClass]
 	public class ExtensionsTest {
 		internal interface ITestImplement { }
