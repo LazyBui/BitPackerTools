@@ -13,5 +13,14 @@ namespace BitPackerTools {
 			if (@this == null) throw new ArgumentNullException(nameof(@this));
 			return @this.GetCustomAttribute<TAttribute>() != null;
 		}
+
+		#if NETFX_40_OR_LOWER
+		public static TAttribute GetCustomAttribute<TAttribute>(this PropertyInfo @this) where TAttribute : Attribute {
+			if (@this == null) throw new ArgumentNullException(nameof(@this));
+			var attributes = @this.GetCustomAttributes(typeof(TAttribute), false);
+			if (attributes.Length == 0) return null;
+			return (TAttribute)attributes[0];
+		}
+		#endif
 	}
 }

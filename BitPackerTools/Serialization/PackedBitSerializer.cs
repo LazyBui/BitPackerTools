@@ -110,7 +110,10 @@ namespace BitPackerTools.Serialization {
 
 		private static void ValidateProperty(Type serializeType, PropertyInfo property) {
 			if (!sValidTypes.Contains(property.PropertyType)) {
-				throw new ArgumentException($"Property type for property {property.Name} must be one of the following: {string.Join(", ", sValidTypes.Select(t => t.Name))}", nameof(serializeType));
+				throw new ArgumentException(
+					$"Property type for property {property.Name} must be one of the following: " +
+					string.Join(", ", sValidTypes.Select(t => t.Name).ToArray()),
+					nameof(serializeType));
 			}
 		}
 
@@ -181,11 +184,16 @@ namespace BitPackerTools.Serialization {
 
 		private static void ValidateFullRange(Type serializeType, HashSet<int> values, int min, int max) {
 			if (values.Count != (max - (min - 1))) {
-				throw new ArgumentException(string.Format(
-					"Missing bit value(s) from range: {0}",
-					string.Join(", ", Enumerable.Range(min, max - (min - 1)).
-					Where(v => !values.Contains(v)).
-					Select(v => v.ToString()))), nameof(serializeType));
+				throw new ArgumentException(
+					string.Format(
+						"Missing bit value(s) from range: {0}",
+						string.Join(
+							", ",
+							Enumerable.Range(min, max - (min - 1)).
+							Where(v => !values.Contains(v)).
+							Select(v => v.ToString()).
+							ToArray())),
+					nameof(serializeType));
 			}
 		}
 
@@ -292,26 +300,26 @@ namespace BitPackerTools.Serialization {
 
 		private void WriteImperativeBits(PackedBitWriter writer, object value, IEnumerable<PropertyInfo> properties, Func<PropertyInfo, BitPair> getBitPair) {
 			foreach (PropertyInfo prop in properties) {
-				if (prop.PropertyType == typeof(bool)) writer.Write((bool)prop.GetValue(value));
+				if (prop.PropertyType == typeof(bool)) writer.Write((bool)prop.GetValue(value, null));
 				else {
 					BitPair write = getBitPair(prop);
 					int bitRange = write.Count;
 					if (write.Signed) {
-						if (prop.PropertyType == typeof(sbyte)) writer.WriteSigned(bitRange, (sbyte)prop.GetValue(value));
-						else if (prop.PropertyType == typeof(short)) writer.WriteSigned(bitRange, (short)prop.GetValue(value));
-						else if (prop.PropertyType == typeof(int)) writer.WriteSigned(bitRange, (int)prop.GetValue(value));
-						else if (prop.PropertyType == typeof(long)) writer.WriteSigned(bitRange, (long)prop.GetValue(value));
+						if (prop.PropertyType == typeof(sbyte)) writer.WriteSigned(bitRange, (sbyte)prop.GetValue(value, null));
+						else if (prop.PropertyType == typeof(short)) writer.WriteSigned(bitRange, (short)prop.GetValue(value, null));
+						else if (prop.PropertyType == typeof(int)) writer.WriteSigned(bitRange, (int)prop.GetValue(value, null));
+						else if (prop.PropertyType == typeof(long)) writer.WriteSigned(bitRange, (long)prop.GetValue(value, null));
 						else throw CodePath.Unreachable;
 					}
 					else {
-						if (prop.PropertyType == typeof(sbyte)) writer.Write(bitRange, (sbyte)prop.GetValue(value));
-						else if (prop.PropertyType == typeof(short)) writer.Write(bitRange, (short)prop.GetValue(value));
-						else if (prop.PropertyType == typeof(int)) writer.Write(bitRange, (int)prop.GetValue(value));
-						else if (prop.PropertyType == typeof(long)) writer.Write(bitRange, (long)prop.GetValue(value));
-						else if (prop.PropertyType == typeof(byte)) writer.Write(bitRange, (byte)prop.GetValue(value));
-						else if (prop.PropertyType == typeof(ushort)) writer.Write(bitRange, (ushort)prop.GetValue(value));
-						else if (prop.PropertyType == typeof(uint)) writer.Write(bitRange, (uint)prop.GetValue(value));
-						else if (prop.PropertyType == typeof(ulong)) writer.Write(bitRange, (ulong)prop.GetValue(value));
+						if (prop.PropertyType == typeof(sbyte)) writer.Write(bitRange, (sbyte)prop.GetValue(value, null));
+						else if (prop.PropertyType == typeof(short)) writer.Write(bitRange, (short)prop.GetValue(value, null));
+						else if (prop.PropertyType == typeof(int)) writer.Write(bitRange, (int)prop.GetValue(value, null));
+						else if (prop.PropertyType == typeof(long)) writer.Write(bitRange, (long)prop.GetValue(value, null));
+						else if (prop.PropertyType == typeof(byte)) writer.Write(bitRange, (byte)prop.GetValue(value, null));
+						else if (prop.PropertyType == typeof(ushort)) writer.Write(bitRange, (ushort)prop.GetValue(value, null));
+						else if (prop.PropertyType == typeof(uint)) writer.Write(bitRange, (uint)prop.GetValue(value, null));
+						else if (prop.PropertyType == typeof(ulong)) writer.Write(bitRange, (ulong)prop.GetValue(value, null));
 						else throw CodePath.Unreachable;
 					}
 				}
@@ -320,26 +328,26 @@ namespace BitPackerTools.Serialization {
 
 		private void ReadImperativeBits(PackedBitReader reader, object value, IEnumerable<PropertyInfo> properties, Func<PropertyInfo, BitPair> getBitPair) {
 			foreach (PropertyInfo prop in properties) {
-				if (prop.PropertyType == typeof(bool)) prop.SetValue(value, reader.ReadBool());
+				if (prop.PropertyType == typeof(bool)) prop.SetValue(value, reader.ReadBool(), null);
 				else {
 					BitPair read = getBitPair(prop);
 					int bitRange = read.Count;
 					if (read.Signed) {
-						if (prop.PropertyType == typeof(sbyte)) prop.SetValue(value, reader.ReadSignedInt8(bitRange));
-						else if (prop.PropertyType == typeof(short)) prop.SetValue(value, reader.ReadSignedInt16(bitRange));
-						else if (prop.PropertyType == typeof(int)) prop.SetValue(value, reader.ReadSignedInt32(bitRange));
-						else if (prop.PropertyType == typeof(long)) prop.SetValue(value, reader.ReadSignedInt64(bitRange));
+						if (prop.PropertyType == typeof(sbyte)) prop.SetValue(value, reader.ReadSignedInt8(bitRange), null);
+						else if (prop.PropertyType == typeof(short)) prop.SetValue(value, reader.ReadSignedInt16(bitRange), null);
+						else if (prop.PropertyType == typeof(int)) prop.SetValue(value, reader.ReadSignedInt32(bitRange), null);
+						else if (prop.PropertyType == typeof(long)) prop.SetValue(value, reader.ReadSignedInt64(bitRange), null);
 						else throw CodePath.Unreachable;
 					}
 					else {
-						if (prop.PropertyType == typeof(sbyte)) prop.SetValue(value, reader.ReadInt8(bitRange));
-						else if (prop.PropertyType == typeof(short)) prop.SetValue(value, reader.ReadInt16(bitRange));
-						else if (prop.PropertyType == typeof(int)) prop.SetValue(value, reader.ReadInt32(bitRange));
-						else if (prop.PropertyType == typeof(long)) prop.SetValue(value, reader.ReadInt64(bitRange));
-						else if (prop.PropertyType == typeof(byte)) prop.SetValue(value, reader.ReadUInt8(bitRange));
-						else if (prop.PropertyType == typeof(ushort)) prop.SetValue(value, reader.ReadUInt16(bitRange));
-						else if (prop.PropertyType == typeof(uint)) prop.SetValue(value, reader.ReadUInt32(bitRange));
-						else if (prop.PropertyType == typeof(ulong)) prop.SetValue(value, reader.ReadUInt64(bitRange));
+						if (prop.PropertyType == typeof(sbyte)) prop.SetValue(value, reader.ReadInt8(bitRange), null);
+						else if (prop.PropertyType == typeof(short)) prop.SetValue(value, reader.ReadInt16(bitRange), null);
+						else if (prop.PropertyType == typeof(int)) prop.SetValue(value, reader.ReadInt32(bitRange), null);
+						else if (prop.PropertyType == typeof(long)) prop.SetValue(value, reader.ReadInt64(bitRange), null);
+						else if (prop.PropertyType == typeof(byte)) prop.SetValue(value, reader.ReadUInt8(bitRange), null);
+						else if (prop.PropertyType == typeof(ushort)) prop.SetValue(value, reader.ReadUInt16(bitRange), null);
+						else if (prop.PropertyType == typeof(uint)) prop.SetValue(value, reader.ReadUInt32(bitRange), null);
+						else if (prop.PropertyType == typeof(ulong)) prop.SetValue(value, reader.ReadUInt64(bitRange), null);
 						else throw CodePath.Unreachable;
 					}
 				}
