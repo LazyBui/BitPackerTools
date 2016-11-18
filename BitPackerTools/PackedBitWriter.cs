@@ -127,10 +127,17 @@ namespace BitPackerTools {
 		public void Write(int bitCount, ulong data) => Write(bitCount, BitConverter.GetBytes(data));
 
 		/// <summary>
-		/// Writes a double to the current buffer (no sign bit included).
+		/// Writes a <see cref="float" /> to the current buffer (no sign bit included).
 		/// This is provided as a convenience, it saves no space in a bitpacked context.
 		/// </summary>
-		/// <param name="data">The double to write to the current buffer.</param>
+		/// <param name="data">The <see cref="float" /> to write to the current buffer.</param>
+		public void Write(float data) => Write(ConvertBytesToBits(sizeof(float)), BitConverter.GetBytes(data));
+
+		/// <summary>
+		/// Writes a <see cref="double" /> to the current buffer (no sign bit included).
+		/// This is provided as a convenience, it saves no space in a bitpacked context.
+		/// </summary>
+		/// <param name="data">The <see cref="double" /> to write to the current buffer.</param>
 		public void Write(double data) => Write(ConvertBytesToBits(sizeof(double)), BitConverter.GetBytes(data));
 
 		/// <summary>
@@ -148,9 +155,13 @@ namespace BitPackerTools {
 		/// <param name="data">The string to write to the current buffer.</param>
 		/// <param name="encoding">The encoding for translating a string to bytes.</param>
 		public void Write(string data, Encoding encoding) {
+			if (object.ReferenceEquals(data, null)) throw new ArgumentNullException(nameof(data));
+			if (object.ReferenceEquals(encoding, null)) throw new ArgumentNullException(nameof(encoding));
 			byte[] raw = encoding.GetBytes(data);
-			Write(sizeof(int) - 1, raw.Length);
-			Write(ConvertBytesToBits(raw.Length), raw);
+			Write(ConvertBytesToBits(sizeof(int)), raw.Length);
+			if (raw.Length > 0) {
+				Write(ConvertBytesToBits(raw.Length), raw);
+			}
 		}
 
 		/// <summary>
@@ -159,6 +170,8 @@ namespace BitPackerTools {
 		/// <param name="bitCount">The number of bits from the array to write.</param>
 		/// <param name="data">The array to write bits from.</param>
 		public void Write(int bitCount, byte[] data) {
+			if (object.ReferenceEquals(data, null)) throw new ArgumentNullException(nameof(data));
+			if (data.Length == 0) throw new ArgumentException("Must have elements", nameof(data));
 			CheckSize(false, bitCount, data.Length);
 			// Copy the data so we can reverse the array without the caller seeing any changes
 			byte[] raw = new byte[data.Length];

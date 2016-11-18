@@ -80,5 +80,14 @@ namespace BitPackerTools.Tests.Serialization {
 			Assert.ThrowsExact<ArgumentException>(() => new PackedBitSerializer(typeof(NonImplementingTypeWithList)));
 			Assert.DoesNotThrow(() => new PackedBitSerializer(typeof(ImplementingTypeWithStringProperty)));
 		}
+
+		[TestMethod]
+		public void ArgumentValidation() {
+			var inst = new PackedBitSerializer(typeof(ImplementingType));
+
+			Assert.ThrowsExact<ArgumentNullException>(() => inst.Deserialize(null));
+			Assert.ThrowsExact<ArgumentNullException>(() => inst.Serialize(null, true));
+			Assert.ThrowsExact<ArgumentNullException>(() => inst.Serialize(new PackedBitWriter(), null as string));
+		}
 	}
 }

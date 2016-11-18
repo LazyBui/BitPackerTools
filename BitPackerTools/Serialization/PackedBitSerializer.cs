@@ -203,6 +203,8 @@ namespace BitPackerTools.Serialization {
 		/// <param name="reader">The stream to deserialize.</param>
 		/// <returns>An object populated by the stream.</returns>
 		public object Deserialize(PackedBitReader reader) {
+			if (object.ReferenceEquals(reader, null)) throw new ArgumentNullException(nameof(reader));
+
 			object ret = Activator.CreateInstance(SerializeType);
 			if (ImplementsInterface) {
 				((IPackedBitSerializable)ret).Deserialize(reader);
@@ -252,6 +254,9 @@ namespace BitPackerTools.Serialization {
 		/// <param name="writer">The stream to serialize to.</param>
 		/// <param name="value">The object to serialize.</param>
 		public void Serialize(PackedBitWriter writer, object value) {
+			if (object.ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+			if (object.ReferenceEquals(value, null)) throw new ArgumentNullException(nameof(value));
+
 			if (ImplementsInterface) {
 				((IPackedBitSerializable)value).Serialize(writer);
 			}

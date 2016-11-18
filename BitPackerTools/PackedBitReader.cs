@@ -305,7 +305,22 @@ namespace BitPackerTools {
 		}
 
 		/// <summary>
-		/// Attempt to read a double value from the current buffer.
+		/// Attempt to read a <see cref="float" /> value from the current buffer.
+		/// </summary>
+		/// <param name="data">The value that will be intialized in the case where there are enough bits.</param>
+		/// <returns>true if reading the bits was successful, false if there were not enough bits to read.</returns>
+		public bool TryRead(out float data) {
+			byte[] raw;
+			if (TryRead(ConvertBytesToBits(sizeof(float)), out raw)) {
+				data = BitConverter.ToSingle(raw, 0);
+				return true;
+			}
+			data = 0f;
+			return false;
+		}
+
+		/// <summary>
+		/// Attempt to read a <see cref="double" /> value from the current buffer.
 		/// </summary>
 		/// <param name="data">The value that will be intialized in the case where there are enough bits.</param>
 		/// <returns>true if reading the bits was successful, false if there were not enough bits to read.</returns>
@@ -477,11 +492,18 @@ namespace BitPackerTools {
 		/// <param name="encoding">The encoding to interpret the string's bytes.</param>
 		/// <returns>true if reading the string was successful, false if a string could not be read.</returns>
 		public bool TryRead(out string data, Encoding encoding) {
+			if (object.ReferenceEquals(encoding, null)) throw new ArgumentNullException(nameof(encoding));
+
 			int length;
-			if (!TryRead(sizeof(int) - 1, out length)) {
+			if (!TryRead(ConvertBytesToBits(sizeof(int)), out length)) {
 				data = null;
 				return false;
 			}
+			if (length == 0) {
+				data = string.Empty;
+				return true;
+			}
+
 			byte[] raw;
 			if (!TryRead(ConvertBytesToBits(length), out raw)) {
 				data = null;
