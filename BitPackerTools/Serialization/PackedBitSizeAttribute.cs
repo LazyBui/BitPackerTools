@@ -8,9 +8,19 @@ namespace BitPackerTools.Serialization {
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
 	public class PackedBitSizeAttribute : Attribute {
+		/// <summary>
+		/// The quantity of bits.
+		/// </summary>
 		public int BitCount { get; private set; }
+		/// <summary>
+		/// Indicates whether or not the value is signed.
+		/// </summary>
 		public bool Signed { get; set; }
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="PackedBitSizeAttribute" /> class.
+		/// </summary>
+		/// <param name="bitCount">The quantity of bits.</param>
 		public PackedBitSizeAttribute(int bitCount = 1) {
 			BitCount = bitCount;
 		}

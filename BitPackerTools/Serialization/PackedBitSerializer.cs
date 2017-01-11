@@ -25,6 +25,8 @@ namespace BitPackerTools.Serialization {
 		/// Initializes a new instance of the BitPackerTools.Serialization.PackedBitSerializer class with a specified type.
 		/// </summary>
 		/// <param name="serializeType">The type to serialize from/deserialize to.</param>
+		/// <exception cref="ArgumentNullException"><paramref name="serializeType" /> is null.</exception>
+		/// <exception cref="ArgumentException"><paramref name="serializeType" /> has no properties with bit attributes, has properties with multiple types of bit attributes, has type(s) that are unsupported by the library, or has bit values that are missing or overlapping.</exception>
 		public PackedBitSerializer(Type serializeType) {
 			if (serializeType == null) throw new ArgumentNullException(nameof(serializeType));
 			SerializeType = serializeType;
@@ -60,7 +62,7 @@ namespace BitPackerTools.Serialization {
 				// We'll have to test the type to see if it fits our rubric
 				var properties = GetProperties(serializeType);
 				if (properties == null || !properties.Any()) {
-					throw new ArgumentException("Type must have at least one property with PackedBitSizeAttribute, PackedBitRangeAttribute, or PackedBitOrderAttribute", nameof(serializeType));
+					throw new ArgumentException($"Type must have at least one property with {nameof(PackedBitSizeAttribute)}, {nameof(PackedBitRangeAttribute)}, or {nameof(PackedBitOrderAttribute)}", nameof(serializeType));
 				}
 
 				bool hasSizeAttribute = properties.Any(p => p.HasAttribute<PackedBitSizeAttribute>());
@@ -79,7 +81,7 @@ namespace BitPackerTools.Serialization {
 				}
 
 				if (setCount > 1) {
-					throw new ArgumentException("PackedBitSizeAttribute, PackedBitRangeAttribute, and PackedBitOrderAttribute are all mutually incompatible; please choose a single one for the entire class", nameof(serializeType));
+					throw new ArgumentException($"{nameof(PackedBitSizeAttribute)}, {nameof(PackedBitRangeAttribute)}, and {nameof(PackedBitOrderAttribute)} are all mutually incompatible; please choose a single one for the entire class", nameof(serializeType));
 				}
 
 				if (hasOrderAttribute) {
@@ -202,6 +204,7 @@ namespace BitPackerTools.Serialization {
 		/// </summary>
 		/// <param name="reader">The stream to deserialize.</param>
 		/// <returns>An object populated by the stream.</returns>
+		/// <exception cref="ArgumentNullException"><paramref name="reader" /> is null.</exception>
 		public object Deserialize(PackedBitReader reader) {
 			if (object.ReferenceEquals(reader, null)) throw new ArgumentNullException(nameof(reader));
 
@@ -253,6 +256,8 @@ namespace BitPackerTools.Serialization {
 		/// </summary>
 		/// <param name="writer">The stream to serialize to.</param>
 		/// <param name="value">The object to serialize.</param>
+		/// <exception cref="ArgumentNullException"><paramref name="writer" /> is null.</exception>
+		/// <exception cref="ArgumentNullException"><paramref name="value" /> is null.</exception>
 		public void Serialize(PackedBitWriter writer, object value) {
 			if (object.ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
 			if (object.ReferenceEquals(value, null)) throw new ArgumentNullException(nameof(value));
