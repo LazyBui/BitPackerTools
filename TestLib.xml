@@ -1,0 +1,1959 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TestLib</name>
+    </assembly>
+    <members>
+        <member name="T:TestLib.Framework.Assert">
+            <summary>
+            A collection of functions that establish fundamental properties about code.
+            </summary>
+        </member>
+        <member name="F:TestLib.Framework.Assert.Failure">
+            <summary>
+            Allows a user to invoke a test failure.
+            </summary>
+        </member>
+        <member name="M:TestLib.Framework.Assert.Fail(System.Exception)">
+            <summary>
+            Asserts that the test has failed.
+            </summary>
+            <param name="exception">Optional exception to add as an <see cref="P:System.Exception.InnerException" />.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">Unconditionally produces this exception.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.True(System.Boolean,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that a condition is true.
+            </summary>
+            <param name="condition">The condition to evaluate for truth.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.True(System.Nullable{System.Boolean},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that a condition is true.
+            </summary>
+            <param name="condition">The condition to evaluate for truth.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.True(System.Func{System.Boolean},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that a condition is true.
+            </summary>
+            <param name="condition">The condition to evaluate for truth.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="condition" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.True(System.Func{System.Nullable{System.Boolean}},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that a condition is true.
+            </summary>
+            <param name="condition">The condition to evaluate for truth.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="condition" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.False(System.Boolean,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that a condition is false.
+            </summary>
+            <param name="condition">The condition to evaluate for truth.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.False(System.Nullable{System.Boolean},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that a condition is false.
+            </summary>
+            <param name="condition">The condition to evaluate for truth.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.False(System.Func{System.Boolean},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that a condition is false.
+            </summary>
+            <param name="condition">The condition to evaluate for truth.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="condition" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.False(System.Func{System.Nullable{System.Boolean}},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that a condition is false.
+            </summary>
+            <param name="condition">The condition to evaluate for truth.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="condition" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.Throws``1(System.Action,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that a specific exception or a more derived type is thrown by <paramref name="action" />.
+            </summary>
+            <typeparam name="TException">The type of the exception.</typeparam>
+            <param name="action">The action to perform and evaluate for exception content.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="action" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.Throws``1(System.Action,System.Func{``0,System.Boolean},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that a specific exception or a more derived type is thrown by <paramref name="action" /> and <paramref name="isValidException" /> predicate is satisfied.
+            </summary>
+            <typeparam name="TException">The type of the exception.</typeparam>
+            <param name="action">The action to perform and evaluate for exception content.</param>
+            <param name="isValidException">A filter that determines whether the specified exception is expected. Can be used to check specific properties of the exception such as <see cref="P:System.Exception.InnerException" />.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="action" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="isValidException" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.Throws(System.Type,System.Action,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that a specific exception or a more derived type is thrown by <paramref name="action" />.
+            </summary>
+            <param name="type">The type of the exception expected.</param>
+            <param name="action">The action to perform and evaluate for exception content.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="type" /> is not a type derived from <see cref="T:System.Exception" />.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="type" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="action" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.Throws(System.Type,System.Action,System.Func{System.Exception,System.Boolean},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that a specific exception or a more derived type is thrown by <paramref name="action" /> and <paramref name="isValidException" /> predicate is satisfied.
+            </summary>
+            <param name="type">The type of the exception expected.</param>
+            <param name="action">The action to perform and evaluate for exception content.</param>
+            <param name="isValidException">A filter that determines whether the specified exception is expected. Can be used to check specific properties of the exception such as <see cref="P:System.Exception.InnerException" />.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="type" /> is not a type derived from <see cref="T:System.Exception" />.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="type" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="action" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="isValidException" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.ThrowsExact``1(System.Action,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that a specific exception is thrown by <paramref name="action" />.
+            </summary>
+            <typeparam name="TException">The type of the exception.</typeparam>
+            <param name="action">The action to perform and evaluate for exception content.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="action" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.ThrowsExact``1(System.Action,System.Func{``0,System.Boolean},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that a specific exception is thrown by <paramref name="action" /> and <paramref name="isValidException" /> predicate is satisfied.
+            </summary>
+            <typeparam name="TException">The type of the exception.</typeparam>
+            <param name="action">The action to perform and evaluate for exception content.</param>
+            <param name="isValidException">A filter that determines whether the specified exception is expected. Can be used to check specific properties of the exception such as <see cref="P:System.Exception.InnerException" />.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="action" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="isValidException" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.ThrowsExact(System.Type,System.Action,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that a specific exception is thrown by <paramref name="action" />.
+            </summary>
+            <param name="type">The type of the exception expected.</param>
+            <param name="action">The action to perform and evaluate for exception content.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="type" /> is not a type derived from <see cref="T:System.Exception" />.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="type" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="action" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.ThrowsExact(System.Type,System.Action,System.Func{System.Exception,System.Boolean},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that a specific exception is thrown by <paramref name="action" /> and <paramref name="isValidException" /> predicate is satisfied.
+            </summary>
+            <param name="type">The type of the exception expected.</param>
+            <param name="action">The action to perform and evaluate for exception content.</param>
+            <param name="isValidException">A filter that determines whether the specified exception is expected. Can be used to check specific properties of the exception such as <see cref="P:System.Exception.InnerException" />.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="type" /> is not a type derived from <see cref="T:System.Exception" />.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="type" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="action" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="isValidException" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.DoesNotThrow(System.Action,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that an action does not throw at all.
+            </summary>
+            <param name="action">The action to perform and evaluate for exception content.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="action" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.Empty``1(System.Collections.Generic.IEnumerable{``0},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="sequence" /> has no elements.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.NotEmpty``1(System.Collections.Generic.IEnumerable{``0},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="sequence" /> has one or more elements.
+            </summary>
+            <param name="sequence">The sequence to check.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.All``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="sequence" /> has elements and that all elements match <paramref name="predicate" />.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="predicate">The predicate to check elements against.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="predicate" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.Any``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="sequence" /> has elements and that any of them matches <paramref name="predicate" />.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="predicate">The predicate to check elements against.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="predicate" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.Only``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="sequence" /> has elements and exactly one element matches <paramref name="predicate" />.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="predicate">The predicate to check elements against.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="predicate" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.Exactly``1(System.Collections.Generic.IEnumerable{``0},System.Int32,System.Func{``0,System.Boolean},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="sequence" /> has elements and exactly <paramref name="count" /> elements match <paramref name="predicate" />.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="count">The number of elements expected to match.</param>
+            <param name="predicate">The predicate to check elements against.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="count" /> is negative.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="predicate" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.None``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="sequence" /> has elements and none match <paramref name="predicate" />.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="predicate">The predicate to check elements against.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="predicate" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.Count``1(System.Collections.Generic.IEnumerable{``0},System.Int32,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="sequence" /> has a specified number of elements.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="count">The number of elements expected to match.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="count" /> is negative.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.Count``1(System.Collections.Generic.IEnumerable{``0},System.Int32,``0,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="sequence" /> has a specified number of a specific element.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="count">The number of elements expected to match.</param>
+            <param name="value">The value to count instances of.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="count" /> is negative.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.Count``1(System.Collections.Generic.IEnumerable{``0},System.Int32,``0,System.Collections.Generic.IEqualityComparer{``0},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="sequence" /> has a specified number of a specific element with a specific comparer.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="count">The number of elements expected to match.</param>
+            <param name="value">The value to count instances of.</param>
+            <param name="comparer">The comparer to use.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="count" /> is negative.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="comparer" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.Contains``1(System.Collections.Generic.IEnumerable{``0},``0,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="sequence" /> contains a specific value.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="value">The value to check.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.Contains``1(System.Collections.Generic.IEnumerable{``0},``0,System.Collections.Generic.IEqualityComparer{``0},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="sequence" /> contains a specific value with a specific comparer.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="value">The value to check.</param>
+            <param name="comparer">The comparer to use.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="comparer" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.DoesNotContain``1(System.Collections.Generic.IEnumerable{``0},``0,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="sequence" /> does not contain a specific value.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="value">The value to check.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.DoesNotContain``1(System.Collections.Generic.IEnumerable{``0},``0,System.Collections.Generic.IEqualityComparer{``0},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="sequence" /> does not contain a specific value with a specific comparer.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="value">The value to check.</param>
+            <param name="comparer">The comparer to use.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="comparer" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.Unique``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``0,System.Boolean},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="sequence" /> with two or more elements has no duplicates that match <paramref name="predicate" />.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="predicate">The predicate to check elements against.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has zero elements or one element.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="predicate" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.Unique``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="sequence" /> with two or more elements has no duplicates that match <paramref name="predicate" />.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <typeparam name="TCompare">The type of the value to compare upon.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="predicate">The predicate to check elements against.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has zero elements or one element.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="predicate" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.Unique``1(System.Collections.Generic.IEnumerable{``0},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="sequence" /> with two or more elements has no duplicates.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has zero elements or one element.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.Unique``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEqualityComparer{``0},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="sequence" /> with two or more elements has no duplicates based on a specific comparer.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="comparer">The comparer to use.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has zero elements or one element.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="comparer" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.NotUnique``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``0,System.Boolean},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="sequence" /> with two or more elements has at least one duplicate pair that matches <paramref name="predicate" />.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="predicate">The predicate to check elements against.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has zero elements or one element.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="predicate" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.NotUnique``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="sequence" /> with two or more elements has at least one duplicate pair that matches <paramref name="predicate" />.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <typeparam name="TCompare">The type of the value to compare upon.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="predicate">The predicate to check elements against.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has zero elements or one element.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="predicate" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.NotUnique``1(System.Collections.Generic.IEnumerable{``0},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="sequence" /> with two or more elements has at least one duplicate pair.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has zero elements or one element.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.NotUnique``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEqualityComparer{``0},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="sequence" /> with two or more elements has at least one duplicate pair based on a specific comparer.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="comparer">The comparer to use.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has zero elements or one element.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="comparer" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.StartsWith``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},TestLib.Framework.AssertionException)">
+            <summary>
+            Ensures that <paramref name="sequence" /> starts with a particular set of values.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="start">The sequence used to check the beginning.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="start" /> has no elements or more elements than <paramref name="sequence" />.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="start" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.StartsWith``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEqualityComparer{``0},TestLib.Framework.AssertionException)">
+            <summary>
+            Ensures that <paramref name="sequence" /> starts with a particular set of values based on a specific comparer.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="start">The sequence used to check the beginning.</param>
+            <param name="comparer">The comparer to use.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="start" /> has no elements or more elements than <paramref name="sequence" />.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="start" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="comparer" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.EndsWith``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},TestLib.Framework.AssertionException)">
+            <summary>
+            Ensures that <paramref name="sequence" /> ends with a particular set of values.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="end">The sequence used to check the end.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="end" /> has no elements or more elements than <paramref name="sequence" />.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="end" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.EndsWith``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEqualityComparer{``0},TestLib.Framework.AssertionException)">
+            <summary>
+            Ensures that <paramref name="sequence" /> ends with a particular set of values based on a specific comparer.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="end">The sequence used to check the end.</param>
+            <param name="comparer">The comparer to use.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="end" /> has no elements or more elements than <paramref name="sequence" />.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="end" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="comparer" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsSubsetOf``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},TestLib.Framework.AssertionException)">
+            <summary>
+            Ensures that <paramref name="sequence" /> contains a particular set of values.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="values">The second sequence to check.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="values" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="values" /> has more elements than <paramref name="sequence" />.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="values" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsSubsetOf``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEqualityComparer{``0},TestLib.Framework.AssertionException)">
+            <summary>
+            Ensures that <paramref name="sequence" /> contains a particular set of values with a specific comparer.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="values">The second sequence to check.</param>
+            <param name="comparer">The comparer to use.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="values" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="values" /> has more elements than <paramref name="sequence" />.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="values" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="comparer" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsNotSubsetOf``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},TestLib.Framework.AssertionException)">
+            <summary>
+            Ensures that <paramref name="sequence" /> does not contain a specific full set of values.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="values">The second sequence to check.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="values" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="values" /> has more elements than <paramref name="sequence" />.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="values" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsNotSubsetOf``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEqualityComparer{``0},TestLib.Framework.AssertionException)">
+            <summary>
+            Ensures that <paramref name="sequence" /> does not contain a specific full set of values based on a specific comparer.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="values">The second sequence to check.</param>
+            <param name="comparer">The comparer to use.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="values" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="values" /> has more elements than <paramref name="sequence" />.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="values" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="comparer" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsStrictSubsetOf``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},TestLib.Framework.AssertionException)">
+            <summary>
+            Ensures that <paramref name="sequence" /> strictly contains a particular set of values.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="values">The second sequence to check.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="values" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="values" /> has the same quantity of elements or more than <paramref name="sequence" />.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="values" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsStrictSubsetOf``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEqualityComparer{``0},TestLib.Framework.AssertionException)">
+            <summary>
+            Ensures that <paramref name="sequence" /> strictly contains a particular set of values based on a specific comparer.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="values">The second sequence to check.</param>
+            <param name="comparer">The comparer to use.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="values" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="values" /> has the same quantity of elements or more than <paramref name="sequence" />.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="values" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="comparer" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsNotStrictSubsetOf``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},TestLib.Framework.AssertionException)">
+            <summary>
+            Ensures that <paramref name="sequence" /> does not strictly contain a specific full set of values.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="values">The second sequence to check.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="values" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="values" /> has the same quantity of elements or more than <paramref name="sequence" />.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="values" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsNotStrictSubsetOf``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEqualityComparer{``0},TestLib.Framework.AssertionException)">
+            <summary>
+            Ensures that <paramref name="sequence" /> does not strictly contain a specific full set of values based on a specific comparer.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="values">The second sequence to check.</param>
+            <param name="comparer">The comparer to use.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="values" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="values" /> has the same quantity of elements or more than <paramref name="sequence" />.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="values" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="comparer" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.OverlapCount``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Int32,TestLib.Framework.AssertionException)">
+            <summary>
+            Ensures that <paramref name="sequence" /> and <paramref name="values" /> share <paramref name="overlapCount" /> values.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="values">The second sequence to check.</param>
+            <param name="overlapCount">The number of elements expected to match.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="values" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="overlapCount" /> is negative.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="values" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.OverlapCount``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Int32,System.Collections.Generic.IEqualityComparer{``0},TestLib.Framework.AssertionException)">
+            <summary>
+            Ensures that <paramref name="sequence" /> and <paramref name="values" /> share <paramref name="overlapCount" /> values based on a specific comparer.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="sequence">The sequence to check.</param>
+            <param name="values">The second sequence to check.</param>
+            <param name="overlapCount">The number of elements expected to match.</param>
+            <param name="comparer">The comparer to use.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="sequence" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="values" /> has no elements.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="overlapCount" /> is negative.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="sequence" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="values" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="comparer" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.FileExists(System.String,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="file" /> exists.
+            </summary>
+            <param name="file">The file to check.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="file" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.FileExists(System.IO.FileInfo,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="file" /> exists.
+            </summary>
+            <param name="file">The file to check.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="file" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.FileNotExists(System.String,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="file" /> does not exist.
+            </summary>
+            <param name="file">The file to check.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="file" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.FileNotExists(System.IO.FileInfo,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="file" /> does not exist.
+            </summary>
+            <param name="file">The file to check.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="file" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.FilesEqual(System.String,System.String,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that two specified files are equal.
+            This has a very high threshold for equality: byte-by-byte binary equality.
+            If you need a looser definition of equality, this is unsupported at this time.
+            </summary>
+            <param name="file1">The file to check.</param>
+            <param name="file2">The file to check.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="file1" /> doesn't exist.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="file2" /> doesn't exist.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="file1" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="file2" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.FilesEqual(System.IO.FileInfo,System.String,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that two specified files are equal.
+            This has a very high threshold for equality: byte-by-byte binary equality.
+            If you need a looser definition of equality, this is unsupported at this time.
+            </summary>
+            <param name="file1">The file to check.</param>
+            <param name="file2">The file to check.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="file1" /> doesn't exist.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="file2" /> doesn't exist.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="file1" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="file2" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.FilesEqual(System.String,System.IO.FileInfo,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that two specified files are equal.
+            This has a very high threshold for equality: byte-by-byte binary equality.
+            If you need a looser definition of equality, this is unsupported at this time.
+            </summary>
+            <param name="file1">The file to check.</param>
+            <param name="file2">The file to check.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="file1" /> doesn't exist.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="file2" /> doesn't exist.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="file1" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="file2" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.FilesEqual(System.IO.FileInfo,System.IO.FileInfo,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that two specified files are equal.
+            This has a very high threshold for equality: byte-by-byte binary equality.
+            If you need a looser definition of equality, this is unsupported at this time.
+            </summary>
+            <param name="file1">The file to check.</param>
+            <param name="file2">The file to check.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="file1" /> doesn't exist.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="file2" /> doesn't exist.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="file1" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="file2" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.FilesNotEqual(System.String,System.String,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that two specified files are not equal.
+            This has a very high threshold for equality: byte-by-byte binary equality.
+            If you need a looser definition of equality, this is unsupported at this time.
+            </summary>
+            <param name="file1">The file to check.</param>
+            <param name="file2">The file to check.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="file1" /> doesn't exist.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="file2" /> doesn't exist.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="file1" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="file2" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.FilesNotEqual(System.IO.FileInfo,System.String,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that two specified files are not equal.
+            This has a very high threshold for equality: byte-by-byte binary equality.
+            If you need a looser definition of equality, this is unsupported at this time.
+            </summary>
+            <param name="file1">The file to check.</param>
+            <param name="file2">The file to check.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="file1" /> doesn't exist.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="file2" /> doesn't exist.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="file1" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="file2" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.FilesNotEqual(System.String,System.IO.FileInfo,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that two specified files are not equal.
+            This has a very high threshold for equality: byte-by-byte binary equality.
+            If you need a looser definition of equality, this is unsupported at this time.
+            </summary>
+            <param name="file1">The file to check.</param>
+            <param name="file2">The file to check.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="file1" /> doesn't exist.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="file2" /> doesn't exist.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="file1" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="file2" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.FilesNotEqual(System.IO.FileInfo,System.IO.FileInfo,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that two specified files are not equal.
+            This has a very high threshold for equality: byte-by-byte binary equality.
+            If you need a looser definition of equality, this is unsupported at this time.
+            </summary>
+            <param name="file1">The file to check.</param>
+            <param name="file2">The file to check.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="file1" /> doesn't exist.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="file2" /> doesn't exist.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="file1" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="file2" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.DirectoryExists(System.String,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="dir" /> exists.
+            </summary>
+            <param name="dir">The directry to check.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="dir" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.DirectoryExists(System.IO.DirectoryInfo,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="dir" /> exists.
+            </summary>
+            <param name="dir">The directry to check.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="dir" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.DirectoryNotExists(System.String,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="dir" /> does not exist.
+            </summary>
+            <param name="dir">The directry to check.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="dir" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.DirectoryNotExists(System.IO.DirectoryInfo,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="dir" /> does not exist.
+            </summary>
+            <param name="dir">The directry to check.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="dir" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsNaN(System.Single,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> is the Not a Number value.
+            </summary>
+            <param name="value">The value to test.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsNaN(System.Double,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> is the Not a Number value.
+            </summary>
+            <param name="value">The value to test.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsNotNaN(System.Single,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> is not the Not a Number value.
+            </summary>
+            <param name="value">The value to test.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsNotNaN(System.Double,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> is not the Not a Number value.
+            </summary>
+            <param name="value">The value to test.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsInfinity(System.Single,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> is either a positive or negative infinity value.
+            </summary>
+            <param name="value">The value to test.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsInfinity(System.Double,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> is either a positive or negative infinity value.
+            </summary>
+            <param name="value">The value to test.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsNotInfinity(System.Single,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> is not a positive or negative infinity value.
+            </summary>
+            <param name="value">The value to test.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsNotInfinity(System.Double,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> is not a positive or negative infinity value.
+            </summary>
+            <param name="value">The value to test.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsPositiveInfinity(System.Single,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> is a positive infinity value.
+            </summary>
+            <param name="value">The value to test.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsPositiveInfinity(System.Double,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> is a positive infinity value.
+            </summary>
+            <param name="value">The value to test.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsNotPositiveInfinity(System.Single,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> is a not positive infinity value.
+            </summary>
+            <param name="value">The value to test.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsNotPositiveInfinity(System.Double,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> is a not positive infinity value.
+            </summary>
+            <param name="value">The value to test.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsNegativeInfinity(System.Single,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> is a negative infinity value.
+            </summary>
+            <param name="value">The value to test.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsNegativeInfinity(System.Double,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> is a negative infinity value.
+            </summary>
+            <param name="value">The value to test.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsNotNegativeInfinity(System.Single,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> is not a negative infinity value.
+            </summary>
+            <param name="value">The value to test.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsNotNegativeInfinity(System.Double,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> is not a negative infinity value.
+            </summary>
+            <param name="value">The value to test.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsSpecialFloatValue(System.Single,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> is not an infinity value or a Not a Number value.
+            </summary>
+            <param name="value">The value to test.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsSpecialFloatValue(System.Double,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> is not an infinity value or a Not a Number value.
+            </summary>
+            <param name="value">The value to test.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsNotSpecialFloatValue(System.Single,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> is either an infinity value or a Not a Number value.
+            </summary>
+            <param name="value">The value to test.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsNotSpecialFloatValue(System.Double,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> is either an infinity value or a Not a Number value.
+            </summary>
+            <param name="value">The value to test.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsWithinDelta(System.Single,System.Single,System.Single,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value1" /> is within <paramref name="delta" /> of <paramref name="value2" />.
+            </summary>
+            <param name="value1">The left value to compare.</param>
+            <param name="value2">The right value to compare.</param>
+            <param name="delta">The maximum difference they may be before an exception should be thrown.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsWithinDelta(System.Double,System.Double,System.Double,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value1" /> is within <paramref name="delta" /> of <paramref name="value2" />.
+            </summary>
+            <param name="value1">The left value to compare.</param>
+            <param name="value2">The right value to compare.</param>
+            <param name="delta">The maximum difference they may be before an exception should be thrown.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.GreaterThanEqual``1(``0,``0,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> compares either greater or equal to <paramref name="lowerBound" />.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="value">The value to test.</param>
+            <param name="lowerBound">The lower bound of the range.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="value" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="lowerBound" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.GreaterThan``1(``0,``0,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> compares strictly greater to <paramref name="lowerBound" />.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="value">The value to test.</param>
+            <param name="lowerBound">The lower bound of the range.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="value" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="lowerBound" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.LessThanEqual``1(``0,``0,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> compares either less or equal to <paramref name="upperBound" />.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="value">The value to test.</param>
+            <param name="upperBound">The upper bound of the range.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="value" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="upperBound" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.LessThan``1(``0,``0,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> compares strictly less to <paramref name="upperBound" />.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="value">The value to test.</param>
+            <param name="upperBound">The upper bound of the range.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="value" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="upperBound" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.InRangeEqual``1(``0,``0,``0,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> compares either greater or equal to <paramref name="lowerBound" /> AND less or equal to <paramref name="upperBound" />.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="value">The value to test.</param>
+            <param name="lowerBound">The lower bound of the range.</param>
+            <param name="upperBound">The upper bound of the range.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="value" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="lowerBound" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="upperBound" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.InRange``1(``0,``0,``0,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> compares strictly greater to <paramref name="lowerBound" /> AND strictly less to <paramref name="upperBound" />.
+            </summary>
+            <typeparam name="TValue">The value of the type to test.</typeparam>
+            <param name="value">The value to test.</param>
+            <param name="lowerBound">The lower bound of the range.</param>
+            <param name="upperBound">The upper bound of the range.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="value" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="lowerBound" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="upperBound" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.NotInRangeEqual``1(``0,``0,``0,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> compares either greater or equal to <paramref name="upperBound" /> AND less or equal to <paramref name="lowerBound" />.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="value">The value to test.</param>
+            <param name="lowerBound">The lower bound of the range.</param>
+            <param name="upperBound">The upper bound of the range.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="value" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="lowerBound" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="upperBound" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.NotInRange``1(``0,``0,``0,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> compares strictly greater to <paramref name="upperBound" /> AND strictly less to <paramref name="lowerBound" />.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="value">The value to test.</param>
+            <param name="lowerBound">The lower bound of the range.</param>
+            <param name="upperBound">The upper bound of the range.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="value" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="lowerBound" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="upperBound" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.Equal``1(``0,``0,System.Collections.Generic.IEqualityComparer{``0},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that two specified objects are equal given a specific comparer.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="left">The left object to compare.</param>
+            <param name="right">The right object to compare.</param>
+            <param name="comparer">The comparer used to compare the objects.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="comparer" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.Equal(System.Object,System.Object,System.Collections.IEqualityComparer,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that two specified objects are equal given a specific comparer.
+            </summary>
+            <param name="left">The left object to compare.</param>
+            <param name="right">The right object to compare.</param>
+            <param name="comparer">The comparer used to compare the objects.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="comparer" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.Equal(System.Object,System.Object,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that two specified objects are equal.
+            null and null are considered equal.
+            The types must also be consistent in order to compare equal (so you cannot compare sbyte with int, for example).
+            </summary>
+            <param name="left">The left object to compare.</param>
+            <param name="right">The right object to compare.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.NotEqual``1(``0,``0,System.Collections.Generic.IEqualityComparer{``0},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that two specified objects are not equal given a specific comparer.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="left">The left object to compare.</param>
+            <param name="right">The right object to compare.</param>
+            <param name="comparer">The comparer used to compare the objects.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="comparer" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.NotEqual(System.Object,System.Object,System.Collections.IEqualityComparer,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that two specified objects are not equal given a specific comparer.
+            </summary>
+            <param name="left">The left object to compare.</param>
+            <param name="right">The right object to compare.</param>
+            <param name="comparer">The comparer used to compare the objects.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="comparer" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.NotEqual(System.Object,System.Object,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that two specified objects are not equal.
+            null and null are considered equal.
+            The types must also be consistent in order to compare equal (so this assertion would be relatively useless if you were comparing sbyte with int, for example).
+            </summary>
+            <param name="left">The left object to compare.</param>
+            <param name="right">The right object to compare.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.Null``1(``0,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> is null.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="value">The value to test.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.Null``1(System.Nullable{``0},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> is null.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="value">The value to test.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.NotNull``1(``0,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> is not null.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="value">The value to test.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.NotNull``1(System.Nullable{``0},TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="value" /> is not null.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="value">The value to test.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.Same``1(``0,``0,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="left" /> is the same object reference as <paramref name="right" />.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="left">The left object to compare.</param>
+            <param name="right">The right object to compare.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.NotSame``1(``0,``0,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="left" /> is not the same object reference as <paramref name="right" />.
+            </summary>
+            <typeparam name="TValue">The type of the values.</typeparam>
+            <param name="left">The left object to compare.</param>
+            <param name="right">The right object to compare.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsType``1(System.Object,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that the type of a specified object matches the specified type.
+            </summary>
+            <typeparam name="TType">The type to check.</typeparam>
+            <param name="value">The value to test.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="value" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsType(System.Object,System.Type,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that the type of a specified object matches the specified type.
+            </summary>
+            <param name="value">The value to test.</param>
+            <param name="type">The expected type of the object.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="value" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="type" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsNotType``1(System.Object,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that the type of a specified object does not match the specified type.
+            </summary>
+            <typeparam name="TType">The type to check.</typeparam>
+            <param name="value">The value to test.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="value" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsNotType(System.Object,System.Type,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that the type of a specified object does not match the specified type.
+            </summary>
+            <param name="value">The value to test.</param>
+            <param name="type">The type of the object that is not permitted.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="value" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="type" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsAssignableFromType``1(System.Object,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that the type of a specified object is assignable from the specified type.
+            </summary>
+            <typeparam name="TType">The type to check.</typeparam>
+            <param name="value">The value to test.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="value" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsAssignableFromType(System.Object,System.Type,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that the type of a specified object is assignable from the specified type.
+            </summary>
+            <param name="value">The value to test.</param>
+            <param name="type">The type of the object that should be assignable to <paramref name="value" />.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="value" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="type" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsNotAssignableFromType``1(System.Object,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that the type of a specified object is not assignable from the specified type.
+            </summary>
+            <typeparam name="TType">The type to check.</typeparam>
+            <param name="value">The value to test.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="value" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsNotAssignableFromType(System.Object,System.Type,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that the type of a specified object is not assignable from the specified type.
+            </summary>
+            <param name="value">The value to test.</param>
+            <param name="type">The type of the object that should not be assignable to <paramref name="value" />.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="value" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="type" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsMatch(System.Text.RegularExpressions.Regex,System.String,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="input" /> matches the regex pattern.
+            </summary>
+            <param name="regex">The pattern to use.</param>
+            <param name="input">The input to check.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="regex" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="input" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsMatch(System.String,System.String,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="input" /> matches the regex pattern.
+            </summary>
+            <param name="regexPattern">The pattern to use.</param>
+            <param name="input">The input to check.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="regexPattern" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="input" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.MatchCount(System.Text.RegularExpressions.Regex,System.String,System.Int32,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="input" /> produces the specified count of matches to the regex pattern.
+            </summary>
+            <param name="regex">The pattern to use.</param>
+            <param name="input">The input to check.</param>
+            <param name="count">The specific quantity of matches expected.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="count" /> is negative.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="regex" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="input" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.MatchCount(System.String,System.String,System.Int32,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="input" /> produces the specified count of matches to the regex pattern.
+            </summary>
+            <param name="regexPattern">The pattern to use.</param>
+            <param name="input">The input to check.</param>
+            <param name="count">The specific quantity of matches expected.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="count" /> is negative.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="regexPattern" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="input" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsNotMatch(System.Text.RegularExpressions.Regex,System.String,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="input" /> does not match the regex pattern.
+            </summary>
+            <param name="regex">The pattern to use.</param>
+            <param name="input">The input to check.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="regex" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="input" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="M:TestLib.Framework.Assert.IsNotMatch(System.String,System.String,TestLib.Framework.AssertionException)">
+            <summary>
+            Asserts that <paramref name="input" /> does not match the regex pattern.
+            </summary>
+            <param name="regexPattern">The pattern to use.</param>
+            <param name="input">The input to check.</param>
+            <param name="exception">Optional exception to throw instead of the default.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="regexPattern" /> is null.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="input" /> is null.</exception>
+            <exception cref="T:TestLib.Framework.AssertionException">The condition implied by the function is not satisfied.</exception>
+        </member>
+        <member name="T:TestLib.Framework.AssertionException">
+            <summary>
+            The exception that all assertions will throw if the assertion fails.
+            </summary>
+        </member>
+        <member name="M:TestLib.Framework.AssertionException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TestLib.Framework.AssertionException" /> class with a specified error message.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:TestLib.Framework.AssertionException.#ctor(System.String,System.Object[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:TestLib.Framework.AssertionException" /> class with a specified formatted error message.
+            </summary>
+            <param name="format">The format string that describes the error.</param>
+            <param name="args">The objects to pass to the format string.</param>
+        </member>
+        <member name="M:TestLib.Framework.AssertionException.GenerateWithInnerException(System.Exception,System.String)">
+            <summary>
+            Creates an AssertionException with an InnerException populated.
+            </summary>
+            <param name="innerException">The desired InnerException.</param>
+            <param name="message">The message that describes the error.</param>
+            <returns>An AssertionException with an InnerException populated.</returns>
+        </member>
+        <member name="M:TestLib.Framework.AssertionException.GenerateWithInnerException(System.Exception,System.String,System.Object[])">
+            <summary>
+            Creates an AssertionException with an InnerException populated.
+            </summary>
+            <param name="innerException">The desired InnerException.</param>
+            <param name="format">The format string that describes the error.</param>
+            <param name="args">The objects to pass to the format string.</param>
+            <returns>An AssertionException with an InnerException populated.</returns>
+        </member>
+        <member name="T:TestLib.Framework.Extensions">
+            <summary>
+            Provides access to extension methods.
+            </summary>
+        </member>
+        <member name="M:TestLib.Framework.Extensions.EqualsOrInherits(System.Type,System.Type)">
+            <summary>
+            Determines whether the class represented by the current <see cref="T:System.Type" /> equals or derives from the class represented by the specified <see cref="T:System.Type" />.
+            </summary>
+            <param name="this">The <see cref="T:System.Type" />.</param>
+            <param name="check">The <see cref="T:System.Type" /> to compare with the current <see cref="T:System.Type" />.</param>
+            <returns>true if the <see cref="T:System.Type" /> represented by <paramref name="check" /> is equivalent to or a more base type of <paramref name="this" />; otherwise, false.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            	<paramref name="this" /> is null.
+            	<paramref name="check" /> is null.
+            </exception>
+        </member>
+        <member name="T:TestLib.Framework.Util.EqualityComparerStateful`1">
+            <summary>
+            Allows arbitrary equality comparison between two instances of the same class.
+            </summary>
+            <typeparam name="TValue">The type comparison will be done on.</typeparam>
+        </member>
+        <member name="M:TestLib.Framework.Util.EqualityComparerStateful`1.#ctor(System.Func{`0,`0,System.Boolean},System.Func{`0,System.Int32})">
+            <summary>
+            Initializes a new instance of the <see cref="T:TestLib.Framework.Util.EqualityComparerStateful`1" /> class with a specified comparer delegate and optional hasher delegate.
+            If the hasher is not specified, the hash of all objects is assumed to be 0.
+            </summary>
+            <param name="comparer">The comparer that determines whether two objects are equal.</param>
+            <param name="hasher">The hash function for a particular object.</param>
+        </member>
+        <member name="M:TestLib.Framework.Util.EqualityComparerStateful`1.Equals(`0,`0)">
+            <summary>
+            Determines whether the specified objects are equal.
+            </summary>
+            <param name="x">The first object of type TValue to compare.</param>
+            <param name="y">The second object of type TValue to compare.</param>
+            <returns>true if the specified objects are equal; otherwise, false.</returns>
+        </member>
+        <member name="M:TestLib.Framework.Util.EqualityComparerStateful`1.GetHashCode(`0)">
+            <summary>
+            Returns a hash code for the specified object.
+            </summary>
+            <param name="obj">The TValue for which a hash code is to be returned.</param>
+            <returns>A hash code for the specified object.</returns>
+        </member>
+        <member name="T:TestLib.Framework.Util.EqualityComparerStateless`2">
+            <summary>
+            Allows equality comparison based on an arbitrary property of class.
+            </summary>
+            <typeparam name="TKey">The type that comparison will be done on.</typeparam>
+            <typeparam name="TValue">The type of the property that will compared for equality.</typeparam>
+        </member>
+        <member name="M:TestLib.Framework.Util.EqualityComparerStateless`2.#ctor(System.Func{`0,`1})">
+            <summary>
+            Initializes a new instance of the <see cref="T:TestLib.Framework.Util.EqualityComparerStateless`2" /> class with a specified selector delegate.
+            </summary>
+            <param name="selector">The selector that determines which property to obtain from an object.</param>
+        </member>
+        <member name="M:TestLib.Framework.Util.EqualityComparerStateless`2.Equals(`0,`0)">
+            <summary>
+            Determines whether the specified objects are equal based on a selected property.
+            </summary>
+            <param name="x">The first object of type TKey to compare.</param>
+            <param name="y">The second object of type TKey to compare.</param>
+            <returns>true if the selected property of the specified objects are equal; otherwise, false.</returns>
+        </member>
+        <member name="M:TestLib.Framework.Util.EqualityComparerStateless`2.GetHashCode(`0)">
+            <summary>
+            Returns a hash code for the specified object based on a selected property.
+            </summary>
+            <param name="obj">The TKey for which a hash code is to be returned.</param>
+            <returns>A hash code for the selected property of the specified object.</returns>
+        </member>
+        <member name="T:TestLib.Framework.Util.ICommandLineArgumentEscaper">
+            <summary>
+            Represents a conversion from a collection of objects to a fully-fledged command line argument string.
+            </summary>
+        </member>
+        <member name="M:TestLib.Framework.Util.ICommandLineArgumentEscaper.Escape(System.Collections.Generic.IEnumerable{System.Object})">
+            <summary>
+            Escapes a collection of objects to a usable command line argument string.
+            </summary>
+            <param name="rawArguments">A collection of objects to be used to compose a command line argument string.</param>
+            <returns>A usable command line argument string.</returns>
+        </member>
+        <member name="T:TestLib.Framework.Util.IProcessSpawner">
+            <summary>
+            Represents an execution of a <see cref="T:System.Diagnostics.Process" /> object and obtains meaningful information from it to allow assertions on execution properties.
+            </summary>
+        </member>
+        <member name="P:TestLib.Framework.Util.IProcessSpawner.Started">
+            <summary>
+            Indicates that the process has started.
+            </summary>
+        </member>
+        <member name="P:TestLib.Framework.Util.IProcessSpawner.Exited">
+            <summary>
+            Indicates that the process has completed.
+            </summary>
+        </member>
+        <member name="E:TestLib.Framework.Util.IProcessSpawner.OnInputRequested">
+            <summary>
+            Is called when the process is asking for input.
+            Frequently, this will be called with a buffer of string.Empty, output from the program, or output based on user input.
+            All of these states should be accounted for.
+            </summary>
+        </member>
+        <member name="M:TestLib.Framework.Util.IProcessSpawner.Run">
+            <summary>
+            Executes the specified process.
+            </summary>
+            <returns>A <see cref="T:TestLib.Framework.Util.ProcessResult" /> object representing the execution.</returns>
+        </member>
+        <member name="T:TestLib.Framework.Util.ProcessInputHandleResult">
+            <summary>
+            Represents whether input was handled.
+            </summary>
+        </member>
+        <member name="F:TestLib.Framework.Util.ProcessInputHandleResult.Handled">
+            <summary>
+            Indicates that input was given and the output buffer should be cleared.
+            </summary>
+        </member>
+        <member name="F:TestLib.Framework.Util.ProcessInputHandleResult.Ignored">
+            <summary>
+            Indicates that no input was given and the output buffer should not be cleared.
+            </summary>
+        </member>
+        <member name="T:TestLib.Framework.Util.ProcessInputDelegate">
+            <summary>
+            Represents a request from a process for input.
+            </summary>
+            <param name="bufferSinceLastCall">
+            The current output buffer.
+            Frequently, this will be called with string.Empty, output from the program, or output based on user input.
+            All of these states should be accounted for.
+            </param>
+            <param name="inputStream">The raw input stream to the process.</param>
+        </member>
+        <member name="T:TestLib.Framework.Util.ProcessResult">
+            <summary>
+            The result of a <see cref="T:System.Diagnostics.Process" /> execution.
+            </summary>
+        </member>
+        <member name="P:TestLib.Framework.Util.ProcessResult.FullStd">
+            <summary>
+            Gets the full stdout stream.
+            </summary>
+        </member>
+        <member name="P:TestLib.Framework.Util.ProcessResult.FullError">
+            <summary>
+            Gets the full stderr stream.
+            </summary>
+        </member>
+        <member name="P:TestLib.Framework.Util.ProcessResult.FullOutput">
+            <summary>
+            Gets the full output as you would expect to see in a console execution.
+            </summary>
+        </member>
+        <member name="P:TestLib.Framework.Util.ProcessResult.ExitCode">
+            <summary>
+            Gets the exit code.
+            </summary>
+        </member>
+        <member name="P:TestLib.Framework.Util.ProcessResult.StartTime">
+            <summary>
+            Gets the start time of the process.
+            </summary>
+        </member>
+        <member name="P:TestLib.Framework.Util.ProcessResult.ExitTime">
+            <summary>
+            Gets the exit time of the process.
+            </summary>
+        </member>
+        <member name="P:TestLib.Framework.Util.ProcessResult.PrivilegedProcessorTime">
+            <summary>
+            Gets the amount of time the process has spent running code inside the operating system core.
+            </summary>
+        </member>
+        <member name="P:TestLib.Framework.Util.ProcessResult.UserProcessorTime">
+            <summary>
+            Gets the amount of time the process has spent running code inside the application.
+            </summary>
+        </member>
+        <member name="P:TestLib.Framework.Util.ProcessResult.TotalProcessorTime">
+            <summary>
+            Gets the sum of UserProcessorTime and PrivilegedProcessorTime.
+            </summary>
+        </member>
+        <member name="P:TestLib.Framework.Util.ProcessResult.PeakPagedMemorySize">
+            <summary>
+            Gets the maximum amount of memory used in the virtual memory paging file.
+            </summary>
+        </member>
+        <member name="P:TestLib.Framework.Util.ProcessResult.PeakVirtualMemorySize">
+            <summary>
+            Gets the maximum amount of virtual memory used by the process (should be greater than or equal to PeakPagedMemorySize).
+            </summary>
+        </member>
+        <member name="P:TestLib.Framework.Util.ProcessResult.PeakWorkingSet">
+            <summary>
+            Gets the maximum amount of physical memory used by the process.
+            </summary>
+        </member>
+        <member name="M:TestLib.Framework.Util.ProcessResult.#ctor(System.String,System.String,System.String,System.Int32,System.DateTime,System.DateTime,System.TimeSpan,System.TimeSpan,System.TimeSpan,System.Int64,System.Int64,System.Int64)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TestLib.Framework.Util.ProcessResult" /> class with the specified information.
+            </summary>
+            <param name="stdOutput">The full stdout stream.</param>
+            <param name="errorOutput">The full stderr stream.</param>
+            <param name="fullOutput">The full output as you would expect to see in a console execution.</param>
+            <param name="exitCode">The exit code.</param>
+            <param name="startTime">The start time of the process.</param>
+            <param name="exitTime">The exit time of the process.</param>
+            <param name="privilegedProcessorTime">The amount of time the process has spent running code inside the operating system core.</param>
+            <param name="userProcessorTime">The amount of time the process has spent running code inside the application.</param>
+            <param name="totalProcessorTime">The sum of UserProcessorTime and PrivilegedProcessorTime.</param>
+            <param name="peakPagedMemorySize">The maximum amount of memory used in the virtual memory paging file.</param>
+            <param name="peakVirtualMemorySize">The maximum amount of virtual memory used by the process (should be greater than or equal to PeakPagedMemorySize).</param>
+            <param name="peakWorkingSet">The maximum amount of physical memory used by the process.</param>
+        </member>
+        <member name="T:TestLib.Framework.Util.ProcessSpawnerWithCombinedAndSplitErrAndOut">
+            <summary>
+            Executes 2 <see cref="T:System.Diagnostics.Process" /> objects in order to get sequentially consistent output (as you would see in a regular console execution) and distinct output for assertion purposes. 
+            <see cref="T:System.Diagnostics.Process" /> has a limitation where these two things cannot be obtained at the same time and it may be a limitation of Windows itself.
+            The fact that it executes 2 processes means that it is slower than the alternatives.
+            If you do not need both outputs, it is recommended to use <see cref="T:TestLib.Framework.Util.ProcessSpawnerWithCombinedErrAndOut" /> or <see cref="T:TestLib.Framework.Util.ProcessSpawnerWithSplitErrAndOut" />.
+            </summary>
+        </member>
+        <member name="P:TestLib.Framework.Util.ProcessSpawnerWithCombinedAndSplitErrAndOut.Started">
+            <summary>
+            Indicates that the process has started.
+            </summary>
+        </member>
+        <member name="P:TestLib.Framework.Util.ProcessSpawnerWithCombinedAndSplitErrAndOut.Exited">
+            <summary>
+            Indicates that the process has completed.
+            </summary>
+        </member>
+        <member name="E:TestLib.Framework.Util.ProcessSpawnerWithCombinedAndSplitErrAndOut.OnInputRequested">
+            <summary>
+            Is called when the process is asking for input.
+            Frequently, this will be called with a buffer of string.Empty, output from the program, or output based on user input.
+            All of these states should be accounted for.
+            </summary>
+        </member>
+        <member name="M:TestLib.Framework.Util.ProcessSpawnerWithCombinedAndSplitErrAndOut.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TestLib.Framework.Util.ProcessSpawnerWithCombinedAndSplitErrAndOut" /> class with a specified file.
+            </summary>
+            <param name="file">The name of the file to execute.</param>
+        </member>
+        <member name="M:TestLib.Framework.Util.ProcessSpawnerWithCombinedAndSplitErrAndOut.#ctor(System.String,System.Object[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:TestLib.Framework.Util.ProcessSpawnerWithCombinedAndSplitErrAndOut" /> class with a specified file and command line arguments.
+            </summary>
+            <param name="file">The name of the file to execute.</param>
+            <param name="args">The command line arguments to pass to the execution of the file.</param>
+        </member>
+        <member name="M:TestLib.Framework.Util.ProcessSpawnerWithCombinedAndSplitErrAndOut.#ctor(System.String,TestLib.Framework.Util.ICommandLineArgumentEscaper,System.Object[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:TestLib.Framework.Util.ProcessSpawnerWithCombinedAndSplitErrAndOut" /> class with a specified file, command line escaper, and command line arguments.
+            </summary>
+            <param name="file">The name of the file to execute.</param>
+            <param name="escaper">The command line escaper to produce a command line argument string from the command line arguments.</param>
+            <param name="args">The command line arguments to pass to the execution of the file.</param>
+        </member>
+        <member name="M:TestLib.Framework.Util.ProcessSpawnerWithCombinedAndSplitErrAndOut.#ctor(System.IO.FileInfo)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TestLib.Framework.Util.ProcessSpawnerWithCombinedAndSplitErrAndOut" /> class with a specified file.
+            </summary>
+            <param name="file">The <see cref="T:System.IO.FileInfo" /> carrying information about the file to execute.</param>
+        </member>
+        <member name="M:TestLib.Framework.Util.ProcessSpawnerWithCombinedAndSplitErrAndOut.#ctor(System.IO.FileInfo,System.Object[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:TestLib.Framework.Util.ProcessSpawnerWithCombinedAndSplitErrAndOut" /> class with a specified file and command line arguments.
+            </summary>
+            <param name="file">The <see cref="T:System.IO.FileInfo" /> carrying information about the file to execute.</param>
+            <param name="args">The command line arguments to pass to the execution of the file.</param>
+        </member>
+        <member name="M:TestLib.Framework.Util.ProcessSpawnerWithCombinedAndSplitErrAndOut.#ctor(System.IO.FileInfo,TestLib.Framework.Util.ICommandLineArgumentEscaper,System.Object[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:TestLib.Framework.Util.ProcessSpawnerWithCombinedAndSplitErrAndOut" /> class with a specified file, command line escaper, and command line arguments.
+            </summary>
+            <param name="file">The <see cref="T:System.IO.FileInfo" /> carrying information about the file to execute.</param>
+            <param name="escaper">The command line escaper to produce a command line argument string from the command line arguments.</param>
+            <param name="args">The command line arguments to pass to the execution of the file.</param>
+        </member>
+        <member name="M:TestLib.Framework.Util.ProcessSpawnerWithCombinedAndSplitErrAndOut.Run">
+            <summary>
+            Executes the specified process.
+            </summary>
+            <returns>A <see cref="T:TestLib.Framework.Util.ProcessResult" /> object representing the execution.</returns>
+        </member>
+        <member name="M:TestLib.Framework.Util.ProcessSpawnerWithCombinedAndSplitErrAndOut.Dispose">
+            <summary>
+            Releases all resources used by the current instance of the <see cref="T:TestLib.Framework.Util.ProcessSpawnerWithCombinedAndSplitErrAndOut" /> class.
+            </summary>
+        </member>
+        <member name="T:TestLib.Framework.Util.ProcessSpawnerWithCombinedErrAndOut">
+            <summary>
+            Executes an <see cref="T:System.Diagnostics.Process" /> object in order to get sequentially consistent output for assertion purposes. 
+            <see cref="T:System.Diagnostics.Process" /> has a limitation where sequentially consistent output (as you would see in a regular console execution) and distinct output cannot be obtained at the same time and it may be a limitation of Windows itself.
+            If both outputs are required, please use <see cref="T:TestLib.Framework.Util.ProcessSpawnerWithCombinedAndSplitErrAndOut" />.
+            </summary>
+        </member>
+        <member name="P:TestLib.Framework.Util.ProcessSpawnerWithCombinedErrAndOut.Started">
+            <summary>
+            Indicates that the process has started.
+            </summary>
+        </member>
+        <member name="P:TestLib.Framework.Util.ProcessSpawnerWithCombinedErrAndOut.Exited">
+            <summary>
+            Indicates that the process has completed.
+            </summary>
+        </member>
+        <member name="E:TestLib.Framework.Util.ProcessSpawnerWithCombinedErrAndOut.OnInputRequested">
+            <summary>
+            Is called when the process is asking for input.
+            Frequently, this will be called with a buffer of string.Empty, output from the program, or output based on user input.
+            All of these states should be accounted for.
+            </summary>
+        </member>
+        <member name="M:TestLib.Framework.Util.ProcessSpawnerWithCombinedErrAndOut.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TestLib.Framework.Util.ProcessSpawnerWithCombinedErrAndOut" /> class with a specified file.
+            </summary>
+            <param name="file">The name of the file to execute.</param>
+        </member>
+        <member name="M:TestLib.Framework.Util.ProcessSpawnerWithCombinedErrAndOut.#ctor(System.String,System.Object[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:TestLib.Framework.Util.ProcessSpawnerWithCombinedErrAndOut" /> class with a specified file and command line arguments.
+            </summary>
+            <param name="file">The name of the file to execute.</param>
+            <param name="args">The command line arguments to pass to the execution of the file.</param>
+        </member>
+        <member name="M:TestLib.Framework.Util.ProcessSpawnerWithCombinedErrAndOut.#ctor(System.String,TestLib.Framework.Util.ICommandLineArgumentEscaper,System.Object[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:TestLib.Framework.Util.ProcessSpawnerWithCombinedErrAndOut" /> class with a specified file, command line escaper, and command line arguments.
+            </summary>
+            <param name="file">The name of the file to execute.</param>
+            <param name="escaper">The command line escaper to produce a command line argument string from the command line arguments.</param>
+            <param name="args">The command line arguments to pass to the execution of the file.</param>
+        </member>
+        <member name="M:TestLib.Framework.Util.ProcessSpawnerWithCombinedErrAndOut.#ctor(System.IO.FileInfo)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TestLib.Framework.Util.ProcessSpawnerWithCombinedErrAndOut" /> class with a specified file.
+            </summary>
+            <param name="file">The <see cref="T:System.IO.FileInfo" /> carrying information about the file to execute.</param>
+        </member>
+        <member name="M:TestLib.Framework.Util.ProcessSpawnerWithCombinedErrAndOut.#ctor(System.IO.FileInfo,System.Object[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:TestLib.Framework.Util.ProcessSpawnerWithCombinedErrAndOut" /> class with a specified file and command line arguments.
+            </summary>
+            <param name="file">The <see cref="T:System.IO.FileInfo" /> carrying information about the file to execute.</param>
+            <param name="args">The command line arguments to pass to the execution of the file.</param>
+        </member>
+        <member name="M:TestLib.Framework.Util.ProcessSpawnerWithCombinedErrAndOut.#ctor(System.IO.FileInfo,TestLib.Framework.Util.ICommandLineArgumentEscaper,System.Object[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:TestLib.Framework.Util.ProcessSpawnerWithCombinedErrAndOut" /> class with a specified file, command line escaper, and command line arguments.
+            </summary>
+            <param name="file">The <see cref="T:System.IO.FileInfo" /> carrying information about the file to execute.</param>
+            <param name="escaper">The command line escaper to produce a command line argument string from the command line arguments.</param>
+            <param name="args">The command line arguments to pass to the execution of the file.</param>
+        </member>
+        <member name="M:TestLib.Framework.Util.ProcessSpawnerWithCombinedErrAndOut.Run">
+            <summary>
+            Executes the specified process.
+            </summary>
+            <returns>A <see cref="T:TestLib.Framework.Util.ProcessResult" /> object representing the execution.</returns>
+        </member>
+        <member name="M:TestLib.Framework.Util.ProcessSpawnerWithCombinedErrAndOut.Dispose">
+            <summary>
+            Releases all resources used by the current instance of the <see cref="T:TestLib.Framework.Util.ProcessSpawnerWithCombinedErrAndOut" /> class.
+            </summary>
+        </member>
+        <member name="T:TestLib.Framework.Util.ProcessSpawnerWithSplitErrAndOut">
+            <summary>
+            Executes an <see cref="T:System.Diagnostics.Process" /> object in order to get distinct output for assertion purposes. 
+            <see cref="T:System.Diagnostics.Process" /> has a limitation where sequentially consistent output (as you would see in a regular console execution) and distinct output cannot be obtained at the same time and it may be a limitation of Windows itself.
+            If both outputs are required, please use <see cref="T:TestLib.Framework.Util.ProcessSpawnerWithCombinedAndSplitErrAndOut" />.
+            </summary>
+        </member>
+        <member name="P:TestLib.Framework.Util.ProcessSpawnerWithSplitErrAndOut.Started">
+            <summary>
+            Indicates that the process has started.
+            </summary>
+        </member>
+        <member name="P:TestLib.Framework.Util.ProcessSpawnerWithSplitErrAndOut.Exited">
+            <summary>
+            Indicates that the process has completed.
+            </summary>
+        </member>
+        <member name="E:TestLib.Framework.Util.ProcessSpawnerWithSplitErrAndOut.OnInputRequested">
+            <summary>
+            Is called when the process is asking for input.
+            Frequently, this will be called with a buffer of string.Empty, output from the program, or output based on user input.
+            All of these states should be accounted for.
+            </summary>
+        </member>
+        <member name="M:TestLib.Framework.Util.ProcessSpawnerWithSplitErrAndOut.#ctor(System.String)">
+            <summary>z
+            Initializes a new instance of the <see cref="T:TestLib.Framework.Util.ProcessSpawnerWithSplitErrAndOut" /> class with a specified file.
+            </summary>
+            <param name="file">The name of the file to execute.</param>
+        </member>
+        <member name="M:TestLib.Framework.Util.ProcessSpawnerWithSplitErrAndOut.#ctor(System.String,System.Object[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:TestLib.Framework.Util.ProcessSpawnerWithSplitErrAndOut" /> class with a specified file and command line arguments.
+            </summary>
+            <param name="file">The name of the file to execute.</param>
+            <param name="args">The command line arguments to pass to the execution of the file.</param>
+        </member>
+        <member name="M:TestLib.Framework.Util.ProcessSpawnerWithSplitErrAndOut.#ctor(System.String,TestLib.Framework.Util.ICommandLineArgumentEscaper,System.Object[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:TestLib.Framework.Util.ProcessSpawnerWithSplitErrAndOut" /> class with a specified file, command line escaper, and command line arguments.
+            </summary>
+            <param name="file">The name of the file to execute.</param>
+            <param name="escaper">The command line escaper to produce a command line argument string from the command line arguments.</param>
+            <param name="args">The command line arguments to pass to the execution of the file.</param>
+        </member>
+        <member name="M:TestLib.Framework.Util.ProcessSpawnerWithSplitErrAndOut.#ctor(System.IO.FileInfo)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TestLib.Framework.Util.ProcessSpawnerWithSplitErrAndOut" /> class with a specified file.
+            </summary>
+            <param name="file">The <see cref="T:System.IO.FileInfo" /> carrying information about the file to execute.</param>
+        </member>
+        <member name="M:TestLib.Framework.Util.ProcessSpawnerWithSplitErrAndOut.#ctor(System.IO.FileInfo,System.Object[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:TestLib.Framework.Util.ProcessSpawnerWithSplitErrAndOut" /> class with a specified file and command line arguments.
+            </summary>
+            <param name="file">The <see cref="T:System.IO.FileInfo" /> carrying information about the file to execute.</param>
+            <param name="args">The command line arguments to pass to the execution of the file.</param>
+        </member>
+        <member name="M:TestLib.Framework.Util.ProcessSpawnerWithSplitErrAndOut.#ctor(System.IO.FileInfo,TestLib.Framework.Util.ICommandLineArgumentEscaper,System.Object[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:TestLib.Framework.Util.ProcessSpawnerWithSplitErrAndOut" /> class with a specified file, command line escaper, and command line arguments.
+            </summary>
+            <param name="file">The <see cref="T:System.IO.FileInfo" /> carrying information about the file to execute.</param>
+            <param name="escaper">The command line escaper to produce a command line argument string from the command line arguments.</param>
+            <param name="args">The command line arguments to pass to the execution of the file.</param>
+        </member>
+        <member name="M:TestLib.Framework.Util.ProcessSpawnerWithSplitErrAndOut.Run">
+            <summary>
+            Executes the specified process.
+            </summary>
+            <returns>A <see cref="T:TestLib.Framework.Util.ProcessResult" /> object representing the execution.</returns>
+        </member>
+        <member name="M:TestLib.Framework.Util.ProcessSpawnerWithSplitErrAndOut.Dispose">
+            <summary>
+            Releases all resources used by the current instance of the <see cref="T:TestLib.Framework.Util.ProcessSpawnerWithSplitErrAndOut" /> class.
+            </summary>
+        </member>
+        <member name="T:TestLib.Framework.Util.WindowsCommandLineArgumentEscaper">
+            <summary>
+            Represents a conversion from a collection of objects to a Windows command line argument string.
+            </summary>
+        </member>
+        <member name="M:TestLib.Framework.Util.WindowsCommandLineArgumentEscaper.Escape(System.Collections.Generic.IEnumerable{System.Object})">
+            <summary>
+            Escapes a collection of objects to a usable Windows command line argument string.
+            </summary>
+            <param name="rawArguments">A collection of objects to be used to compose a Windows command line argument string.</param>
+            <returns>A usable Windows command line argument string.</returns>
+        </member>
+    </members>
+</doc>
